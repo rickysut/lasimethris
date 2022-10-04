@@ -65,7 +65,7 @@
                    @yield("content")
                </div>
                <div class="position-absolute pos-bottom pos-left pos-right p-3 text-center text-white">
-                   2022 © {{ trans('panel.site_title') }} by&nbsp;<a href='#' class='text-white opacity-60 fw-500' title='{{ trans('panel.site_title') }}' target='_blank'>TIM Creative</a>
+                   2022 © {{ trans('panel.site_footer') }} by&nbsp;<a href='#' class='text-white opacity-60 fw-500' title='{{ trans('panel.site_maker') }}' target='_blank'>{{ trans('panel.site_maker') }}</a>
                </div>
            </div>
        </div>

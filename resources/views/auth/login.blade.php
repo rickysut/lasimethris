@@ -4,9 +4,9 @@
 	<div class="row">
 		<div class="col col-md-6 col-lg-7 hidden-sm-down">
 			<h2 class="fs-xxl fw-500 mt-4 text-white">
-				{{ trans('smartadmin.welcome') }}
-				<small class="h3 fw-300 mt-3 mb-5 text-white opacity-60">
-					{{ trans('smartadmin.home_subtitle') }}
+				<small class="h3 fw-300 mt-3 mb-5 text-white opacity-100">
+					{{ trans('panel.site_subtitle') }}
+					<p>{{ trans('panel.site_registertitle') }} <a href="{{ trans('panel.site_riph') }}" class="fw-700 text-white">{{ trans('panel.site_riph') }}</a></p>
 				</small>
 			</h2>
 			
