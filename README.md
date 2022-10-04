@@ -10,7 +10,9 @@
 ## How to install
 
 1. Copy repository
-2. Composer install
-3. php artisan migrate:fresh --seed
-4. npm install
-5. npm run dev
+2. Copy .env_sample to .env and setup your db
+3. Composer install
+4. php artisan migrate:fresh --seed
+5. npm install
+6. npm run dev
+7. php artisan serve 
