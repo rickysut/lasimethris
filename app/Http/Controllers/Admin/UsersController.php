@@ -96,10 +96,10 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::pluck('title', 'id');
-
+        $access = User::ROLE_TYPE_SELECT;
         $user->load('roles');
         $breadcrumb = trans('global.edit') . " ".  trans('cruds.user.title_singular') ;
-        return view('admin.users.edit', compact('roles', 'user', 'breadcrumb'));
+        return view('admin.users.edit', compact('roles', 'user', 'access', 'breadcrumb'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -116,7 +116,8 @@ class UsersController extends Controller
 
         $user->load('roles');
         $breadcrumb = trans('global.show') . " ".  trans('cruds.user.title_singular') ;
-        return view('admin.users.show', compact('user', 'breadcrumb'));
+        $access = User::ROLE_TYPE_SELECT;
+        return view('admin.users.show', compact('user', 'access', 'breadcrumb'));
     }
 
     public function destroy(User $user)

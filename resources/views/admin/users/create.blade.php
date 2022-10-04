@@ -51,7 +51,7 @@
                                     <select class="form-control select2 {{ $errors->has('roleaccess') ? 'is-invalid' : '' }}" name="roleaccess" id="roleaccess" required>
                                         <option value="0" selected>{{ trans('panel.role_placeholder') }}</option>
                                         @foreach($access as $id => $role)
-                                            <option value="{{ $id }}" {{ old('roleaccess', '') ? 'selected' : '' }}>{{ $role }}</option>
+                                            <option value="{{ $id }}">{{ $role }}</option>
                                         @endforeach
                                     </select>
                                     

@@ -39,6 +39,14 @@
                                     </tr>
                                     <tr>
                                         <th>
+                                            {{ trans('cruds.user.fields.roleaccess') }}
+                                        </th>
+                                        <td>
+                                            {{ $access[$user->roleaccess] }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
                                             {{ trans('cruds.user.fields.email') }}
                                         </th>
                                         <td>
