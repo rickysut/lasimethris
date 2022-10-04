@@ -9,5 +9,13 @@ return [
     'site_maker' => 'Dit. STO - Ditjen Hortikultura',
     'login_title' => 'For RIPH Holders, use the same account and password as used in the RIPH Online application',
     'role_title' => 'User Role',
-    'role_tip' => 'Your role in this application'
+    'role_tip' => 'Your role in this application',
+    'role_placeholder' => '- select your role access',
+    'role_val1' => '- Ministry/Directorate',
+    'role_val2' => '- Importer',
+    'role_help' => 'username to access this application',
+    'username_title' => 'Use the same account as yours in the RIPH app',
+    'username_help' => 'username to access this application',
+    'password_title' => 'Use the password associated with your account in the RIPH app',
+    'password_help' => 'password to access this application',
 ];

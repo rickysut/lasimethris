@@ -323,4 +323,5 @@ return [
     'calendar'                       => 'Kalender',
     'messenger'                      => 'Pesan',
     'login_username'                 => 'ID Pengguna',
+    'associate'                      => 'Mitra',
 ];

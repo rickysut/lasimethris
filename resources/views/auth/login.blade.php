@@ -11,7 +11,7 @@
 			</h2>
 			<div class="d-sm-flex flex-column align-items-center justify-content-center d-md-block">
 				<div class="px-0 py-1 mt-5 text-white fs-nano opacity-50">
-					Associate
+					{{ trans('global.associate') }}
 				</div>
 				<div class="d-flex flex-row opacity-70 align-items-center">
 					<a href="{{ trans('panel.site_riph') }}" class="text-white mr-2">
@@ -42,50 +42,57 @@
 								</div>
 							</div>
 							<select id="roleaccess" name="roleaccess" type="text" class="form-control form-control-md" required autocomplete="roleaccess" autofocus placeholder="select role" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-								<option hidden>- select Your Role Access</option>
-								<option value="">- Kementerian/Direktorat</option>
-								<option value="">- Pelaku Usaha</option>
+								<option hidden>{{trans('panel.role_placeholder')}}</option>
+								<option value="">{{trans('panel.role_val1')}}</option>
+								<option value="">{{trans('panel.role_val2')}}</option>
 							</select>
+							@if($errors->has('roleaccess'))
 							<div class="invalid-feedback">
-								No, you missed this one.
+								{{ $errors->first('roleaccess') }}
 							</div>
+							@endif
+							
 						</div>
-						<div class="help-block text-muted">username untuk meng-akses aplikasi ini</div>
+						<div class="help-block text-muted">{{trans('panel.role_help')}}</div>
 					</div>
 					<div class="form-group" >
-						<label class="form-label" for="username">Username</label>
-						<div class="input-group" data-toggle="tooltip" title data-original-title="Gunakan akun yang sama dengan akun Anda di aplikasi RIPH">
+						<label class="form-label" for="username">{{ trans('global.login_username') }}</label>
+						<div class="input-group" data-toggle="tooltip" title data-original-title="{{ trans('panel.username_title') }}">
 							<div class="input-group-prepend">
 								<div class="input-group-text">
 									<span class="fal fa-user"></span>
 								</div>
 							</div>
-							<input id="username" name="username" type="text" class="form-control form-control-md" required autocomplete="username" autofocus placeholder="your id or email" value="usernameanda@simethris.com" />
+							<input id="username" name="username" type="text" class="form-control form-control-md" required autocomplete="{{ trans('global.login_username') }}" autofocus placeholder="{{ trans('global.login_username') }}" value="" />
+							@if($errors->has('username'))
 							<div class="invalid-feedback">
-								No, you missed this one.
+								{{ $errors->first('username') }}
 							</div>
+							@endif
 						</div>
-						<div class="help-block text-muted">username untuk meng-akses aplikasi ini</div>
+						<div class="help-block text-muted">{{ trans('panel.username_help') }}</div>
 					</div>
 					<div class="form-group">
-						<label class="form-label" for="password">Password</label>
-						<div class="input-group bg-white shadow-inset-2" data-toggle="tooltip" title data-original-title="Gunakan katakunci yang terhubung dengan akun Anda di aplikasi RIPH">
+						<label class="form-label" for="password">{{ trans('global.login_password') }}</label>
+						<div class="input-group bg-white shadow-inset-2" data-toggle="tooltip" title data-original-title="{{ trans('panel.password_title') }}">
 							<div class="input-group-prepend">
 								<div class="input-group-text">
 									<span class="fal fa-key"></span>
 								</div>
 							</div>
-							<input id="password" name="password" type="text" class="form-control form-control-md border-right-0 bg-transparent pr-0" required autocomplete="password" autofocus placeholder="your id or email" value="password" />
+							<input id="password" name="password" type="text" class="form-control form-control-md border-right-0 bg-transparent pr-0" required autocomplete="{{ trans('global.login_password') }}" autofocus placeholder="{{ trans('global.login_password') }}" value="" />
+							@if($errors->has('password'))
 							<div class="invalid-feedback">
-								No, you missed this one.
+								{{ $errors->first('password') }}
 							</div>
+							@endif
 							<div class="input-group-append">
 								<span class="input-group-text bg-transparent border-left-0">
 									<i class="fal fa-eye"  id="togglePassword"></i>
 								</span>
 							</div>
 						</div>
-						<div class="help-block text-muted">kata kunci untuk meng-akses aplikasi ini</div>
+						<div class="help-block text-muted">{{ trans('panel.password_help') }}</div>
 					</div>
 					<div class="form-group text-left">
 						<div class="custom-control custom-checkbox">
