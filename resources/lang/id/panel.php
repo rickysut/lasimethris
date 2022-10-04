@@ -7,4 +7,7 @@ return [
     'site_riph' => 'http://riph.pertanian.go.id',
     'site_footer' => 'Sistem Monitoring Wajib Tanam Hortikultura Strategis',
     'site_maker' => 'Dit. STO - Ditjen Hortikultura',
+    'login_title' => 'Bagi Pemegang RIPH, Gunakan akun dan katakunci yang sama dengan yang digunakan pada aplikasi RIPH Online',
+    'role_title' => 'Pengguna',
+    'role_tip' => 'Peran anda di aplikasi ini'
 ];

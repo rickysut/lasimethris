@@ -7,4 +7,7 @@ return [
     'site_riph' => 'http://riph.pertanian.go.id',
     'site_footer' => 'Strategic Horticulture Planting Mandatory Monitoring System',
     'site_maker' => 'Dit. STO - Ditjen Hortikultura',
+    'login_title' => 'For RIPH Holders, use the same account and password as used in the RIPH Online application',
+    'role_title' => 'User Role',
+    'role_tip' => 'Your role in this application'
 ];
