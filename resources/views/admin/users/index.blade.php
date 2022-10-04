@@ -36,6 +36,9 @@
                                                 {{ trans('cruds.user.fields.username') }}
                                             </th>
                                             <th style="width:20%">
+                                                {{ trans('cruds.user.fields.roleaccess') }}
+                                            </th>
+                                            <th style="width:20%">
                                                 {{ trans('cruds.user.fields.email') }}
                                             </th>
                                             <!--th>
@@ -108,6 +111,7 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'name', name: 'name' },
 { data: 'username', name: 'username' },
+{ data: 'roleaccess', name: 'roleaccess' },
 { data: 'email', name: 'email' },
 //{ data: 'email_verified_at', name: 'email_verified_at' },
 { data: 'roles', name: 'roles.title' },

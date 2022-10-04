@@ -100,6 +100,8 @@ return [
             'roles_helper'             => ' ',
             'remember_token'           => 'Remember Token',
             'remember_token_helper'    => ' ',
+            'roleaccess'               => 'App\'s Role',
+            'roleaccess_helper'        => ' ',
             'created_at'               => 'Created at',
             'created_at_helper'        => ' ',
             'updated_at'               => 'Updated at',
@@ -107,7 +109,7 @@ return [
             'deleted_at'               => 'Deleted at',
             'deleted_at_helper'        => ' ',
             'username'                 => 'Username',
-            'username_helper'          => 'Username',
+            'username_helper'          => ' ',
         ],
     ],
     'auditLog' => [

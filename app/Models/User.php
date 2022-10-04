@@ -20,6 +20,13 @@ class User extends Authenticatable
     use Auditable;
     use HasFactory;
 
+    public const ROLE_TYPE_SELECT = [
+        '1' => 'Kementerian/Direktorat',
+        '2' => 'Pelaku Usaha',
+    ];
+
+    
+
     public $table = 'users';
 
     protected $hidden = [
@@ -41,6 +48,7 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'remember_token',
+        'roleaccess',
         'created_at',
         'updated_at',
         'deleted_at',

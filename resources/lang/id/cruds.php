@@ -100,6 +100,8 @@ return [
             'roles_helper'             => ' ',
             'remember_token'           => 'Token Pengingat',
             'remember_token_helper'    => ' ',
+            'roleaccess'               => 'Peran',
+            'roleaccess_helper'        => ' ',
             'created_at'               => 'Dibuat',
             'created_at_helper'        => ' ',
             'updated_at'               => 'Diubah',
@@ -107,7 +109,7 @@ return [
             'deleted_at'               => 'Dihapus',
             'deleted_at_helper'        => ' ',
             'username'                 => 'ID Pengguna',
-            'username_helper'          => 'Id Pengguna',
+            'username_helper'          => ' ',
         ],
     ],
     'auditLog' => [

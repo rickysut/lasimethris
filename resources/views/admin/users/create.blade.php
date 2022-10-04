@@ -47,6 +47,22 @@
                                     <span class="help-block">{{ trans('cruds.user.fields.username_helper') }}</span>
                                 </div>
                                 <div class="form-group">
+                                    <label class="required" for="roleaccess">{{ trans('cruds.user.fields.roleaccess') }}</label>
+                                    <select class="form-control select2 {{ $errors->has('roleaccess') ? 'is-invalid' : '' }}" name="roleaccess" id="roleaccess" required>
+                                        <option value="0" selected>{{ trans('panel.role_placeholder') }}</option>
+                                        @foreach($access as $id => $role)
+                                            <option value="{{ $id }}" {{ old('roleaccess', '') ? 'selected' : '' }}>{{ $role }}</option>
+                                        @endforeach
+                                    </select>
+                                    
+                                    @if($errors->has('roleaccess'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('roleaccess') }}
+                                        </div>
+                                    @endif
+                                    <span class="help-block">{{ trans('cruds.user.fields.roleaccess_helper') }}</span>
+                                </div>
+                                <div class="form-group">
                                     <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
                                     <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email') }}" required>
                                     @if($errors->has('email'))

@@ -47,6 +47,10 @@ class UsersController extends Controller
             $table->editColumn('username', function ($row) {
                 return $row->username ? $row->username : '';
             });
+            $table->editColumn('roleaccess', function ($row) {
+
+                return $row->roleaccess ? User::ROLE_TYPE_SELECT[$row->roleaccess]  : '';
+            });
             $table->editColumn('email', function ($row) {
                 return $row->email ? $row->email : '';
             });
@@ -74,9 +78,9 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::pluck('title', 'id');
-
+        $access = User::ROLE_TYPE_SELECT;
         $breadcrumb = trans('global.create') . " ".  trans('cruds.user.title_singular') ;
-        return view('admin.users.create', compact('roles', 'breadcrumb'));
+        return view('admin.users.create', compact('roles', 'access', 'breadcrumb'));
     }
 
     public function store(StoreUserRequest $request)

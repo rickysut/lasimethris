@@ -70,6 +70,7 @@ trait AuthenticatesUsers
     protected function validateLogin(Request $request)
     {
         $request->validate([
+            'roleaccess' => 'required|integer',
             $this->username() => 'required|string',
             'password' => 'required|string',
         ]);
@@ -96,7 +97,7 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
-        return $request->only($this->username(), 'password');
+        return $request->only( $this->username(), 'password', 'roleaccess');
     }
 
     /**
@@ -144,6 +145,7 @@ trait AuthenticatesUsers
     {
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
+            'roleaccess' => [trans('auth.roleaccess')]
         ]);
     }
 

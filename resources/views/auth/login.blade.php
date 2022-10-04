@@ -41,10 +41,10 @@
 									<span class="fal fa-user-lock"></span>
 								</div>
 							</div>
-							<select id="roleaccess" name="roleaccess" type="text" class="form-control form-control-md" required autocomplete="roleaccess" autofocus placeholder="select role" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+							<select id="roleaccess" name="roleaccess" type="text" class="form-control form-control-md" required autocomplete="roleaccess" autofocus placeholder="select role">
 								<option hidden>{{trans('panel.role_placeholder')}}</option>
-								<option value="">{{trans('panel.role_val1')}}</option>
-								<option value="">{{trans('panel.role_val2')}}</option>
+								<option value="1">{{trans('panel.role_val1')}}</option>
+								<option value="2">{{trans('panel.role_val2')}}</option>
 							</select>
 							@if($errors->has('roleaccess'))
 							<div class="invalid-feedback">
