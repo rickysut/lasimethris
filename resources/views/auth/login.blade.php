@@ -80,7 +80,7 @@
 									<span class="fal fa-key"></span>
 								</div>
 							</div>
-							<input id="password" name="password" type="text" class="form-control form-control-md border-right-0 bg-transparent pr-0" required autocomplete="{{ trans('global.login_password') }}" autofocus placeholder="{{ trans('global.login_password') }}" value="" />
+							<input id="password" name="password" type="password" class="form-control form-control-md border-right-0 bg-transparent pr-0" required autocomplete="{{ trans('global.login_password') }}" autofocus placeholder="{{ trans('global.login_password') }}" value="" />
 							@if($errors->has('password'))
 							<div class="invalid-feedback">
 								{{ $errors->first('password') }}
@@ -88,7 +88,7 @@
 							@endif
 							<div class="input-group-append">
 								<span class="input-group-text bg-transparent border-left-0">
-									<i class="fal fa-eye"  id="togglePassword"></i>
+									<i class="fal fa-eye-slash"  id="togglePassword"></i>
 								</span>
 							</div>
 						</div>
@@ -131,4 +131,19 @@
 	
 </div>
 
+@endsection
+@section('scripts')
+@parent
+<script>
+	const togglePassword = document.querySelector('#togglePassword');
+	const password = document.querySelector('#password');
+		
+	togglePassword.addEventListener('click', function (e) {
+		// toggle the type attribute
+		const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+		password.setAttribute('type', type);
+		// toggle the eye slash icon
+		this.classList.toggle('fa-eye');
+	});
+</script>
 @endsection
