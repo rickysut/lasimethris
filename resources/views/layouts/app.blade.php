@@ -13,7 +13,7 @@
 	<!-- Remove Tap Highlight on Windows Phone IE -->
 	<meta name="msapplication-tap-highlight" content="no">
 	<!-- base css -->
-	
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}" />
 	<link href="{{ asset('css/smartadmin/vendors.bundle.css') }}" rel="stylesheet" />
 	<link href="{{ asset('css/smartadmin/app.bundle.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/smartadmin/skin-master.css') }}" rel="stylesheet" />
@@ -70,6 +70,7 @@
            </div>
        </div>
    </div>
+   <script src="{{ asset('js/app.js') }}"></script>
    <script src="{{ asset('js/vendors.bundle.js') }}"></script>
    <script src="{{ asset('js/app.bundle.js') }}"></script>
    <script src="{{ asset('js/jquery/jquery.validate.js') }}"></script>

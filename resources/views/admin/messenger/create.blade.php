@@ -36,10 +36,10 @@
                             <textarea name="content" class="form-control"></textarea>
                         </div>
                     </div>
-                    <button class="btn btn-outline-success btn-pills waves-effect waves-themed btn-sm mt-4" type="submit">
+                    <button class="btn btn-success  waves-effect waves-themed btn-sm mt-4" type="submit">
                         {{ trans('global.submit') }}
                     </button>
-                    {{-- <input type="submit" value="{{ trans('global.submit') }}" class="btn btn-outline-success btn-pills" /> --}}
+                    {{-- <input type="submit" value="{{ trans('global.submit') }}" class="btn btn-success " /> --}}
                 </div>
             </div>
         </form>

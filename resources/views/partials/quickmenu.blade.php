@@ -655,7 +655,7 @@
 					<div class="pl-5 pr-3 py-3 bg-faded">
 						<div class="row no-gutters">
 							<div class="col-6 pr-1">
-								<a href="#" class="btn btn-outline-danger fw-500 btn-block" data-action="app-reset">Reset Penyesuaian</a>
+								<a href="#" class="btn btn-danger fw-500 btn-block" data-action="app-reset">Reset Penyesuaian</a>
 							</div>
 							<div class="col-6 pl-1">
 								<a href="#" class="btn btn-danger fw-500 btn-block" data-action="factory-reset">Reset Pabrik</a>

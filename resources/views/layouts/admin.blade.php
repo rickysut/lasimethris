@@ -21,14 +21,18 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
         <!-- Remove Tap Highlight on Windows Phone IE -->
         <meta name="msapplication-tap-highlight" content="no">
         <!-- smartadmin base css -->
+		<link rel="stylesheet" href="{{ asset('css/app.css') }}" />
         <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/vendors.bundle.css') }}">
         <link id="appbundle" rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/app.bundle.css') }}">
         <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
         <link id="myskin" rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/skins/skin-master.css') }}">
         <!-- Place favicon.ico in the root directory -->
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo-icon.png') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/logo-icon.png') }}">
-        <link rel="mask-icon" href="{{ asset('img/logo-icon.png') }}" color="#5bbad5">
+        
+		<link href="{{ asset('img/favicon.png') }}" rel="icon" />
+		<link href="{{ asset('img/logo-icon.png') }}" rel="apple-touch-icon" sizes="180x180" />
+		<link href="{{ asset('img/logo-icon.png') }}" rel="safari-pinned-tab.svg" color="#5bbad5" />
+
+
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/miscellaneous/reactions/reactions.css') }}">
 		
         <!-- You can add your own stylesheet here to override any styles that comes before it
@@ -131,24 +135,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 		<!-- begin quick menu -->
 		@include('partials.quickmenu')
 		<!-- end quick menu -->
-		
-		<!-- base vendor bundle: 
-			 DOC: if you remove pace.js from core please note on Internet Explorer some CSS animations may execute before a page is fully loaded, resulting 'jump' animations 
-				+ pace.js (recommended)
-				+ jquery.js (core)
-				+ jquery-ui-cust.js (core)
-				+ popper.js (core)
-				+ bootstrap.js (core)
-				+ slimscroll.js (extension)
-				+ app.navigation.js (core)
-				+ ba-throttle-debounce.js (core)
-				+ waves.js (extension)
-				+ smartpanels.js (extension)
-				+ src/../jquery-snippets.js (core)
-				{ { asset('js/vendors.bundle.js') }}
-				{ { asset('js/app.bundle.js') }}
-				{ { asset('js/smartadmin/datagrid/datatables/datatables.bundle.js') }}
-		-->
+		{{-- base app script --}}
+		<script src="{{ asset('js/app.js') }}"></script>
 		<!-- Smartadmin core -->
 		<script src="{{ asset('js/vendors.bundle.js') }}"></script>
         <script src="{{ asset('js/app.bundle.js') }}"></script>
@@ -257,7 +245,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 					buttons: [
 					{
 						extend: 'selectAll',
-						className: 'btn-outline-primary btn-pills waves-effect waves-themed btn-sm mr-1',
+						className: 'btn-primary  waves-effect waves-themed btn-sm mr-1',
 						text: selectAllButtonTrans,
 						exportOptions: {
 						columns: ':visible'
@@ -270,7 +258,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 					},
 					{
 						extend: 'selectNone',
-						className: 'btn-outline-dark btn-pills waves-effect waves-themed  btn-sm mr-1',
+						className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
 						text: selectNoneButtonTrans,
 						exportOptions: {
 						columns: ':visible'
@@ -280,7 +268,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 						extend: 'copyHtml5',
 						text: copyButtonTrans,
 						titleAttr: 'Copy to clipboard',
-						className: 'btn-outline-primary btn-sm mr-1',
+						className: 'btn-primary btn-sm mr-1',
 						exportOptions: {
 						columns: ':visible'
 						}
@@ -289,14 +277,14 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 						extend: 'csvHtml5',
 						text: csvButtonTrans,
 						titleAttr: 'Generate CSV',
-						className: 'btn-outline-dark btn-pills waves-effect waves-themed  btn-sm mr-1',
+						className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
 						exportOptions: {
 						columns: ':visible'
 						}
 					},
 					{
 						extend: 'excelHtml5',
-						className: 'btn-outline-dark btn-pills waves-effect waves-themed  btn-sm mr-1',
+						className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
 						text: excelButtonTrans,
 						titleAttr: 'Generate Excel',
 						exportOptions: {
@@ -305,7 +293,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 					},
 					{
 						extend: 'pdfHtml5',
-						className: 'btn-outline-dark btn-pills waves-effect waves-themed  btn-sm mr-1',
+						className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
 						text: pdfButtonTrans,
 						titleAttr: 'Generate PDF',
 						exportOptions: {
@@ -314,7 +302,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 					},
 					{
 						extend: 'print',
-						className: 'btn-outline-dark btn-pills waves-effect waves-themed  btn-sm',
+						className: 'btn-dark  waves-effect waves-themed  btn-sm',
 						text: printButtonTrans,
 						titleAttr: 'Print Table',
 						exportOptions: {

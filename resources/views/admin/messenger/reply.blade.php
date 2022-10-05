@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-outline-success btn-pills btn-sm mt-4" type="submit">
+                    <button class="btn btn-success btn-sm mt-4" type="submit">
                         {{ trans('global.reply') }}
                     </button>
                     {{-- <input type="submit" value="{{ trans('global.reply') }}" class="btn btn-success" /> --}}

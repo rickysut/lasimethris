@@ -13,10 +13,10 @@
                     </h2>
                     <div class="panel-toolbar">
                         <div class="form-group">
-                            <button class="btn btn-outline-success btn-pills waves-effect waves-themed btn-sm mr-2" type="submit">
+                            <button class="btn btn-success  waves-effect waves-themed btn-sm mr-2" type="submit">
                                 {{ trans('global.save') }}
                             </button>
-                            <a class="btn btn-outline-danger btn-pills waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.permissions.index') }}">
+                            <a class="btn btn-danger  waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.permissions.index') }}">
                                 {{ trans('global.cancel') }}
                             </a>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label class="required" for="title">{{ trans('cruds.permissions.fields.title') }}</label>
+                                    <label class="required" for="title">{{ trans('cruds.permission.fields.title') }}</label>
                                     <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $permission->title) }}" required>
                                     @if($errors->has('title'))
                                         <div class="invalid-feedback">
@@ -64,7 +64,7 @@
                                             {{ $errors->first('grp_title') }}
                                         </div>
                                     @endif
-                                    <span class="help-block">{{ trans('cruds.permissions.fields.grp_title_helper') }}</span>
+                                    <span class="help-block">{{ trans('cruds.permission.fields.grp_title_helper') }}</span>
                                 </div>
                             </div>
                         </div>

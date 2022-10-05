@@ -30,7 +30,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-outline-info btn-pills" type="submit">
+                        <button class="btn btn-info " type="submit">
                             {{ trans('global.save') }}
                         </button>
                     </div>
@@ -61,7 +61,7 @@
                         <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" required>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-outline-info btn-pills" type="submit">
+                        <button class="btn btn-info " type="submit">
                             {{ trans('global.save') }}
                         </button>
                     </div>
@@ -81,7 +81,7 @@
                 <form method="POST" action="{{ route("profile.password.destroyProfile") }}" onsubmit="return prompt('{{ __('global.delete_account_warning') }}') == '{{ auth()->user()->email }}'">
                     @csrf
                     <div class="form-group">
-                        <button class="btn btn-danger btn-pills" type="submit">
+                        <button class="btn btn-danger " type="submit">
                             {{ trans('global.delete') }}
                         </button>
                     </div>

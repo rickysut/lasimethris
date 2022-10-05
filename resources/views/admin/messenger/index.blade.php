@@ -36,7 +36,7 @@
                         <form action="{{ route('admin.messenger.destroyTopic', [$topic->id]) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');">
                             <input type="hidden" name="_method" value="DELETE">
                             @csrf
-                            <button class="btn btn-outline-danger btn-pills waves-effect waves-themed btn-xs" type="submit">
+                            <button class="btn-danger waves-effect waves-themed btn-xs" type="submit">
                                 {{ trans('global.delete') }}
                             </button>
                             {{-- <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}"> --}}

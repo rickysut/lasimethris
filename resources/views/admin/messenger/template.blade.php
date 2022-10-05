@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-3">
             <p>
-                <a href="{{ route('admin.messenger.createTopic') }}" class="btn btn-outline-primary btn-pills btn-block">
+                <a href="{{ route('admin.messenger.createTopic') }}" class="btn btn-primary btn-block">
                     {{ trans('global.new_message') }}
                 </a>
             </p>

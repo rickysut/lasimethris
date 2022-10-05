@@ -13,10 +13,10 @@
                     </h2>
                     <div class="panel-toolbar">
                         <div class="form-group">
-                            <button class="btn btn-outline-success btn-pills waves-effect waves-themed btn-sm mr-2" type="submit">
+                            <button class="btn btn-success  waves-effect waves-themed btn-sm mr-2" type="submit">
                                 {{ trans('global.save') }}
                             </button>
-                            <a class="btn btn-outline-danger btn-pills waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.settings.index') }}">
+                            <a class="btn btn-danger  waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.settings.index') }}">
                                 {{ trans('global.cancel') }}
                             </a>
                         </div>

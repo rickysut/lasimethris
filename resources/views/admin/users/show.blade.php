@@ -9,7 +9,7 @@
 					{{ trans('cruds.user.title') }} | <span class="fw-300"><i>Lihat</i></span>
 				</h2>
 				<div class="panel-toolbar">
-					<a class="btn btn-outline-primary btn-pills waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.users.index') }}">
+					<a class="btn btn-primary  waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.users.index') }}">
 						{{ trans('global.back_to_list') }}
 					</a>
 				</div>

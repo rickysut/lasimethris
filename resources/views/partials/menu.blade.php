@@ -1,9 +1,11 @@
 <aside class="page-sidebar list-filter-active">
     <div class="page-logo">
 		<a href="/" class="page-logo-link press-scale-down d-flex align-items-center position-relative">
-			<img src="{{ asset('img/logo-icon.png') }}" alt="{{ trans('panel.site_title') }}" aria-roledescription="logo">
-			<span class="page-logo-text mr-1">{{ trans('panel.site_title') }}</span>
-			  
+			{{-- <img src="{{ asset('img/logo-icon.png') }}" alt="{{ trans('panel.site_title') }}" aria-roledescription="logo"> --}}
+			{{-- <span class="page-logo-text mr-1">{{ trans('panel.site_title') }}</span> --}}
+			<img src="{{ asset('img/favicon.png') }}" alt="Simethris" aria-roledescription="logo">
+			<img src="{{ asset('img/logo-icon.png') }}" class="page-logo-text mr-1" alt="Simethris" aria-roledescription="logo" style="width:50px; height:auto;">
+							  
 		</a>
         
 	</div>

@@ -10,7 +10,7 @@
 				</h2>
 				@can('role_create')
 				<div class="panel-toolbar">
-					<a class="btn btn-outline-success btn-pills waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.roles.create') }}" data-toggle="tooltip" title="tambah data" data-original-title="tambah data">
+					<a class="btn btn-success  waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.roles.create') }}" data-toggle="tooltip" title="tambah data" data-original-title="tambah data">
 						{{ trans('global.add') }} {{ trans('cruds.role.title_singular') }}
 					</a>
 				</div>
@@ -58,7 +58,7 @@
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.roles.massDestroy') }}",
-    className: 'btn-outline-danger btn-pills waves-effect waves-themed  btn-sm mr-1',
+    className: 'btn-danger  waves-effect waves-themed  btn-sm mr-1',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
           return entry.id

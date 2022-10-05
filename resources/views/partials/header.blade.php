@@ -32,17 +32,23 @@
 				<i class="fal fa-search"></i>
 			</a>
 		</div>
-		
+		<!-- app settings -->
+		<div class="hidden-md-down">
+			<a href="#" class="header-icon" data-toggle="modal" title="Penyesuaian" data-target=".js-modal-settings">
+				<i class="fal fa-cog"></i>
+			</a>
+		</div>
+		<!-- app user menu -->
 		<div>
 			<a href="#" data-toggle="dropdown" title="{{ Auth::user()->name }}" class="header-icon d-flex align-items-center justify-content-center ml-2">
-				<img src="{{ asset('img/user.png') }}" class="profile-image rounded-circle" alt="{{ Auth::user()->name }}">
+				<img src="{{ asset('img/favicon.png') }}" class="profile-image rounded-circle" alt="{{ Auth::user()->name }}">
 				
 			</a>
 			<div class="dropdown-menu dropdown-menu-animated dropdown-lg">
 				<div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
 					<div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
 						<span class="mr-2">
-							<img src="{{ asset('img/user.png') }}" class="rounded-circle profile-image" alt="users">
+							<img src="{{ asset('img/favicon.png') }}" class="rounded-circle profile-image" alt="users">
 						</span>
 						<div class="info-card-text">
 							<div class="fs-lg text-truncate text-truncate-lg">{{ Auth::user()->name }}</div>

@@ -12,10 +12,10 @@
                     </h2>
                     <div class="panel-toolbar">
                         <div class="form-group">
-                            <button class="btn btn-outline-success btn-pills waves-effect waves-themed btn-sm mr-2" type="submit">
+                            <button class="btn btn-success  waves-effect waves-themed btn-sm mr-2" type="submit">
                                 {{ trans('global.save') }}
                             </button>
-                            <a class="btn btn-outline-danger btn-pills waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.users.index') }}">
+                            <a class="btn btn-danger  waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.users.index') }}">
                                 {{ trans('global.cancel') }}
                             </a>
                         </div>
@@ -85,8 +85,8 @@
                                 <div class="form-group">
                                     <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
                                     {{-- <div style="padding-bottom: 4px">
-                                        <span class="btn btn-outline-info btn-xs select-all" style="border-radius: 10">{{ trans('global.select_all') }}</span>
-                                        <span class="btn btn-outline-info btn-xs deselect-all" style="border-radius: 10">{{ trans('global.deselect_all') }}</span>
+                                        <span class="btn btn-info btn-xs select-all" style="border-radius: 10">{{ trans('global.select_all') }}</span>
+                                        <span class="btn btn-info btn-xs deselect-all" style="border-radius: 10">{{ trans('global.deselect_all') }}</span>
                                     </div> --}}
                                     <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}" name="roles[]" id="roles" multiple required>
                                         @foreach($roles as $id => $role)

@@ -14,10 +14,10 @@
                     </h2>
                     <div class="panel-toolbar">
                         <div class="form-group">
-                            <button class="btn btn-outline-success btn-pills waves-effect waves-themed btn-sm mr-2 btnsave" type="submit">
+                            <button class="btn btn-success  waves-effect waves-themed btn-sm mr-2 btnsave" type="submit">
                                 {{ trans('global.save') }}
                             </button>
-                            <a class="btn btn-outline-danger btn-pills waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.roles.index') }}">
+                            <a class="btn btn-danger  waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.roles.index') }}">
                                 {{ trans('global.cancel') }}
                             </a>
                         </div>
@@ -45,8 +45,8 @@
                                                 <th>
                                                     {{ trans('cruds.permission.title') }}
                                                     <div>
-                                                    <span class="btn btn-outline-info btn-xs check-all" style="border-radius: 10">{{ trans('global.select_all') }}</span>
-                                                    <span class="btn btn-outline-info btn-xs decheck-all" style="border-radius: 10">{{ trans('global.deselect_all') }}</span>
+                                                    <span class="btn btn-info btn-xs check-all" style="border-radius: 10">{{ trans('global.select_all') }}</span>
+                                                    <span class="btn btn-info btn-xs decheck-all" style="border-radius: 10">{{ trans('global.deselect_all') }}</span>
                                                     </div>
                                                 </th>
                                                 <th width="20" class="text-center">

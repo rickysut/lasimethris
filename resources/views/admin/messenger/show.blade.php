@@ -6,7 +6,7 @@
 <div class="row">
     <p>
         @if($topic->receiverOrCreator() !== null && !$topic->receiverOrCreator()->trashed())
-            <a href="{{ route('admin.messenger.reply', [$topic->id]) }}" class="btn btn-outline-primary btn-pills">
+            <a href="{{ route('admin.messenger.reply', [$topic->id]) }}" class="btn btn-primary">
                 {{ trans('global.reply') }}
             </a>
         @endif
