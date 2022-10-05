@@ -18,7 +18,7 @@ return [
     'filterDate'                     => 'Filter berdasarkan bulan',
     'forgot_password'                => 'Lupa Kata Sandi ?',
     'home'                           => 'Beranda',
-    'list'                           => 'Daftar',
+    'list'                           => 'Data',
     'login'                          => 'Masuk',
     'login_email'                    => 'Email',
     'login_password'                 => 'Kata Sandi',
