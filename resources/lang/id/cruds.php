@@ -1,6 +1,17 @@
 <?php
 
 return [
+    'landing' =>[
+        'title'          => 'Beranda',
+        'title_singular' => 'Beranda',
+        'is_parent'      => '1', 
+        'is_hidden'      => '0',
+        'can_view'       => '0',
+        'can_edit'       => '0', 
+        'can_delete'     => '0',  
+        'can_access'     => '1', 
+        'can_create'     => '0',   
+    ], 
     'dashboard' =>[
         'title'          => 'Dashboard',
         'title_singular' => 'Dashboard',

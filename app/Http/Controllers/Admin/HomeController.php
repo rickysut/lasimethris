@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers\Admin;
 
-use LaravelDaily\LaravelCharts\Classes\LaravelChart;
-use App\Models\Belanja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
-class HomeController
+class HomeController extends Controller
 {   
-    public function index()
+    public function index() // should be landing page
     {
-        $breadcrumb = trans('cruds.dashboard.title') ;
-        return view('admin.dashboard.index', compact('breadcrumb'));  
+        $roleaccess = Auth::user()->roleaccess;
+        if ($roleaccess==1)
+        {
+            $breadcrumb = 'Beranda Dirjen' ;
+            return view('admin.landing.indexdirjen', compact('breadcrumb'));  
+        } 
+        if ($roleaccess==2)
+        {
+            $breadcrumb = 'Beranda User' ;
+            return view('admin.landing.indexuser', compact('breadcrumb')); 
+        }
     }
+        
 
     
 }

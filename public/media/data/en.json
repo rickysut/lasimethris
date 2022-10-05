@@ -3,6 +3,7 @@
     "name": "Smartadmin"
   },
   "nav": {
+    "landing_page": "Home",
     "monitoring_analysis": "MONITORING & ANALYSIS",
     "monitoring_analysis_sub1": "Monitoring Dashboard",
     "monitoring_analysis_sub1_menu1": "Dashboard",

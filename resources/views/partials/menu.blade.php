@@ -1,4 +1,4 @@
-<aside class="page-sidebar list-filter-active">
+<aside class="page-sidebar">
     <div class="page-logo">
 		<a href="/" class="page-logo-link press-scale-down d-flex align-items-center position-relative">
 			{{-- <img src="{{ asset('img/logo-icon.png') }}" alt="{{ trans('panel.site_title') }}" aria-roledescription="logo"> --}}
@@ -15,28 +15,54 @@
         <div class="nav-filter">
 			<div class="position-relative">
 				<input type="text" id="nav_filter_input" placeholder="Cari menu" class="form-control" tabindex="0">
-				
+				<a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
+                    <i class="fal fa-chevron-up"></i>
+                </a>
 			</div>
 		</div>
-        
+        <div class="info-card">
+            <img src="{{ asset('/img/avatars/farmer.png') }}" class="profile-image rounded-circle" alt="">
+            <div class="info-card-text">
+                <a href="#" class="d-flex align-items-center text-white">
+                    <span class="text-truncate text-truncate-sm d-inline-block">
+                        {{ Auth::user()->username }}
+                    </span>
+                </a>
+                <span class="d-inline-block text-truncate text-truncate-sm">Company Name</span>
+            </div>
+            <img src="{{ asset('/img/card-backgrounds/cover-2-lg.png') }}" class="cover" alt="cover">
+            <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
+                <i class="fal fa-angle-down"></i>
+            </a>
+        </div>
         <ul id="js-nav-menu" class="nav-menu">
+            @can('landing_access')
+            <li class="c-sidebar-nav-item {{ request()->is("admin")  ? "active" : "" }}">
+                <a href="{{ route("admin.home") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.landing.title')) }}">
+                    <i class="c-sidebar-nav-icon fal fa-home-alt">
+
+                    </i>
+                    {{ trans('cruds.landing.title') }}
+                </a>
+            </li>
+            @endcan
             @can('dashboard_access')
-            <li class="c-sidebar-nav-item">
-                <a href="{{ route("admin.home") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboard.title')) }}">
-                    <i class="c-sidebar-nav-icon fas fa-fw fa-tachometer-alt">
+            <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
+                <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboard.title')) }}">
+                    <i class="c-sidebar-nav-icon fal  fa-analytics">
 
                     </i>
                     {{ trans('cruds.dashboard.title') }}
                 </a>
             </li>
-        @endcan
+            @endcan
         
         
         @can('master_data_access')
         <li class="nav-title" data-i18n="nav.master_data">DATA INDUK (master)</li>
             <li>
                 @can('partner_access')
-                    <li class="c-sidebar-nav-item {{ request()->is("admin/partners") || request()->is("admin/partners/*") ? "c-active" : "" }}">
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/partners") || request()->is("admin/partners/*") ? "active" : "" }}">
                         <a href="{{ route("admin.partners.index") }}" data-filter-tags="{{ strtolower(trans('cruds.partner.title')) }}">
                             <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
@@ -46,7 +72,7 @@
                     </li>
                 @endcan
                 @can('coa_access')
-                    <li class="c-sidebar-nav-item {{ request()->is("admin/coas") || request()->is("admin/coas/*") ? "c-active" : "" }}">
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/coas") || request()->is("admin/coas/*") ? "active" : "" }}">
                         <a href="{{ route("admin.coas.index") }}" data-filter-tags="{{ strtolower(trans('cruds.coa.title')) }}">
                             <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
@@ -59,7 +85,7 @@
         @endcan
         @can('user_management_access')
         <li class="nav-title" data-i18n="nav.administation">ADMINISTRATOR</li>
-        <li class="{{ request()->is("admin/permissions*")  || request()->is("admin/roles*") || request()->is("admin/users*") || request()->is("admin/audit-logs*")  ? "active open" : "" }}">
+        <li class="{{ request()->is("admin/permissions*")  || request()->is("admin/roles*") || request()->is("admin/users*") || request()->is("admin/audit-logs*")  ? "active open" : "" }} ">
             <a href="#" title="User Management" data-filter-tags="{{ strtolower(trans('cruds.userManagement.title')) }}">
                 <i class="fal fal fa-users"></i>
                 <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.userManagement.title') }}</span>
@@ -103,7 +129,7 @@
         @endcan
         
         @can('setting_access')
-            <li class="c-sidebar-nav-item {{ request()->is("admin/settings") || request()->is("admin/settings/*") ? "c-active" : "" }}">
+            <li class="c-sidebar-nav-item {{ request()->is("admin/settings") || request()->is("admin/settings/*") ? "active" : "" }}">
                 <a href="{{ route("admin.settings.index") }}" data-filter-tags="{{ strtolower(trans('cruds.setting.title')) }}">
                     <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
@@ -115,7 +141,7 @@
         
         
         @php($unread = \App\Models\QaTopic::unreadCount())
-            <li class="c-sidebar-nav-item {{ request()->is("admin/messenger") || request()->is("admin/messenger/*") ? "c-active" : "" }}">
+            <li class="c-sidebar-nav-item {{ request()->is("admin/messenger") || request()->is("admin/messenger/*") ? "active" : "" }}">
                 <a href="{{ route("admin.messenger.index") }}" data-filter-tags="{{ strtolower(trans('global.messages')) }}">
                     <i class="c-sidebar-nav-icon fa-fw fa fa-envelope">
 
@@ -129,7 +155,7 @@
             </li>
             @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                 @can('profile_password_edit')
-                    <li class="c-sidebar-nav-item {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'c-active' : '' }}" >
+                    <li class="c-sidebar-nav-item {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}" >
                         <a href="{{ route('profile.password.edit') }}" data-filter-tags="{{ strtolower(trans('global.change_password')) }}">
                             <i class="fa-fw fas fa-key c-sidebar-nav-icon">
                             </i>
