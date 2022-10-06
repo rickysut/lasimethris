@@ -21,7 +21,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 ml-auto shadow-lg">
 			<h1 class="text-white fw-300 mb-3 d-sm-block d-md-none">
 				Secure login
@@ -41,7 +41,7 @@
 									<span class="fal fa-user-lock"></span>
 								</div>
 							</div>
-							<select id="roleaccess" name="roleaccess" type="text" class="form-control form-control-md" required autocomplete="roleaccess" autofocus placeholder="select role">
+							<select id="roleaccess" name="roleaccess" type="text" class="form-control form-control-md {{ $errors->has('roleaccess') ? ' is-invalid' : '' }}" required autocomplete="roleaccess" autofocus placeholder="select role">
 								<option hidden>{{trans('panel.role_placeholder')}}</option>
 								<option value="1">{{trans('panel.role_val1')}}</option>
 								<option value="2">{{trans('panel.role_val2')}}</option>
@@ -63,12 +63,13 @@
 									<span class="fal fa-user"></span>
 								</div>
 							</div>
-							<input id="username" name="username" type="text" class="form-control form-control-md" required autocomplete="{{ trans('global.login_username') }}" autofocus placeholder="{{ trans('global.login_username') }}" value="" />
+							<input id="username" name="username" type="text" class="form-control form-control-md {{ $errors->has('username') ? ' is-invalid' : '' }}" required autocomplete="{{ trans('global.login_username') }}" autofocus placeholder="{{ trans('global.login_username') }}" value="{{ old('username', null) }}" />
 							@if($errors->has('username'))
 							<div class="invalid-feedback">
 								{{ $errors->first('username') }}
 							</div>
 							@endif
+							
 						</div>
 						<div class="help-block text-muted">{{ trans('panel.username_help') }}</div>
 					</div>
@@ -80,7 +81,7 @@
 									<span class="fal fa-key"></span>
 								</div>
 							</div>
-							<input id="password" name="password" type="password" class="form-control form-control-md border-right-0 bg-transparent pr-0" required autocomplete="{{ trans('global.login_password') }}" autofocus placeholder="{{ trans('global.login_password') }}" value="" />
+							<input id="password" name="password" type="password" class="form-control form-control-md border-right-0 bg-transparent pr-0 {{ $errors->has('password') ? ' is-invalid' : '' }}" required autocomplete="{{ trans('global.login_password') }}" autofocus placeholder="{{ trans('global.login_password') }}" value="" />
 							@if($errors->has('password'))
 							<div class="invalid-feedback">
 								{{ $errors->first('password') }}

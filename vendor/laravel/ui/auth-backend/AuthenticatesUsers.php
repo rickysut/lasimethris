@@ -69,10 +69,15 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
+        // $messages = [
+        //     'roleaccess.required' => 'Role is required!',
+        //     'password.required' => 'Password is required!',
+        //     $this->username() => 'Username is required!'
+        // ];
         $request->validate([
             'roleaccess' => 'required|integer',
             $this->username() => 'required|string',
-            'password' => 'required|string',
+            //'password' => 'required|string',
         ]);
     }
 
@@ -143,12 +148,18 @@ trait AuthenticatesUsers
      */
     protected function sendFailedLoginResponse(Request $request)
     {
+        
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
+            $this->username() => [trans('auth.failed')]
+        ]);
+    }
+    protected function sendFailedLoginResponse2(Request $request)
+    {
+        
+        throw ValidationException::withMessages([
             'roleaccess' => [trans('auth.roleaccess')]
         ]);
     }
-
     /**
      * Get the login username to be used by the controller.
      *

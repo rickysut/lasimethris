@@ -14,13 +14,19 @@ class HomeController extends Controller
         $roleaccess = Auth::user()->roleaccess;
         if ($roleaccess==1)
         {
-            $breadcrumb = 'Beranda Dirjen' ;
-            return view('admin.landing.indexdirjen', compact('breadcrumb'));  
+            $module_name = 'Executive' ;
+            $page_title = 'Daftar Pengajuan';
+            $page_heading = 'Daftar Pengajuan';
+            $heading_class = 'fal fa-ballot-check';
+            return view('admin.landing.indexdirjen', compact('module_name', 'page_title', 'page_heading', 'heading_class'));  
         } 
         if ($roleaccess==2)
         {
-            $breadcrumb = 'Beranda User' ;
-            return view('admin.landing.indexuser', compact('breadcrumb')); 
+            $module_name = 'Executive' ;
+            $page_title = 'Daftar Pengajuan';
+            $page_heading = 'Daftar Pengajuan';
+            $heading_class = 'fal fa-ballot-check';
+            return view('admin.landing.indexuser', compact('module_name', 'page_title', 'page_heading', 'heading_class'));
         }
     }
         
