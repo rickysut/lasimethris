@@ -13,14 +13,31 @@ class DashboardController extends Controller
     {
         $roleaccess = Auth::user()->roleaccess;
         if ($roleaccess==1)
-        {
-            $breadcrumb = trans('cruds.dashboard.title') . ' Dirjen';
-            return view('admin.dashboard.indexdirjen', compact('breadcrumb'));  
+        {   
+            // dd(Auth::user()->roles[0]->title);
+            if (Auth::user()->roles[0]->title == 'Admin'){
+                $module_name = 'Dashboard' ;
+                $page_title = '';
+                $page_heading = 'Dashboard' ;
+                $heading_class = 'fal fa-tachometer';
+                return view('admin.dashboard.indexadmin', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+            }
+            if (Auth::user()->roles[0]->title == 'Verifikator'){
+                $module_name = 'Dashboard' ;
+                $page_title = '';
+                $page_heading = 'Dashboard' ;
+                $heading_class = 'fal fa-tachometer';
+                return view('admin.dashboard.indexverifikator', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+            }
         } 
         if ($roleaccess==2)
         {
-            $breadcrumb = trans('cruds.dashboard.title'). ' User';
-            return view('admin.dashboard.indexuser', compact('breadcrumb')); 
+            $module_name = 'Dashboard' ;
+            $page_title = '';
+            $page_heading = 'Dashboard' ;
+            $heading_class = 'fal fa-tachometer';
+            return view('admin.dashboard.indexuser', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+            
         }
     }
 }

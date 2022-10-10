@@ -548,6 +548,11 @@ aside.page-sidebar ($nav-width, $nav-background)
    font-size: 2.5rem;
    font-weight: 300;
    line-height: 1.57; }
+
+   .display-5 {
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.57; }
  
  hr {
    margin-top: 1rem;

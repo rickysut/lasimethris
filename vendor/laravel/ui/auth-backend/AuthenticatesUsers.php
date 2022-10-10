@@ -102,6 +102,7 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
+        
         return $request->only( $this->username(), 'password', 'roleaccess');
     }
 

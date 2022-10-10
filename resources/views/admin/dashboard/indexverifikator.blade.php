@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 @section('content')
+@include('partials.breadcrumb')
 @include('partials.subheader')
-@can('dashboard_access')
+@can('dashboardv_access')
 
 
 @endcan

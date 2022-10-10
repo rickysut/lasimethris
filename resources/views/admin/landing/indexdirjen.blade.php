@@ -2,7 +2,7 @@
 @section('content')
 @include('partials.breadcrumb')
 @include('partials.subheader')
-@can('dashboard_access')
+@can('landing_access')
 <div class="row">
 	<div class="col-12">
 		<div class="panel" id="panel-1">
@@ -83,7 +83,77 @@
 @endsection
 @section('scripts')
 @parent
+<script>
+	$(document).ready(function()
+	{
+		$('#dt-ajulunas').dataTable(
+		{
+			responsive: true,
+			pageLength: 15,
+			order: [
+				[0, 'desc']
+			]
+		});
+	});
+// $(function () {
+//   	let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+// 	@can('user_delete')
+// 		let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
+// 		let deleteButton = {
+// 			text: deleteButtonTrans,
+// 			url: "{{ route('admin.users.massDestroy') }}",
+// 			className: 'btn-danger  waves-effect waves-themed  btn-sm mr-1',
+// 			action: function (e, dt, node, config) {
+// 				var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+// 					return entry.id
+// 				});
 
+// 				if (ids.length === 0) {
+// 					alert('{{ trans('global.datatables.zero_selected') }}')
+
+// 					return
+// 				}
+
+// 				if (confirm('{{ trans('global.areYouSure') }}')) {
+// 					$.ajax({
+// 					headers: {'x-csrf-token': _token},
+// 					method: 'POST',
+// 					url: config.url,
+// 					data: { ids: ids, _method: 'DELETE' }})
+// 					.done(function () { location.reload() })
+// 				}
+// 			}
+// 		}
+// 		dtButtons.push(deleteButton)
+// 	@endcan
+
+//   	let dtOverrideGlobals = {
+//     	buttons: dtButtons,
+//     	processing: true,
+//     	serverSide: true,
+//     	retrieve: true,
+//     	aaSorting: [],
+//     	ajax: "{{ route('admin.users.index') }}",
+//     	columns: [
+//       		{ data: 'placeholder', name: 'placeholder' },
+// 			{ data: 'name', name: 'name' },
+// 			{ data: 'username', name: 'username' },
+// 			{ data: 'roleaccess', name: 'roleaccess' },
+// 			{ data: 'email', name: 'email' },
+// 			//{ data: 'email_verified_at', name: 'email_verified_at' },
+// 			{ data: 'roles', name: 'roles.title' },
+// 			{ data: 'actions', name: '{{ trans('global.actions') }}' }
+//     	],
+// 		orderCellsTop: true,
+// 		order: [[ 1, 'desc' ]],
+// 		pageLength: 10,
+//   	};
+//   	let table = $('#dt-ajulunas').DataTable(dtOverrideGlobals);
+// 	$('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
+// 		$($.fn.dataTable.tables(true)).DataTable()
+// 			.columns.adjust();
+// 	});
+// });
 
 
 @endsection

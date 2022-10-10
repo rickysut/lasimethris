@@ -48,11 +48,31 @@
             @endcan
             @can('dashboard_access')
             <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
-                <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboard.title')) }}">
+                <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardUser.title')) }}">
                     <i class="c-sidebar-nav-icon fal  fa-analytics">
 
                     </i>
-                    {{ trans('cruds.dashboard.title') }}
+                    {{ trans('cruds.dashboardUser.title') }}
+                </a>
+            </li>
+            @endcan
+            @can('dashboarda_access')
+            <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
+                <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardAdmin.title')) }}">
+                    <i class="c-sidebar-nav-icon fal  fa-analytics">
+
+                    </i>
+                    {{ trans('cruds.dashboardAdmin.title') }}
+                </a>
+            </li>
+            @endcan
+            @can('dashboardv_access')
+            <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
+                <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardVerifikator.title')) }}">
+                    <i class="c-sidebar-nav-icon fal  fa-analytics">
+
+                    </i>
+                    {{ trans('cruds.dashboardVerifikator.title') }}
                 </a>
             </li>
             @endcan
