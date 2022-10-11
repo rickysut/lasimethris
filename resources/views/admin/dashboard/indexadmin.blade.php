@@ -1,9 +1,32 @@
 @extends('layouts.admin')
 @section('content')
 @include('partials.breadcrumb')
-@include('partials.subheader')
+{{-- @include('partials.subheader') --}}
 @can('dashboarda_access')
 <!-- Page Content -->
+<div class="subheader d-print-none">
+	<h1 class="subheader-title">
+		<i class="subheader-icon {{ ($heading_class ?? '') }}"></i><span class="fw-700 mr-2">{{  ($page_heading ?? '') }}</span><span class="fw-300">Realisasi & Verifikasi</span>
+	</h1>
+	
+	<div class="subheader-block d-lg-flex align-items-center">
+		<div class="d-inline-flex flex-column justify-content-center ">
+			<select type="text" id="statusTanam" class="form-control form-control-sm" data-toggle="tooltip" title data-original-title="pilih tahun awal laporan" placeholder="Task..." aria-label="statusTanam" aria-describedby="statusTanam">
+				<option hidden>- pilih tahun laporan</option>
+					<option disabled></option>
+					<option>2022</option>
+					<option>2023</option>
+					<option disabled></option>
+			</select>
+		</div>
+	</div>
+	<div class="subheader-block d-lg-flex align-items-center border-faded border-right-0 border-top-0 border-bottom-0 ml-3 pl-3">
+		<div class="d-inline-flex flex-column justify-content-center mr-3">
+			<button class="btn btn-primary ">Lihat
+			</button>
+		</div>
+	</div>
+</div>
 <div class="row">
         <div class="col-md-3">
             <div id="new_request" class="p-3 bg-danger-300 rounded overflow-hidden position-relative text-white mb-g">

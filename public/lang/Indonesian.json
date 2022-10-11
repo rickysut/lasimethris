@@ -12,9 +12,9 @@
 	"sSearch":       "Cari:",
 	"sUrl":          "",
 	"oPaginate": {
-		"sFirst":    "Pertama",
-		"sPrevious": "Sebelumnya",
-		"sNext":     "Selanjutnya",
-		"sLast":     "Terakhir"
+		"sFirst":    "<<",
+		"sLast":     ">>",
+		"sNext":     ">",
+		"sPrevious": "<"
 	}
 }

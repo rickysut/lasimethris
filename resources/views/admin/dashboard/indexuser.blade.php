@@ -175,8 +175,8 @@
 			<div class="panel-container show">
 				<div class="panel-content">
 					<div class="table-responsive">
-						<table id="sum_verif" class="table table-xs table-bordered table-striped tabel-hover table-sm w-100">
-							<thead class="bg-gradient text-white text-center fw-500">
+						<table id="sum_verif"  class="table table-bordered ajaxTable table-hover datatable table-sm w-100">
+                            <thead  class="bg-primary-100 text-white text-center">
 								<tr>
 									<th rowspan="2">Nomor RIPH</th>
 									<th colspan="2">Tahap 1 <sup>(Lapangan)</sup></th>

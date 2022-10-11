@@ -13,10 +13,10 @@
 	"sSearch":         "Search:",
 	"sZeroRecords":    "No matching records found",
 	"oPaginate": {
-		"sFirst":    "First",
-		"sLast":     "Last",
-		"sNext":     "Next",
-		"sPrevious": "Previous"
+		"sFirst":    "<<",
+		"sLast":     ">>",
+		"sNext":     ">",
+		"sPrevious": "<"
 	},
 	"oAria": {
 		"sSortAscending":  ": activate to sort column ascending",
