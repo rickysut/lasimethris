@@ -1,9 +1,13 @@
 @extends('layouts.admin')
 @section('content')
+<link rel="stylesheet" media="screen, print" href="{{ asset('css/miscellaneous/jqvmap/jqvmap.bundle.css') }}">
 
 @include('partials.breadcrumb')
-{{-- @include('partials.subheader') --}}
-@can('dashboardv_access')
+<style>
+	.bg-ocean {
+		background-color: #eafeff;
+	}
+	</style>
 <!-- Page Title Heading -->
 <div class="subheader d-print-none">
 	<h1 class="subheader-title">
@@ -44,13 +48,13 @@
 				<div class="panel-content">
 					<div class="row">
 						<div class="col-lg-8 bg-ocean p-0" style="min-height: 300px;">
-							<div id="vector-map" class="w-100 h-100 p-2"></div>
+							<div id="vector-map" style="height: 100%; width: 100%" class="p-2"></div>
 						</div>
 						<div class="col-lg-4 p-4">
 							<div class="p-1 d-flex align-items-center justify-content-start">
 								<div class="border-faded border-top-0 border-left-0 border-bottom-0 py-2 pr-1 mr-1">
 									<div class="text-right fw-500 l-h-n d-flex flex-column">
-										<img class="d-inline-block js-jqvmap-flag mr-1" alt="logo" src="<?php echo base_url('assets/public/img/avatars/') ?>farmer.png" style="width:auto; height: 55px;">
+										<img class="d-inline-block js-jqvmap-flag mr-1" alt="logo" src="{{ asset('img/avatars/farmer.png') }}" style="width:auto; height: 55px;">
 									</div>
 								</div>
 								<div class="d-flex justify-content-center flex-wrap d-sm-block">
@@ -145,10 +149,10 @@
 					<div class="carousel slide" data-ride="carousel" id="carouselProduksi">
 						<div class="carousel-inner">
 							<div class="carousel-item active text-center" style="height:30vh">
-								<img class="img-responsive card-image-top" src="<?php echo base_url('assets/public/img/demo/gallery/') ?>34.jpg" alt="Judul foto" style="height:30vh; widht:100%;">
+								<img class="img-responsive card-image-top" src="{{ asset('img/demo/gallery/34.jpg') }}" alt="Judul foto" style="height:30vh; widht:100%;">
 							</div>
 							<div class="carousel-item text-center" style="height:30vh">
-								<img class="img-responsive card-image-top" src="<?php echo base_url('assets/public/img/demo/gallery/') ?>52.jpg" alt="Judul foto" style="height:30vh; widht:100%;">
+								<img class="img-responsive card-image-top" src="{{ asset('img/demo/gallery/52.jpg') }}" alt="Judul foto" style="height:30vh; widht:100%;">
 								<div class="carousel-caption caption d-none d-md-block">
 								</div>
 							</div>
@@ -229,54 +233,54 @@
 </div>
 {{-- End Page Content --}}
 
-@endcan
 @endsection
 @section('scripts')
 @parent
-
-    <script>
+<script src="{{ asset('js/miscellaneous/jqvmap/jqvmap.bundle.js') }}"></script>
+<script src="{{ asset('js/miscellaneous/jqvmap/maps/jquery.vmap.indonesia.js') }}"></script>
+<script type="text/javascript" >
         $(function () 
         {
             $('#vector-map').vectorMap(
             {
                 map: 'indonesia_id',
-                // enableZoom: true,
-                // backgroundColor: 'transparent',
-                // color: color.warning._50,
-                // borderOpacity: 0.5,
-                // borderWidth: 1,
-                // hoverColor: color.primary._300,
-                // hoverOpacity: null,
-                // selectedColor: color.success._500,
-                // enableZoom: true,
-                // showTooltip: true,
-                // scaleColors: [color.primary._400, color.primary._50],
-                // normalizeFunction: 'polynomial',
-                // onRegionClick: function(element, code, region)
-                // {
-                //     var message = 'You clicked "'
-                //     + region
-                //     + '" which has the code: '
-                //     + code.toLowerCase();
+                enableZoom: true,
+                backgroundColor: 'transparent',
+                color: color.warning._50,
+                borderOpacity: 0.5,
+                borderWidth: 1,
+                hoverColor: color.success._300,
+                hoverOpacity: null,
+                selectedColor: color.success._700,
+                enableZoom: true,
+                showTooltip: true,
+                scaleColors: [color.primary._400, color.primary._50],
+                normalizeFunction: 'polynomial',
+                onRegionClick: function(element, code, region)
+                {
+                    var message = 'You clicked "'
+                    + region
+                    + '" which has the code: '
+                    + code.toLowerCase();
         
-                // console.log(message);
+                    //console.log(message);
 
-                //     var randomNumber = Math.floor(Math.random() * 10000000);
-                //     var arrow;
+                    var randomNumber = Math.floor(Math.random() * 10000000);
+                    var arrow;
 
-                //     if (Math.random() >= 0.5 == true)
-                //     {
-                //         arrow = '<div class="ml-2 d-inline-flex"><i class="fal fa-caret-up text-success fs-xs"></i></div>'
-                //     }
-                //     else
-                //     {
-                //         arrow = '<div class="ml-2 d-inline-flex"><i class="fal fa-caret-down text-danger fs-xs"></i></div>'
-                //     }
+                    if (Math.random() >= 0.5 == true)
+                    {
+                        arrow = '<div class="ml-2 d-inline-flex"><i class="fal fa-caret-up text-success fs-xs"></i></div>'
+                    }
+                    else
+                    {
+                        arrow = '<div class="ml-2 d-inline-flex"><i class="fal fa-caret-down text-danger fs-xs"></i></div>'
+                    }
 
-                //     $('.js-jqvmap-flag').attr('src', '/img/prov_logo/' + code.toLowerCase() + '.svg');
-                //     $('.js-jqvmap-prov').html(region);
-                // }
+                    $('.js-jqvmap-flag').attr('src', '/img/prov_logo/' + code.toLowerCase() + '.svg');
+                    $('.js-jqvmap-prov').html(region);
+                }
             });
         });
-    </script>
+</script>
 @endsection

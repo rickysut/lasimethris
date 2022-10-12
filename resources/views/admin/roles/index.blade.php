@@ -58,7 +58,7 @@
       let deleteButton = {
         text: deleteButtonTrans,
         url: "{{ route('admin.roles.massDestroy') }}",
-        className: 'btn-danger  waves-effect waves-themed  btn-sm mr-1',
+        className: 'btn-danger  waves-effect waves-themed  btn-xs mr-1',
         action: function (e, dt, node, config) {
           var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
               return entry.id
@@ -89,6 +89,23 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
+    columnDefs: [{
+						orderable: false,
+						className: 'select-checkbox',
+						targets: 0
+					}, {
+						orderable: false,
+						searchable: false,
+						targets: -1
+					}],
+		select: {
+					style:    'multi+shift',
+					selector: 'td:first-child'
+		},
+    dom: 
+					"<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-8 d-flex'B><'col-sm-12 col-md-2 d-flex justify-content-end'f>>" +
+					"<'row'<'col-sm-12 col-md-12'tr>>" +
+					"<'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'p>>",
     ajax: "{{ route('admin.roles.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },

@@ -19,9 +19,7 @@
 									<thead  class="bg-primary-50">
 
                                         <tr>
-                                            <th width="10">
-
-                                            </th>
+                                            
                                             <th>
                                                 {{ trans('cruds.auditLog.fields.id') }}
                                             </th>
@@ -73,9 +71,14 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
+    
+    dom: 
+					"<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-8 d-flex'B><'col-sm-12 col-md-2 d-flex justify-content-end'f>>" +
+					"<'row'<'col-sm-12 col-md-12'tr>>" +
+					"<'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'p>>",
     ajax: "{{ route('admin.audit-logs.index') }}",
     columns: [
-      { data: 'placeholder', name: 'placeholder' },
+    //   { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'description', name: 'description' },
 { data: 'subject_id', name: 'subject_id' },
@@ -86,7 +89,7 @@
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
+    order: [[ 0, 'desc' ]],
     pageLength: 100,
   };
   let table = $('.datatable-AuditLog').DataTable(dtOverrideGlobals);
