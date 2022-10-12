@@ -13,8 +13,8 @@ return [
         'can_create'     => '0',   
     ], 
     'dashboardAdmin' =>[
-        'title'          => 'Dashboard Admin',
-        'title_singular' => 'Dashboard Admin',
+        'title'          => 'Realisation & Verification',
+        'title_singular' => 'Realisation & Verification',
         'is_parent'      => '1', 
         'is_hidden'      => '0',
         'can_view'       => '0',
@@ -24,8 +24,8 @@ return [
         'can_create'     => '0',   
     ], 
     'dashboardVerifikator' =>[
-        'title'          => 'Dashboard Verifikator',
-        'title_singular' => 'Dashboard Verifikator',
+        'title'          => 'Verification',
+        'title_singular' => 'Verification',
         'is_parent'      => '1', 
         'is_hidden'      => '0',
         'can_view'       => '0',
@@ -35,8 +35,8 @@ return [
         'can_create'     => '0',   
     ], 
     'dashboardUser' =>[
-        'title'          => 'Dashboard User',
-        'title_singular' => 'Dashboard User',
+        'title'          => 'Data Summary',
+        'title_singular' => 'Data Summary',
         'is_parent'      => '1', 
         'is_hidden'      => '0',
         'can_view'       => '0',

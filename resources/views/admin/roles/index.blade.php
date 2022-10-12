@@ -52,36 +52,36 @@
 @parent
 <script>
     $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('role_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.roles.massDestroy') }}",
-    className: 'btn-danger  waves-effect waves-themed  btn-sm mr-1',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
-          return entry.id
-      });
+    let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+    @can('role_delete')
+      let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
+      let deleteButton = {
+        text: deleteButtonTrans,
+        url: "{{ route('admin.roles.massDestroy') }}",
+        className: 'btn-danger  waves-effect waves-themed  btn-sm mr-1',
+        action: function (e, dt, node, config) {
+          var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+              return entry.id
+          });
 
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
+          if (ids.length === 0) {
+            alert('{{ trans('global.datatables.zero_selected') }}')
 
-        return
+            return
+          }
+
+          if (confirm('{{ trans('global.areYouSure') }}')) {
+            $.ajax({
+              headers: {'x-csrf-token': _token},
+              method: 'POST',
+              url: config.url,
+              data: { ids: ids, _method: 'DELETE' }})
+              .done(function () { location.reload() })
+          }
+        }
       }
-
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
+      dtButtons.push(deleteButton)
+    @endcan
 
   let dtOverrideGlobals = {
     buttons: dtButtons,

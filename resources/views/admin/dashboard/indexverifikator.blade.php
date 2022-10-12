@@ -291,7 +291,6 @@
         let dtOverrideGlobals = {
             processing: true,
             serverside: true,
-            pagingType: 'full_numbers',
             responsive: true,
             lengthChange: false,
             pageLength: 10,

@@ -13,8 +13,8 @@ return [
         'can_create'     => '0',   
     ], 
     'dashboardAdmin' =>[
-        'title'          => 'Dashboard Admin',
-        'title_singular' => 'Dashboard Admin',
+        'title'          => 'Realisasi & Verifikasi',
+        'title_singular' => 'Realisasi & Verifikasi',
         'is_parent'      => '1', 
         'is_hidden'      => '0',
         'can_view'       => '0',
@@ -24,8 +24,8 @@ return [
         'can_create'     => '0',   
     ], 
     'dashboardVerifikator' =>[
-        'title'          => 'Dashboard Verifikator',
-        'title_singular' => 'Dashboard Verifikator',
+        'title'          => 'Verifikasi',
+        'title_singular' => 'Verifikasi',
         'is_parent'      => '1', 
         'is_hidden'      => '0',
         'can_view'       => '0',
@@ -35,8 +35,8 @@ return [
         'can_create'     => '0',   
     ], 
     'dashboardUser' =>[
-        'title'          => 'Dashboard User',
-        'title_singular' => 'Dashboard User',
+        'title'          => 'Ringkasan Data',
+        'title_singular' => 'Ringkasan Data',
         'is_parent'      => '1', 
         'is_hidden'      => '0',
         'can_view'       => '0',

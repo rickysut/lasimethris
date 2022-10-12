@@ -47,33 +47,63 @@
             </li>
             @endcan
             @can('dashboard_access')
-            <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
-                <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardUser.title')) }}">
-                    <i class="c-sidebar-nav-icon fal  fa-analytics">
-
-                    </i>
-                    {{ trans('cruds.dashboardUser.title') }}
+            <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
+                <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
+                    <i class="fal fa-analytics"></i>
+                    <span class="nav-link-text" data-i18n="nav.dashboard_menu">Dashboard</span>
                 </a>
+                <ul>
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
+                        <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardUser.title')) }}">
+                            {{ trans('cruds.dashboardUser.title') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route("admin.dashboard") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
+                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endcan
             @can('dashboarda_access')
-            <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
-                <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardAdmin.title')) }}">
-                    <i class="c-sidebar-nav-icon fal  fa-analytics">
-
-                    </i>
-                    {{ trans('cruds.dashboardAdmin.title') }}
+            <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
+                <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
+                    <i class="fal fa-analytics"></i>
+                    <span class="nav-link-text" data-i18n="nav.dashboard_menu">Dashboard</span>
                 </a>
+                <ul>
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
+                        <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardAdmin.title')) }}">
+                            {{ trans('cruds.dashboardAdmin.title') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route("admin.dashboard") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
+                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endcan
             @can('dashboardv_access')
-            <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
-                <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardVerifikator.title')) }}">
-                    <i class="c-sidebar-nav-icon fal  fa-analytics">
-
-                    </i>
-                    {{ trans('cruds.dashboardVerifikator.title') }}
+            <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
+                <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
+                    <i class="fal fa-analytics"></i>
+                    <span class="nav-link-text" data-i18n="nav.dashboard_menu">Dashboard</span>
                 </a>
+                <ul>
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
+                        <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardVerifikator.title')) }}">
+                            {{ trans('cruds.dashboardVerifikator.title') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route("admin.dashboard") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
+                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endcan
         

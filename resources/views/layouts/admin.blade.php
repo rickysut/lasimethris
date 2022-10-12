@@ -331,7 +331,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 					]
 				});
 
-  				$.fn.dataTable.ext.classes.sPageButton = '';
+  				$.fn.dataTable.ext.classes.sPageButton = 'button primary_button paginate_button';
 			});
 		$(document).ready(function() {
 		  $('.searchable-field').select2({

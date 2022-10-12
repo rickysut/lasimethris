@@ -270,7 +270,8 @@
                                 </div>
                             </div>
                         </div><hr>
-                        <table id="sum_verif"  class="table table-bordered ajaxTable table-hover datatable table-sm w-100">
+                        <div class="table dataTables_wrapper dt-bootstrap4">
+                        <table id="sum_verif"  class="dtr-inline table table-bordered ajaxTable table-hover datatable table-sm w-100">
                             <thead  class="bg-primary-100 text-white text-center">
                         {{-- <table id="sum_verif" class="table table-bordered table-hover table-sm w-100 dataTable">
                             <thead class="bg-gradient text-white text-center fw-500"> --}}
@@ -363,6 +364,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -408,18 +410,22 @@
 	// @endcan
 
   	let dtOverrideGlobals = {
+        
+        buttons: dtButtons,
         processing: true,
 		serverside: true,
-		pagingType: 'full_numbers',
+        retrieve: true,
+        aaSorting: [],
 		responsive: true,
 		lengthChange: false,
 		pageLength: 10,
 		order: [
 			[0, 'asc']
 		],
-    	buttons: dtButtons,
+        orderCellsTop: true,
     	
-    	//aaSorting: [],
+    	
+    	//
         
     	//ajax: "#",
     	// columns: [
