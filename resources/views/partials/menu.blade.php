@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route("admin.dashboard") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
+                        <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
                             <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>
@@ -79,7 +79,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route("admin.dashboard") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
+                        <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
                             <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>
@@ -99,7 +99,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route("admin.dashboard") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
+                        <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
                             <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>

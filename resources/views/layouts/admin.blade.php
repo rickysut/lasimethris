@@ -52,7 +52,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/fa-regular.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/fa-solid.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/fa-brands.css') }}">
-		
+		<link rel="stylesheet" media="screen, print" href="{{ asset('css/miscellaneous/jqvmap/jqvmap.css') }}">
+
 		<!-- coreui -->
 		{{-- <link href="{{ asset('css/ajax/all.css') }}" rel="stylesheet" />
 		<link href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -137,8 +138,12 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 		<!-- end quick menu -->
 		{{-- base app script --}}
 		<script src="{{ asset('js/app.js') }}"></script>
+		{{-- <script src="{{ asset('js/jquery/jquery.min.js') }}"></script> --}}
 		<!-- Smartadmin core -->
+		
+		
 		<script src="{{ asset('js/vendors.bundle.js') }}"></script>
+		
         <script src="{{ asset('js/app.bundle.js') }}"></script>
 		<!-- Smartadmin plugin -->
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.bundle.js') }}"></script>
@@ -160,7 +165,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 		<script src="{{ asset('js/smartadmin/statistics/echart/echarts.min.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/statistics/easypiechart/easypiechart.bundle.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/statistics/sparkline/sparkline.bundle.js') }}"></script>
-		
+		<script src="{{ asset('js/miscellaneous/jqvmap/jquery.vmap.js') }}"></script>
+		<script src="{{ asset('js/miscellaneous/jqvmap/maps/jquery.vmap.indonesia.js') }}"></script>
 		<!-- coreui -->
 		
 		{{-- <script src="{{ asset('js/pdfmake/pdfmake.min.js') }}"></script>
@@ -402,6 +408,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 			var url = $(this).attr('href');
 			window.location = url;
 		  });
+
+		  
 		});
 		</script>
 		@yield('scripts')

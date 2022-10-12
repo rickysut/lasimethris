@@ -11,10 +11,11 @@ class DashboardController extends Controller
 {
     public function index() 
     {
+        
         $roleaccess = Auth::user()->roleaccess;
         if ($roleaccess==1)
         {   
-            // dd(Auth::user()->roles[0]->title);
+           
             if (Auth::user()->roles[0]->title == 'Admin'){
                 $module_name = 'Dashboard' ;
                 $page_title = '';
@@ -39,5 +40,36 @@ class DashboardController extends Controller
             return view('admin.dashboard.indexuser', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
             
         }
+    }
+
+    public function map() 
+    {
+        $roleaccess = Auth::user()->roleaccess;
+        if ($roleaccess==1)
+        {  
+            if (Auth::user()->roles[0]->title == 'Admin'){
+                $module_name = 'Dashboard' ;
+                $page_title = 'Pemetaan';
+                $page_heading = 'Pemetaan' ;
+                $heading_class = 'fal fa-map-marked-alt';
+                return view('admin.dashboard.map', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+            }
+            if (Auth::user()->roles[0]->title == 'Verifikator'){
+                $module_name = 'Dashboard' ;
+                $page_title = 'Pemetaan';
+                $page_heading = 'Pemetaan' ;
+                $heading_class = 'fal fa-map-marked-alt';
+                return view('admin.dashboard.map', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+            }
+        } 
+        if ($roleaccess==2)
+        {
+            $module_name = 'Dashboard' ;
+            $page_title = 'Pemetaan';
+            $page_heading = 'Pemetaan' ;
+            $heading_class = 'fal fa-map-marked-alt';
+            return view('admin.dashboard.map', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+            
+        } 
     }
 }

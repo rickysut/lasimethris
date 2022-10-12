@@ -533,10 +533,10 @@ var initApp = (function(app) {
 
 		/* on change keyboard */
 		$(input).change( function () {
-			
+
 			var filter = $(this).val().toLowerCase(),
 				listPrev = $(list).next().filter('.js-filter-message');
-	        
+	
 			/* when user types more than 1 letter start search filter */
 			if(filter.length > 1) {
 
@@ -1224,12 +1224,12 @@ var initApp = (function(app) {
 		
 		/* Add app date to js-get-date */
 		if ( myapp_config.appDateHook.length ) {
-			var months = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'Desember'],
-				day = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+			var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+				day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 				now = new Date(),
 				formatted = day[now.getDay()] + ', ' +  
-							now.getDate() + ' ' +
 							months[now.getMonth()] + ' ' +  
+							now.getDate() + ', ' +
 							now.getFullYear();
 			myapp_config.appDateHook.text(formatted);				
 		}
@@ -1625,19 +1625,18 @@ var initApp = (function(app) {
 					 * lazyloads i18n plugin and activates selected language
 					 **/
 					case ( actiontype === 'lang' ):
-						console.log("set language");
 
 						var applang = $(this).attr('data-lang').toString();
 
 						if (!$.i18n) {
 						//jQuery.getScript('http://url/to/the/script');
 
-							initApp.loadScript("/js/i18n/i18n.js", 
+							initApp.loadScript("js/i18n/i18n.js", 
 
 								function activateLang () {
 									
 									$.i18n.init({
-										resGetPath: '/media/data/__lng__.json',
+										resGetPath: 'media/data/__lng__.json',
 										load: 'unspecific',
 										fallbackLng: false,
 										lng: applang
@@ -1645,9 +1644,6 @@ var initApp = (function(app) {
 										$('[data-i18n]').i18n();
 										$('[data-lang]').removeClass('active');
 										$('[data-lang="' + applang + '"]').addClass('active');
-										$.post( "/admin/adminSetlocale?lang="+applang);
-										console.log("init i18n");
-										
 									});								
 									
 								}
@@ -1658,11 +1654,7 @@ var initApp = (function(app) {
 							i18n.setLng(applang, function(){
 								$('[data-i18n]').i18n();
 								$('[data-lang]').removeClass('active');
-								$('[data-lang="' + applang + '"]').addClass('active');
-								//$(this).addClass('active');
-								$.post( "/admin/adminSetLocale?lang="+applang);
-								console.log("i18n setLng");
-								
+								$(this).addClass('active');
 							});
 
 						}
@@ -1758,11 +1750,10 @@ var initApp = (function(app) {
 		 * Display APP version
 		 * DOC: only show this if debug state tree
 		 **/
-		 if (myapp_config.debugState){
-			
-			console.log("%c✔ Finished app.init() version " + myapp_config.VERSION + '\n' + "---------------------------", "color: #148f32");
-		 }
+		 if (myapp_config.debugState)
+			console.log("%c✔ Finished app.init() v" + myapp_config.VERSION + '\n' + "---------------------------", "color: #148f32");	
 	};
+
 	return app;
 	
 })({});

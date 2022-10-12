@@ -15,8 +15,11 @@ Auth::routes(['register' => true]); // menghidupkan registration
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+    // landing
     Route::get('/', 'HomeController@index')->name('home');
+    // Dashboard
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/dashboard/map', 'DashboardController@map')->name('dashboard.map');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
