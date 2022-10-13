@@ -49,7 +49,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //verifikasi
     Route::get('dir_check_b', 'MessengerController@showReply')->name('verifikasi.dir_check_b');
     Route::get('dir_check_c', 'MessengerController@showReply')->name('verifikasi.dir_check_c');
-
+    //usertask
+    Route::get('pull', 'MessengerController@showReply')->name('task.pull');
+    Route::get('commitment', 'MessengerController@showReply')->name('task.commitment');
+    
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

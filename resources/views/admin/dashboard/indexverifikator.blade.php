@@ -2,7 +2,7 @@
 @section('content')
 @include('partials.breadcrumb')
 {{-- @include('partials.subheader') --}}
-@can('dashboardv_access')
+@can('dashboard_access')
 <!-- Page Title Heading -->
 <div class="subheader d-print-none">
 	<h1 class="subheader-title">

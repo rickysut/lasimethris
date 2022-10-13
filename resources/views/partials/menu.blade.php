@@ -40,13 +40,13 @@
             <li class="c-sidebar-nav-item {{ request()->is("admin")  ? "active" : "" }}">
                 <a href="{{ route("admin.home") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.landing.title')) }}">
                     <i class="c-sidebar-nav-icon fal fa-home-alt">
-
                     </i>
-                    {{ trans('cruds.landing.title') }}
+                    <span class="nav-link-text" data-i18n="nav.landing_page">{{ trans('cruds.landing.title') }}</span>
                 </a>
             </li>
             @endcan
             @can('dashboard_access')
+            @if (Auth::user()->roles[0]->title == 'User')
             <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
                 <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
                     <i class="fal fa-analytics"></i>
@@ -58,15 +58,14 @@
                             {{ trans('cruds.dashboardUser.title') }}
                         </a>
                     </li>
-                    <li>
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
                             <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            @endcan
-            @can('dashboarda_access')
+            @elseif (Auth::user()->roles[0]->title == 'Admin')
             <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
                 <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
                     <i class="fal fa-analytics"></i>
@@ -78,15 +77,14 @@
                             {{ trans('cruds.dashboardAdmin.title') }}
                         </a>
                     </li>
-                    <li>
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
                             <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            @endcan
-            @can('dashboardv_access')
+            @elseif (Auth::user()->roles[0]->title == 'Verifikator')
             <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
                 <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
                     <i class="fal fa-analytics"></i>
@@ -98,36 +96,35 @@
                             {{ trans('cruds.dashboardVerifikator.title') }}
                         </a>
                     </li>
-                    <li>
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
                             <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>
                 </ul>
             </li>
+            @endif
             @endcan
         
-        
-        @can('master_data_access')
-        <li class="nav-title" data-i18n="nav.master_data">DATA INDUK (master)</li>
+        @can('user_task_access')
+        <li class="nav-title" data-i18n="nav.user_task">User Task</li>
             <li>
-                @can('partner_access')
+                @can('pull_access')
                     <li class="c-sidebar-nav-item {{ request()->is("admin/partners") || request()->is("admin/partners/*") ? "active" : "" }}">
-                        <a href="{{ route("admin.partners.index") }}" data-filter-tags="{{ strtolower(trans('cruds.partner.title')) }}">
-                            <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
-
+                        <a href="{{ route("admin.task.pull") }}" data-filter-tags="{{ strtolower(trans('cruds.partner.title')) }}">
+                            <i class="fa-fw fal fa-sync-alt c-sidebar-nav-icon">
                             </i>
-                            {{ trans('cruds.partner.title') }}
+                            {{ trans('cruds.pullSync.title') }}
                         </a>
                     </li>
                 @endcan
-                @can('coa_access')
+                @can('commitment_access')
                     <li class="c-sidebar-nav-item {{ request()->is("admin/coas") || request()->is("admin/coas/*") ? "active" : "" }}">
-                        <a href="{{ route("admin.coas.index") }}" data-filter-tags="{{ strtolower(trans('cruds.coa.title')) }}">
-                            <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+                        <a href="{{ route("admin.task.commitment") }}" data-filter-tags="{{ strtolower(trans('cruds.coa.title')) }}">
+                            <i class="fa-fw fal fa-ballot c-sidebar-nav-icon">
 
                             </i>
-                            {{ trans('cruds.coa.title') }}
+                            {{ trans('cruds.commitment.title') }}
                         </a>
                     </li>
                 @endcan

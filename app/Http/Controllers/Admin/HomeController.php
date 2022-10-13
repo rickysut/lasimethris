@@ -14,7 +14,7 @@ class HomeController extends Controller
         $roleaccess = Auth::user()->roleaccess;
         if ($roleaccess==1)
         {
-            $module_name = 'Executive' ;
+            $module_name = 'Beranda' ;
             $page_title = '';
             $page_heading = 'Daftar Pengajuan';
             $heading_class = 'fal fa-ballot-check';
@@ -24,7 +24,7 @@ class HomeController extends Controller
         {
             $module_name = 'Landing' ;
             $page_title = '';
-            $page_heading = 'Daftar Pengajuan';
+            $page_heading = 'Welcome';
             $heading_class = 'fal fa-ballot-check';
             return view('admin.landing.indexuser', compact('module_name', 'page_title', 'page_heading', 'heading_class'));
         }
