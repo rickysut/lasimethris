@@ -50,8 +50,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('dir_check_b', 'MessengerController@showReply')->name('verifikasi.dir_check_b');
     Route::get('dir_check_c', 'MessengerController@showReply')->name('verifikasi.dir_check_c');
     //usertask
-    Route::get('pull', 'MessengerController@showReply')->name('task.pull');
-    Route::get('commitment', 'MessengerController@showReply')->name('task.commitment');
+    Route::get('task/pull', 'PullRiphController@index')->name('task.pull');
+    Route::get('task/commitment', 'CommitmentController@index')->name('task.commitment');
     
 
 });

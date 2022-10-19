@@ -110,8 +110,8 @@
         <li class="nav-title" data-i18n="nav.user_task">User Task</li>
             <li>
                 @can('pull_access')
-                    <li class="c-sidebar-nav-item {{ request()->is("admin/partners") || request()->is("admin/partners/*") ? "active" : "" }}">
-                        <a href="{{ route("admin.task.pull") }}" data-filter-tags="{{ strtolower(trans('cruds.partner.title')) }}">
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/task/pull")  ? "active" : "" }}">
+                        <a href="{{ route("admin.task.pull") }}" data-filter-tags="{{ strtolower(trans('cruds.pullSync.title')) }}">
                             <i class="fa-fw fal fa-sync-alt c-sidebar-nav-icon">
                             </i>
                             {{ trans('cruds.pullSync.title') }}
@@ -119,8 +119,8 @@
                     </li>
                 @endcan
                 @can('commitment_access')
-                    <li class="c-sidebar-nav-item {{ request()->is("admin/coas") || request()->is("admin/coas/*") ? "active" : "" }}">
-                        <a href="{{ route("admin.task.commitment") }}" data-filter-tags="{{ strtolower(trans('cruds.coa.title')) }}">
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/task/commitment")  ? "active" : "" }}">
+                        <a href="{{ route("admin.task.commitment") }}" data-filter-tags="{{ strtolower(trans('cruds.commitment.title')) }}">
                             <i class="fa-fw fal fa-ballot c-sidebar-nav-icon">
 
                             </i>
