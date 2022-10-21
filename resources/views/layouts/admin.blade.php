@@ -64,12 +64,12 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 		@yield('styles')
     </head>
 
-	<style>
+	{{-- <style>
 		.dataTables_wrapper .dataTables_filter label {
     			display: -webkit-inline-box !important;
 		}
 
-	</style>
+	</style> --}}
 	<!--
 		ditambahkan class fixed footer "footer-function-fixed"
 		pada body class sebagai default layout antisipasi
@@ -208,207 +208,218 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 				
 			}
 			
-			$(function() {
-				let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
-				let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
-				let excelButtonTrans = '{{ trans('global.datatables.excel') }}'
-				let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
-				let printButtonTrans = '{{ trans('global.datatables.print') }}'
-				let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}'
-				let selectAllButtonTrans = '{{ trans('global.select_all') }}'
-				let selectNoneButtonTrans = '{{ trans('global.deselect_all') }}'
+			// $(function() {
+			// 	let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
+			// 	let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
+			// 	let excelButtonTrans = '{{ trans('global.datatables.excel') }}'
+			// 	let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
+			// 	let printButtonTrans = '{{ trans('global.datatables.print') }}'
+			// 	let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}'
+			// 	let selectAllButtonTrans = '{{ trans('global.select_all') }}'
+			// 	let selectNoneButtonTrans = '{{ trans('global.deselect_all') }}'
 
-				let languages = {
-					'en': '{{ url("lang/English.json")  }}',
-					'id': '{{ url("lang/Indonesian.json") }}'
-				};
+			// 	let languages = {
+			// 		'en': '{{ url("lang/English.json")  }}',
+			// 		'id': '{{ url("lang/Indonesian.json") }}'
+			// 	};
 
-  				$.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
-  				$.extend(true, $.fn.dataTable.defaults, {
-					language: {
-					url: languages['{{ app()->getLocale() }}']
-					},
-					// columnDefs: [{
-					// 	orderable: false,
-					// 	className: 'select-checkbox',
-					// 	targets: 0
-					// }, {
-					// 	orderable: false,
-					// 	searchable: false,
-					// 	targets: -1
-					// }],
-					// select: {
-					// style:    'multi+shift',
-					// selector: 'td:first-child'
-					// },
-					order: [],
-					scrollX: true,
-					pageLength: 100,
-					dom: 
-					"<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
-					"<'row'<'col-sm-12'tr>>" +
-					"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+  			// 	$.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
+  			// 	$.extend(true, $.fn.dataTable.defaults, {
+			// 		language: {
+			// 			url: languages['{{ app()->getLocale() }}'],
+			// 			paginate: {
+			// 				previous: "<i class='fal fa-chevron-left'></i>",
+			// 				next: "<i class='fal fa-chevron-right'></i>"
+			// 			},
+			// 			processing: '<div class="d-flex align-items-center justify-content-center fs-lg"><div class="spinner-border spinner-border-sm text-primary mr-2" role="status"><span class="sr-only"> Loading...</span></div> Processing...</div>',
+			// 			/* replace the default search lable text with a nice icon */
+			// 			search: '<div class="input-group-text d-inline-flex width-3 align-items-center justify-content-center border-bottom-right-radius-0 border-top-right-radius-0 border-right-0"><i class="fal fa-search"></i></div>',
+			// 			/* add search filter */
+			// 			searchPlaceholder: "{{ trans('global.search') }}",
+			// 			/* change text for zero records */
+			// 			zeroRecords: "{{ trans('global.no_results') }}"
+			// 		},
+			// 		// columnDefs: [{
+			// 		// 	orderable: false,
+			// 		// 	className: 'select-checkbox',
+			// 		// 	targets: 0
+			// 		// }, {
+			// 		// 	orderable: false,
+			// 		// 	searchable: false,
+			// 		// 	targets: -1
+			// 		// }],
+			// 		// select: {
+			// 		// style:    'multi+shift',
+			// 		// selector: 'td:first-child'
+			// 		// },
+			// 		order: [],
+			// 		scrollX: true,
+			// 		pageLength: 100,
+			// 		dom: 
+			// 		"<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+			// 		"<'row'<'col-sm-12'tr>>" +
+			// 		"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
 
-					// "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-8 d-flex'B><'col-sm-12 col-md-2 d-flex justify-content-end'f>>" +
-					// "<'row'<'col-sm-12 col-md-12'tr>>" +
-					// "<'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'p>>",
+			// 		// "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-8 d-flex'B><'col-sm-12 col-md-2 d-flex justify-content-end'f>>" +
+			// 		// "<'row'<'col-sm-12 col-md-12'tr>>" +
+			// 		// "<'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'p>>",
 					
-					buttons: [
-					{
-						extend: 'colvis',
-						className: 'btn-outline-info btn-xs mr-sm-3 ml-5',
-						text: colvisButtonTrans,
-						titleAttr: 'Col visibility',
-						exportOptions: {
-						columns: ':visible'
-						}
-					},
-					{
-						extend: 'pdfHtml5',
-						className: 'btn-outline-danger btn-xs mr-1',
-						text: pdfButtonTrans,
-						titleAttr: 'Generate PDF',
-						exportOptions: {
-						columns: ':visible'
-						}
-					},
-					{
-						extend: 'excelHtml5',
-						className: 'btn-outline-success btn-xs mr-1',
-						text: excelButtonTrans,
-						titleAttr: 'Generate Excel',
-						exportOptions: {
-						columns: ':visible'
-						}
-					},
-					// {
-					// 	extend: 'selectAll',
-					// 	className: 'btn-primary  waves-effect waves-themed btn-sm mr-1',
-					// 	text: selectAllButtonTrans,
-					// 	exportOptions: {
-					// 	columns: ':visible'
-					// 	},
-					// 	action: function(e, dt) {
-					// 	e.preventDefault()
-					// 	dt.rows().deselect();
-					// 	dt.rows({ search: 'applied' }).select();
-					// 	}
-					// },
-					// {
-					// 	extend: 'selectNone',
-					// 	className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
-					// 	text: selectNoneButtonTrans,
-					// 	exportOptions: {
-					// 	columns: ':visible'
-					// 	}
-					// },
-					/*{
-						extend: 'copyHtml5',
-						text: copyButtonTrans,
-						titleAttr: 'Copy to clipboard',
-						className: 'btn-primary btn-sm mr-1',
-						exportOptions: {
-						columns: ':visible'
-						}
-					},*/
-					// {
-					// 	extend: 'csvHtml5',
-					// 	text: csvButtonTrans,
-					// 	titleAttr: 'Generate CSV',
-					// 	className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
-					// 	exportOptions: {
-					// 	columns: ':visible'
-					// 	}
-					// },
+			// 		buttons: [
+			// 		{
+			// 			extend: 'colvis',
+			// 			className: 'btn-outline-info btn-xs mr-sm-3 ml-5',
+			// 			text: colvisButtonTrans,
+			// 			titleAttr: 'Col visibility',
+			// 			exportOptions: {
+			// 			columns: ':visible'
+			// 			}
+			// 		},
+			// 		{
+			// 			extend: 'pdfHtml5',
+			// 			className: 'btn-outline-danger btn-xs mr-1',
+			// 			text: pdfButtonTrans,
+			// 			titleAttr: 'Generate PDF',
+			// 			exportOptions: {
+			// 			columns: ':visible'
+			// 			}
+			// 		},
+			// 		{
+			// 			extend: 'excelHtml5',
+			// 			className: 'btn-outline-success btn-xs mr-1',
+			// 			text: excelButtonTrans,
+			// 			titleAttr: 'Generate Excel',
+			// 			exportOptions: {
+			// 			columns: ':visible'
+			// 			}
+			// 		},
+			// 		// {
+			// 		// 	extend: 'selectAll',
+			// 		// 	className: 'btn-primary  waves-effect waves-themed btn-sm mr-1',
+			// 		// 	text: selectAllButtonTrans,
+			// 		// 	exportOptions: {
+			// 		// 	columns: ':visible'
+			// 		// 	},
+			// 		// 	action: function(e, dt) {
+			// 		// 	e.preventDefault()
+			// 		// 	dt.rows().deselect();
+			// 		// 	dt.rows({ search: 'applied' }).select();
+			// 		// 	}
+			// 		// },
+			// 		// {
+			// 		// 	extend: 'selectNone',
+			// 		// 	className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
+			// 		// 	text: selectNoneButtonTrans,
+			// 		// 	exportOptions: {
+			// 		// 	columns: ':visible'
+			// 		// 	}
+			// 		// },
+			// 		/*{
+			// 			extend: 'copyHtml5',
+			// 			text: copyButtonTrans,
+			// 			titleAttr: 'Copy to clipboard',
+			// 			className: 'btn-primary btn-sm mr-1',
+			// 			exportOptions: {
+			// 			columns: ':visible'
+			// 			}
+			// 		},*/
+			// 		// {
+			// 		// 	extend: 'csvHtml5',
+			// 		// 	text: csvButtonTrans,
+			// 		// 	titleAttr: 'Generate CSV',
+			// 		// 	className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
+			// 		// 	exportOptions: {
+			// 		// 	columns: ':visible'
+			// 		// 	}
+			// 		// },
 					
 					
-					{
-						extend: 'print',
-						className: 'btn-outline-primary btn-xs',
-						text: printButtonTrans,
-						titleAttr: 'Print Table',
-						exportOptions: {
-						columns: ':visible'
-						}
-					}
+			// 		{
+			// 			extend: 'print',
+			// 			className: 'btn-outline-primary btn-xs',
+			// 			text: printButtonTrans,
+			// 			titleAttr: 'Print Table',
+			// 			exportOptions: {
+			// 			columns: ':visible'
+			// 			}
+			// 		}
 					
-					]
-				});
+			// 		]
+			// 	});
 
-  				$.fn.dataTable.ext.classes.sPageButton = 'button primary_button paginate_button';
-			});
-		$(document).ready(function() {
-		  $('.searchable-field').select2({
-			minimumInputLength: 3,
-			ajax: {
-			  url: '{{ route("admin.globalSearch") }}',
-			  dataType: 'json',
-			  type: 'GET',
-			  delay: 200,
-			  data: function(term) {
-				return {
-				  search: term
-				};
-			  },
-			  results: function(data) {
-				return {
-				  data
-				};
-			  }
-			},
-			escapeMarkup: function(markup) {
-			  return markup;
-			},
-			templateResult: formatItem,
-			templateSelection: formatItemSelection,
-			placeholder: "{{ trans('global.search') }} ...",
-			language: {
-			  inputTooShort: function(args) {
-				var remainingChars = args.minimum - args.input.length;
-				var translation = "{{ trans('global.search_input_too_short') }}";
+  			// 	$.fn.dataTable.ext.classes.sPageButton = 'button primary_button paginate_button';
+			// });
+		// $(document).ready(function() {
+		//   $('.searchable-field').select2({
+		// 	minimumInputLength: 3,
+		// 	ajax: {
+		// 	  url: '{{ route("admin.globalSearch") }}',
+		// 	  dataType: 'json',
+		// 	  type: 'GET',
+		// 	  delay: 200,
+		// 	  data: function(term) {
+		// 		return {
+		// 		  search: term
+		// 		};
+		// 	  },
+		// 	  results: function(data) {
+		// 		return {
+		// 		  data
+		// 		};
+		// 	  }
+		// 	},
+		// 	escapeMarkup: function(markup) {
+		// 	  return markup;
+		// 	},
+		// 	templateResult: formatItem,
+		// 	templateSelection: formatItemSelection,
+		// 	placeholder: "{{ trans('global.search') }} ...",
+		// 	language: {
+		// 	  inputTooShort: function(args) {
+		// 		var remainingChars = args.minimum - args.input.length;
+		// 		var translation = "{{ trans('global.search_input_too_short') }}";
 
-				return translation.replace(':count', remainingChars);
-			  },
-			  errorLoading: function() {
-				return "{{ trans('global.results_could_not_be_loaded') }}";
-			  },
-			  searching: function() {
-				return "{{ trans('global.searching') }}";
-			  },
-			  noResults: function() {
-				return "{{ trans('global.no_results') }}";
-			  },
-			}
+		// 		return translation.replace(':count', remainingChars);
+		// 	  },
+		// 	  errorLoading: function() {
+		// 		return "{{ trans('global.results_could_not_be_loaded') }}";
+		// 	  },
+		// 	  searching: function() {
+		// 		return "{{ trans('global.searching') }}";
+		// 	  },
+		// 	  noResults: function() {
+		// 		return "{{ trans('global.no_results') }}";
+		// 	  },
+		// 	}
 
-		  });
+		//   });
 
-		  function formatItem(item) {
-			if (item.loading) {
-			  return "{{ trans('global.searching') }}...";
-			}
-			var markup = "<div class='searchable-link' href='" + item.url + "'>";
-			markup += "<div class='searchable-title'>" + item.model + "</div>";
-			$.each(item.fields, function(key, field) {
-			  markup += "<div class='searchable-fields'>" + item.fields_formated[field] + " : " + item[field] + "</div>";
-			});
-			markup += "</div>";
+		//   function formatItem(item) {
+		// 	if (item.loading) {
+		// 	  return "{{ trans('global.searching') }}...";
+		// 	}
+		// 	var markup = "<div class='searchable-link' href='" + item.url + "'>";
+		// 	markup += "<div class='searchable-title'>" + item.model + "</div>";
+		// 	$.each(item.fields, function(key, field) {
+		// 	  markup += "<div class='searchable-fields'>" + item.fields_formated[field] + " : " + item[field] + "</div>";
+		// 	});
+		// 	markup += "</div>";
 
-			return markup;
-		  }
+		// 	return markup;
+		//   }
 
-		  function formatItemSelection(item) {
-			if (!item.model) {
-			  return "{{ trans('global.search') }}...";
-			}
-			return item.model;
-		  }
-		  $(document).delegate('.searchable-link', 'click', function() {
-			var url = $(this).attr('href');
-			window.location = url;
-		  });
+		//   function formatItemSelection(item) {
+		// 	if (!item.model) {
+		// 	  return "{{ trans('global.search') }}...";
+		// 	}
+		// 	return item.model;
+		//   }
+		//   $(document).delegate('.searchable-link', 'click', function() {
+		// 	var url = $(this).attr('href');
+		// 	window.location = url;
+		//   });
 
 		  
-		});
+		// });
 		</script>
 		@yield('scripts')
 	</body>
