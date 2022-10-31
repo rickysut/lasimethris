@@ -20,7 +20,7 @@ class HomeController extends Controller
             $heading_class = 'fal fa-ballot-check';
             return view('admin.landing.indexdirjen', compact('module_name', 'page_title', 'page_heading', 'heading_class'));  
         } 
-        if ($roleaccess==2)
+        if (($roleaccess==2)||($roleaccess==3))
         {
             $module_name = 'Landing' ;
             $page_title = '';

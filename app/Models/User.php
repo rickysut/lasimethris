@@ -23,6 +23,7 @@ class User extends Authenticatable
     public const ROLE_TYPE_SELECT = [
         '1' => 'Kementerian/Direktorat',
         '2' => 'Pelaku Usaha',
+        '3' => 'Pelaku Usaha V2',
     ];
 
     

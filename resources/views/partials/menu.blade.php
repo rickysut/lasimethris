@@ -1,6 +1,6 @@
 <aside class="page-sidebar">
     <div class="page-logo">
-		<a href="/" class="page-logo-link press-scale-down d-flex align-items-center position-relative">
+		<a href="/admin" class="page-logo-link press-scale-down d-flex align-items-center position-relative">
 			{{-- <img src="{{ asset('img/logo-icon.png') }}" alt="{{ trans('panel.site_title') }}" aria-roledescription="logo"> --}}
 			{{-- <span class="page-logo-text mr-1">{{ trans('panel.site_title') }}</span> --}}
 			<img src="{{ asset('img/favicon.png') }}" alt="Simethris" aria-roledescription="logo">

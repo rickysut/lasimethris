@@ -31,7 +31,7 @@ class DashboardController extends Controller
                 return view('admin.dashboard.indexverifikator', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
             }
         } 
-        if ($roleaccess==2)
+        if (($roleaccess==2)||($roleaccess==3))
         {
             $module_name = 'Dashboard' ;
             $page_title = 'Ringkasan Data';
@@ -62,7 +62,7 @@ class DashboardController extends Controller
                 return view('admin.dashboard.map', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
             }
         } 
-        if ($roleaccess==2)
+        if (($roleaccess==2)||($roleaccess==3))
         {
             $module_name = 'Dashboard' ;
             $page_title = 'Pemetaan';
