@@ -1,8 +1,10 @@
 <?php
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
+
 Route::get('/v2/register', function () {
     return view('v2register');
 });
@@ -17,7 +19,8 @@ Route::get('/home', function () {
 });
 
 
-Auth::routes(['register' => true]); // menghidupkan registration
+Auth::routes(['register' => false]); // menghidupkan registration
+
 
 
 

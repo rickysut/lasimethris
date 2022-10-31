@@ -72,12 +72,12 @@
                                 <span class="page-logo-text mr-1 d-sm-block d-md-none">Simethris MobileApp</span>
                             </a>
                         </div>
-                        {{-- <span class="text-white opacity-50 ml-auto mr-2 hidden-sm-down">
+                        <span class="text-white opacity-50 ml-auto mr-2 hidden-sm-down">
                             Sudah memiliki akun?
                         </span>
-                        <a href="/v2" class="btn-link text-white ml-auto ml-sm-0">
+                        <a href="{{ route('admin.home') }}" class="btn-link text-white ml-auto ml-sm-0">
                             Login di sini
-                        </a> --}}
+                        </a>
                     </div>
                 </div>
                 <div class="flex-1" style="background: url('{{ asset('img/svg/pattern-1.svg') }}' no-repeat center bottom fixed; background-size: cover;">

@@ -151,7 +151,8 @@ trait AuthenticatesUsers
     {
         
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')]
+            $this->username() => [trans('auth.failed')],
+            'roleaccess' => $request->input('roleaccess')
         ]);
     }
     protected function sendFailedLoginResponse2(Request $request)

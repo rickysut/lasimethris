@@ -52,26 +52,20 @@
     <!-- BEGIN Page Wrapper -->
     <div class="page-wrapper">
         <div class="page-inner">
-            <!-- BEGIN Left Aside sidebar -->
-
-            <!-- END Left Aside sidebar -->
+        
             <div class="page-content-wrapper">
-                <!-- BEGIN Page Header -->
-
-                <!-- END Page Header -->
+                
                 <!-- BEGIN Page Content -->
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
-                    <!-- BEGIN breadcrumb -->
-
-                    <!-- END Page Content -->
-                    <!-- BEGIN subheader -->
-
-                    <!-- END subheader -->
-                    <!-- BEGIN system alert. can be use for flash message or pushed app notification sent by Administrator -->
-                    <!-- END system alert  -->
                     <!-- Your main content goes below here: -->
-                    <div class="" data-title="System Alert" data-intro="Ini adalah Panel yang berisi informasi atau pemberitahuan penting untuk Anda." data-step="1"></div>
+                    
+                    {{-- @if ($errors->any())
+                        <script>
+                           showModal();
+                        </script>
+                    @endif --}}
+                        
                     <!-- welcome message -->
                     <div class="row mb-3">
                         <div class="col text-center">
@@ -156,10 +150,13 @@
                                                         <span class="fal fa-user"></span>
                                                     </div>
                                                 </div>
-                                                <input id="username" name="username" type="text" class="form-control form-control-md" required autocomplete="username" autofocus placeholder="username@example.com" value="" />
+                                                
+                                                <input id="username" name="username" type="text" class="form-control form-control-md {{ $errors->has('username') ? ' is-invalid' : '' }}" required autocomplete="{{ trans('global.login_username') }}" autofocus placeholder="{{ trans('global.login_username') }}" value="{{ old('username', null) }}" />
+                                                @if($errors->has('username'))
                                                 <div class="invalid-feedback">
-                                                    No, you missed this one.
+                                                    {{ $errors->first('username') }}
                                                 </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -170,10 +167,12 @@
                                                         <span class="fal fa-key"></span>
                                                     </div>
                                                 </div>
-                                                <input id="password" name="password" type="password" class="form-control form-control-md border-right-0 bg-transparent pr-0" required autocomplete="password" autofocus placeholder="password" />
+                                                <input id="password" name="password" type="password" class="form-control form-control-md border-right-0 bg-transparent pr-0 {{ $errors->has('password') ? ' is-invalid' : '' }}" required autocomplete="{{ trans('global.login_password') }}" autofocus placeholder="{{ trans('global.login_password') }}" value="" />
+                                                @if($errors->has('password'))
                                                 <div class="invalid-feedback">
-                                                    No, you missed this one.
+                                                    {{ $errors->first('password') }}
                                                 </div>
+                                                @endif
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg-transparent border-left-0">
                                                         <i class="far fa-eye-slash text-muted" id="togglePassword"></i>
@@ -184,12 +183,12 @@
                                         <div class="form-group text-left" data-title="Ingat Saya" data-intro="Centang jika Anda ingin langsung masuk jika login berhasil" data-step="5">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="rememberme">
-                                                <label class="custom-control-label" for="rememberme"> Remember Me</label>
+                                                <label class="custom-control-label" for="rememberme">{{ trans('global.remember_me') }}</label>
                                             </div>
                                         </div>
                                         <div class="row no-gutters">
                                             <div class="col-lg-12 pl-lg-1 my-2" data-title="Tombol masuk" data-intro="Klik tombol ini untuk mengakses aplikasi jika seluruh kolom telah terisi" data-step="6">
-                                                <button id="js-login-btn" type="submit" class="btn btn-block btn-info btn-block btn-sm">Sign in</button>
+                                                <button id="js-login-btn" type="submit" class="btn btn-block btn-info btn-block btn-sm">{{ trans('global.login') }}</button>
                                             </div>
                                         </div>
                                         <div class="row no-gutters mt-3">
@@ -279,6 +278,15 @@
 			
         </script> --}}
     <script>
+        $(document).ready(function () {
+            @if ($errors->any())
+                
+                $('#login1').modal('show');
+                
+            @endif
+                
+        })
+            
         const togglePassword = document.querySelector('#togglePassword');
         const password = document.querySelector('#password');
         
