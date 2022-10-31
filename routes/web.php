@@ -1,6 +1,13 @@
 <?php
 
-Route::redirect('/', '/login');
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/v2/register', function () {
+    return view('v2register');
+});
+
+//Route::get('/login', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
