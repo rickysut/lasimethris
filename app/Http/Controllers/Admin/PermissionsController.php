@@ -67,7 +67,7 @@ class PermissionsController extends Controller
             return $table->make(true);
         }
         
-        $breadcrumb = trans('cruds.permission.title_singular') ." ". trans('global.list');
+        $breadcrumb = trans('cruds.permission.title') ." ". trans('global.list');
         return view('admin.permissions.index', compact('breadcrumb'));
     }
 
@@ -76,7 +76,7 @@ class PermissionsController extends Controller
         abort_if(Gate::denies('permission_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $grpTitle = trans('cruds');
 
-        $breadcrumb = trans('global.create') . " ".  trans('cruds.permission.title_singular') ;
+        $breadcrumb = trans('global.create') . " ".  trans('cruds.permission.title') ;
         return view('admin.permissions.create', compact( 'grpTitle', 'breadcrumb'));
     }
 
@@ -93,7 +93,7 @@ class PermissionsController extends Controller
 
         $grpTitle = trans('cruds');
         
-        $breadcrumb = trans('global.edit') . " ".  trans('cruds.permission.title_singular') ;
+        $breadcrumb = trans('global.edit') . " ".  trans('cruds.permission.title') ;
         return view('admin.permissions.edit', compact('permission', 'grpTitle', 'breadcrumb'));
     }
 
@@ -108,7 +108,7 @@ class PermissionsController extends Controller
     {
         abort_if(Gate::denies('permission_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $grpTitle = trans('cruds');
-        $breadcrumb = trans('global.show') . " ".  trans('cruds.permission.title_singular') ;
+        $breadcrumb = trans('global.show') . " ".  trans('cruds.permission.title') ;
         return view('admin.permissions.show', compact('permission', 'grpTitle', 'breadcrumb'));
     }
 

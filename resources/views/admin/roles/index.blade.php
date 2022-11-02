@@ -11,7 +11,7 @@
 				@can('role_create')
 				<div class="panel-toolbar">
 					<a class="btn btn-success  waves-effect waves-themed btn-sm mr-2" href="{{ route('admin.roles.create') }}" data-toggle="tooltip" title="tambah data" data-original-title="tambah data">
-						{{ trans('global.add') }} {{ trans('cruds.role.title_singular') }}
+						{{ trans('global.add') }} {{ trans('cruds.role.title') }}
 					</a>
 				</div>
 				@endcan

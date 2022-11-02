@@ -5,8 +5,8 @@
 <!-- welcome message -->
 <div class="row mb-5">
 	<div class="col text-center">
-		<h1 class="display-4 hidden-md-down">Selamat Datang di Simethris, <span class="fw-700">User!</span></h1>
-		<h1 class="display-4 hidden-sm-up">Hallo, <span class="fw-700">User!</span></h1>
+		<h1 class="display-4 hidden-md-down">Selamat Datang di Simethris, <span class="fw-700">{{ Auth::user()->name }}</span></h1>
+		<h1 class="display-4 hidden-sm-up">Hallo, <span class="fw-700">{{ Auth::user()->name }}</span></h1>
 		<h4 class="hidden-md-down">If the world is to big for you to hold, then make it smaller to fits in your hands!</h4>
 		<span class="text-muted js-get-date"></span>
 	</div>

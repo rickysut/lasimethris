@@ -46,9 +46,11 @@
     {{-- <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/intro.js/minified/introjs.min.css') }}">
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/intro.js/minified/introjs.min.css.map') }}"> --}}
     @yield('style')
+
 </head>
 
 <body class="mod-bg-1 mod-nav-link footer-function-fixed nav-function-minify nav-function-fixed">
+    
     <!-- BEGIN Page Wrapper -->
     <div class="page-wrapper">
         <div class="page-inner">
@@ -120,11 +122,11 @@
                         </div>
                     </div>
                     {{-- login1 --}}
+                    
                     <div class="modal fade" id="login1" tabindex="-1" role="dialog" style="display: none;" aria-modal="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    {{-- <img class="mx-auto" src="{{ asset('img/favicon.png') }}" alt="logo"> --}}
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true"><i class="fal fa-times"></i></span>
                                     </button>
@@ -180,13 +182,14 @@
                                         </div>
                                         <div class="row no-gutters">
                                             <div class="col-lg-12 pl-lg-1 my-2" data-title="Tombol masuk" data-intro="Klik tombol ini untuk mengakses aplikasi jika seluruh kolom telah terisi" data-step="6">
-                                                <button id="js-login-btn" type="submit" class="btn btn-block btn-info btn-block btn-sm">{{ trans('global.login') }}</button>
+                                                <button id="js-login-btn" type="submit" class="btn btn-block btn-info btn-xm">{{ trans('global.login') }}</button>
                                             </div>
                                         </div>
-                                        <div class="row no-gutters mt-3">
-                                            <span>Belum memiliki akun?</span>
+                                        
+                                        <div class="row no-gutters">
+                                            {{-- <div class="text-center">Belum memiliki akun?</div> --}}
                                             <div class="col-lg-12 pl-lg-1 my-2">
-                                                <a href="#" id="regbutton" class="btn btn-block btn-danger btn-block btn-sm">Daftarkan Akun</a>
+                                                <a href="#" id="regbutton" class="btn btn-block btn-outline-danger btn-xm">Daftarkan Akun</a>
                                             </div>
                                         </div>
                                     </form>

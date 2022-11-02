@@ -429,7 +429,7 @@
 					<span data-i18n="drpdwn.print">Cetak</span>
 					<i class="float-right text-muted fw-n">Ctrl + P</i>
 				</a>
-				<div class="dropdown-multilevel dropdown-multilevel-left">
+				{{-- <div class="dropdown-multilevel dropdown-multilevel-left">
 					<div class="dropdown-item" data-i18n="drpdwn.lang">
 						Bahasa
 					</div>
@@ -437,7 +437,7 @@
 						<a href="#?lang=id" class="dropdown-item {{ app()->getLocale() == 'id' ? "active" : "" }}" data-action="lang" data-lang="id">Bahasa (ID)</a>
 						<a href="#?lang=en" class="dropdown-item {{ app()->getLocale() == 'en' ? "active" : "" }}" data-action="lang" data-lang="en">English (US)</a>
 					</div>
-				</div>
+				</div> --}}
 				<div class="dropdown-divider m-0"></div>
 				<a class="dropdown-item fw-500 pt-3 pb-3" onclick="event.preventDefault(); document.getElementById('logoutform').submit();" href="{{ trans('global.logout') }}">
 					<span data-i18n="drpdwn.page-logout">Keluar</span>

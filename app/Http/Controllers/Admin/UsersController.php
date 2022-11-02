@@ -69,7 +69,7 @@ class UsersController extends Controller
             return $table->make(true);
         }
 
-        $breadcrumb = trans('cruds.user.title_singular') ." ". trans('global.list');
+        $breadcrumb = trans('cruds.user.title') ." ". trans('global.list');
         return view('admin.users.index', compact('breadcrumb'));
     }
 
@@ -79,7 +79,7 @@ class UsersController extends Controller
 
         $roles = Role::pluck('title', 'id');
         $access = User::ROLE_TYPE_SELECT;
-        $breadcrumb = trans('global.create') . " ".  trans('cruds.user.title_singular') ;
+        $breadcrumb = trans('global.create') . " ".  trans('cruds.user.title') ;
         return view('admin.users.create', compact('roles', 'access', 'breadcrumb'));
     }
 
@@ -98,7 +98,7 @@ class UsersController extends Controller
         $roles = Role::pluck('title', 'id');
         $access = User::ROLE_TYPE_SELECT;
         $user->load('roles');
-        $breadcrumb = trans('global.edit') . " ".  trans('cruds.user.title_singular') ;
+        $breadcrumb = trans('global.edit') . " ".  trans('cruds.user.title') ;
         return view('admin.users.edit', compact('roles', 'user', 'access', 'breadcrumb'));
     }
 
@@ -115,7 +115,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $user->load('roles');
-        $breadcrumb = trans('global.show') . " ".  trans('cruds.user.title_singular') ;
+        $breadcrumb = trans('global.show') . " ".  trans('cruds.user.title') ;
         $access = User::ROLE_TYPE_SELECT;
         return view('admin.users.show', compact('user', 'access', 'breadcrumb'));
     }

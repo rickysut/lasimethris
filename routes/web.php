@@ -9,7 +9,6 @@ Route::get('/v2/register', function () {
     return view('v2register');
 });
 
-//Route::get('/login', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -62,6 +61,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //usertask
     Route::get('task/pull', 'PullRiphController@index')->name('task.pull');
     Route::get('task/commitment', 'CommitmentController@index')->name('task.commitment');
+    Route::resource('kelompoktani', 'KelompoktaniController');
     
 
 });

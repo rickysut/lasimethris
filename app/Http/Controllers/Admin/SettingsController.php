@@ -58,7 +58,7 @@ class SettingsController extends Controller
             return $table->make(true);
         }
 
-        $breadcrumb = trans('cruds.setting.title_singular') ." ". trans('global.list');
+        $breadcrumb = trans('cruds.setting.title') ." ". trans('global.list');
         return view('admin.settings.index', compact('breadcrumb'));
     }
 
@@ -66,7 +66,7 @@ class SettingsController extends Controller
     {
         abort_if(Gate::denies('setting_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $breadcrumb = trans('global.create') . " ".  trans('cruds.setting.title_singular') ;
+        $breadcrumb = trans('global.create') . " ".  trans('cruds.setting.title') ;
         return view('admin.settings.create', compact('breadcrumb'));
     }
 
@@ -83,7 +83,7 @@ class SettingsController extends Controller
 
         $setting->load('created_by');
 
-        $breadcrumb = trans('global.edit') . " ".  trans('cruds.setting.title_singular') ;
+        $breadcrumb = trans('global.edit') . " ".  trans('cruds.setting.title') ;
         return view('admin.settings.edit', compact('setting', 'breadcrumb'));
     }
 
@@ -100,7 +100,7 @@ class SettingsController extends Controller
 
         $setting->load('created_by');
 
-        $breadcrumb = trans('global.show') . " ".  trans('cruds.setting.title_singular') ;
+        $breadcrumb = trans('global.show') . " ".  trans('cruds.setting.title') ;
         return view('admin.settings.show', compact('setting', 'breadcrumb'));
     }
 

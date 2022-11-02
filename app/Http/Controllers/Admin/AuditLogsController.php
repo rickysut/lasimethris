@@ -62,7 +62,7 @@ class AuditLogsController extends Controller
 
             return $table->make(true);
         }
-        $breadcrumb = trans('cruds.auditLog.title_singular') ." ". trans('global.list');
+        $breadcrumb = trans('cruds.auditLog.title') ." ". trans('global.list');
         return view('admin.auditLogs.index', compact('breadcrumb'));
     }
 
@@ -71,7 +71,7 @@ class AuditLogsController extends Controller
         abort_if(Gate::denies('audit_log_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $auditLog->load('user_info');
         $breadcrumb = "View Audit Log";
-        $breadcrumb =trans('global.show')  ." ". trans('cruds.auditLog.title_singular'); 
+        $breadcrumb =trans('global.show')  ." ". trans('cruds.auditLog.title'); 
         return view('admin.auditLogs.show', compact('auditLog', 'breadcrumb'));
     }
 }
