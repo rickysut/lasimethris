@@ -53,11 +53,12 @@
                 <ul>
                     <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardUser.title_lang')) }}">
-                            {{ trans('cruds.dashboardUser.title_lang') }}
+                            <i class="fa-fw fal fa-database c-sidebar-nav-icon"></i>{{ trans('cruds.dashboardUser.title_lang') }}
                         </a>
                     </li>
                     <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
+                            <i class="fa-fw fal fa-map c-sidebar-nav-icon"></i>
                             <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>
@@ -72,12 +73,12 @@
                 <ul>
                     <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardAdmin.title_lang')) }}">
-                            {{ trans('cruds.dashboardAdmin.title_lang') }}
+                            <i class="fa-fw fal fa-stamp c-sidebar-nav-icon"></i>{{ trans('cruds.dashboardAdmin.title_lang') }}
                         </a>
                     </li>
                     <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
-                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
+                            <i class="fa-fw fal fa-map c-sidebar-nav-icon"></i><span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>
                 </ul>
@@ -91,12 +92,12 @@
                 <ul>
                     <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardVerifikator.title_lang')) }}">
-                            {{ trans('cruds.dashboardVerifikator.title_lang') }}
+                            <i class="fa-fw fal fa-stamp c-sidebar-nav-icon"></i>{{ trans('cruds.dashboardVerifikator.title_lang') }}
                         </a>
                     </li>
                     <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
                         <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
-                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
+                            <i class="fa-fw fal fa-map c-sidebar-nav-icon"></i><span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
                         </a>
                     </li>
                 </ul>
@@ -128,8 +129,8 @@
                 @endcan
                 @can('kelompoktani_access')
                     <li class="c-sidebar-nav-item {{ request()->is("admin/kelompoktani")  ? "active" : "" }}">
-                        <a href="{{ route("admin.kelompoktani.index") }}" data-filter-tags="{{ strtolower(trans('cruds.kelompoktani.title_lang')) }}">
-                            <i class="fa-fw fal fa-ballot c-sidebar-nav-icon">
+                        <a href="{{ route("admin.task.kelompoktani.index") }}" data-filter-tags="{{ strtolower(trans('cruds.kelompoktani.title_lang')) }}">
+                            <i class="fa-fw fal fa-users c-sidebar-nav-icon">
 
                             </i>
                             {{ trans('cruds.kelompoktani.title_lang') }}
@@ -138,7 +139,72 @@
                 @endcan
             </li>
         @endcan
-        
+
+        @can('verifikasi_access')
+        <li class="{{ request()->is("admin/task/pengajuan*")  || request()->is("admin/task/skl*") ? "active open" : "" }} ">
+            <a href="#" title="Verifikasi & SKL" data-filter-tags="{{ strtolower(trans('cruds.verifikasi.title_lang')) }}">
+                <i class="fa-fw fal fa-ballot"></i>
+                <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.verifikasi.title_lang') }}</span>
+            </a>
+            <ul>
+                @can('pengajuan_access')
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/task/pengajuan") || request()->is("admin/task/pengajuan/*") ? "active" : "" }}">
+                        <a href="{{ route("admin.task.pengajuan.index") }}" title="Pengajuan" data-filter-tags="{{ strtolower(trans('cruds.pengajuan.title_lang')) }}">
+                            <i class="fa-fw fal fa-file c-sidebar-nav-icon"></i>
+                            <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.pengajuan.title_lang') }}</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('skl_access')
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/task/skl") || request()->is("admin/task/skl/*") ? "active" : "" }}">
+                        <a href="{{ route("admin.task.skl.index") }}" title="Skl" data-filter-tags="{{ strtolower(trans('cruds.skl.title_lang')) }}">
+                            <i class="fa-fw fal fa-file c-sidebar-nav-icon"></i>
+                            <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.skl.title_lang') }}</span>
+                        </a>
+                    </li>
+                @endcan
+                
+            </ul>
+        </li>
+        @endcan
+
+        {{-- berkas --}}
+        @can('folder_access')
+        <li class="{{ request()->is("admin/task/berkas*")  || request()->is("admin/task/galeri*") || request()->is("admin/task/template*") ? "active open" : "" }} ">
+            <a href="#" title="Pengelolaan Berkas" data-filter-tags="{{ strtolower(trans('cruds.folder.title_lang')) }}">
+                <i class="fa-fw fal fa-folders"></i>
+                <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.folder.title_lang') }}</span>
+            </a>
+            <ul>
+                @can('berkas_access')
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/task/berkas") || request()->is("admin/task/berkas/*") ? "active" : "" }}">
+                        <a href="{{ route("admin.task.berkas") }}" title="Berkas" data-filter-tags="{{ strtolower(trans('cruds.berkasberkasng')) }}">
+                            <i class="fa-fw fal fa-file c-sidebar-nav-icon"></i>
+                            <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.berkas.title_lang') }}</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('galeri_access')
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/task/galeri") || request()->is("admin/task/skl/*") ? "active" : "" }}">
+                        <a href="{{ route("admin.task.galeri") }}" title="Galeri" data-filter-tags="{{ strtolower(trans('cruds.galeri.title_lang')) }}">
+                            <i class="fa-fw fal fa-images c-sidebar-nav-icon"></i>
+                            <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.galeri.title_lang') }}</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('template_access')
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/task/template") || request()->is("admin/task/template/*") ? "active" : "" }}">
+                        <a href="{{ route("admin.task.template") }}" title="Skl" data-filter-tags="{{ strtolower(trans('cruds.template.title_lang')) }}">
+                            <i class="fa-fw fal fa-heart c-sidebar-nav-icon"></i>
+                            <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.template.title_lang') }}</span>
+                        </a>
+                    </li>
+                @endcan
+                
+            </ul>
+        </li>
+        @endcan
+
         @can('user_management_access')
         <li class="nav-title" data-i18n="nav.administation">ADMINISTRATOR</li>
         <li class="{{ request()->is("admin/permissions*")  || request()->is("admin/roles*") || request()->is("admin/users*") || request()->is("admin/audit-logs*")  ? "active open" : "" }} ">

@@ -2,10 +2,13 @@
 @section('content')
 @include('partials.breadcrumb')
 @include('partials.subheader')
-{{-- <div class="" data-title="System Alert" data-intro="Ini adalah Panel yang berisi informasi atau pemberitahuan penting untuk Anda." data-step="1">@include('partialsv2.sysalert')</div> --}}
+@can('kelompoktani_create')
+@if (!empty($pagedata['alerttitle']))
+<div class="" data-title="System Alert" data-intro="Ini adalah Panel yang berisi informasi atau pemberitahuan penting untuk Anda." data-step="1">@include('partials.sysalert')</div>
+@endif
 <div class="row">
     <div class="col-md-12">
-        <form id="js-login" novalidate="" action="{{ route('admin.kelompoktani.create') }}">
+        <form id="js-login" novalidate="" action="{{ route('admin.task.kelompoktani.create') }}">
             <div id="panel-1" class="panel" data-title="Panel Data" data-intro="Panel ini berisi data-data" data-step="2">
                 <div class="panel-container show">
                     <div class="panel-content">
@@ -95,6 +98,7 @@
         </form>
     </div>
 </div>
+@endcan
 @endsection
 <!-- @parent -->
 <!-- start script for this page -->

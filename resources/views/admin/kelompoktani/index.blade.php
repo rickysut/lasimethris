@@ -3,7 +3,9 @@
 @include('partials.breadcrumb')
 @include('partials.subheader')
 @can('kelompoktani_access')
-{{-- <div class="" data-title="System Alert" data-intro="Ini adalah Panel yang berisi informasi atau pemberitahuan penting untuk Anda." data-step="1">@include('partials.sysalert')</div> --}}
+@if (!empty($pagedata['alerttitle']))
+<div class="" data-title="System Alert" data-intro="Ini adalah Panel yang berisi informasi atau pemberitahuan penting untuk Anda." data-step="1">@include('partials.sysalert')</div>
+@endif
 <div class="row">
     <div class="col-md-12">
         <div id="panel-1" class="panel" data-title="Panel Data" data-intro="Panel ini berisi data-data" data-step="2">
@@ -12,7 +14,7 @@
                     Daftar Komitmen <span class="fw-300"><i>Wajib Tanam</i></span>
                 </h2>
                 <div class="panel-toolbar">
-                    <a class="btn btn-xs btn-primary mr-1 ml-1" href="{{ route('admin.kelompoktani.create') }}"><i class="fal fa-plus mr-1"></i>Add Kelompoktani</a>
+                    <a class="btn btn-xs btn-primary mr-1 ml-1" href="{{ route('admin.task.kelompoktani.create') }}"><i class="fal fa-plus mr-1"></i>Add Kelompoktani</a>
                     @include('partials.globaltoolbar')
                 </div>
             </div>

@@ -20,7 +20,7 @@ class PermissionsController extends Controller
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Permission::query()->select(sprintf('%s.*', (new Permission())->table));
+            $query = Permission::query()->orderBy('created_at', 'desc')->select(sprintf('%s.*', (new Permission())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');

@@ -9,9 +9,9 @@
         </div>
         <div class="d-flex flex-fill">
             <div class="flex-fill">
-                <span class="h5">{{ $pagedata['alerttitle'] }}</span>
+                <span class="h5">{{ ($pagedata['alerttitle'] ?? '')}}</span>
                 <p>
-                    {{ $pagedata['alertcontent'] }}
+                    {{ ($pagedata['alertcontent']  ?? '')}}
                 </p>
             </div>
         </div>

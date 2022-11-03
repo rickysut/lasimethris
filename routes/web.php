@@ -58,10 +58,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //verifikasi
     Route::get('dir_check_b', 'MessengerController@showReply')->name('verifikasi.dir_check_b');
     Route::get('dir_check_c', 'MessengerController@showReply')->name('verifikasi.dir_check_c');
-    //usertask
-    Route::get('task/pull', 'PullRiphController@index')->name('task.pull');
-    Route::get('task/commitment', 'CommitmentController@index')->name('task.commitment');
-    Route::resource('kelompoktani', 'KelompoktaniController');
+    
+    //user task
+    Route::group(['prefix' => 'task','as' => 'task.'], function () {
+        Route::get('pull', 'PullRiphController@index')->name('pull');
+        Route::get('commitment', 'CommitmentController@index')->name('commitment');
+        Route::resource('kelompoktani', 'KelompoktaniController');
+        Route::resource('pengajuan', 'PengajuanController');
+        Route::resource('skl', 'SklController');
+        Route::get('berkas', 'BerkasController@indexberkas')->name('berkas');
+        Route::get('galeri', 'BerkasController@indexgaleri')->name('galeri');
+        Route::get('template', 'BerkasController@indextemplate')->name('template');
+    });
     
 
 });
