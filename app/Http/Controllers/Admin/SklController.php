@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Skl;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class SklController extends Controller
 {
@@ -15,6 +17,8 @@ class SklController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('skl_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $module_name = 'User task' ;
         $page_title = 'Daftar SKL';
         $page_heading = 'Daftar SKL' ;

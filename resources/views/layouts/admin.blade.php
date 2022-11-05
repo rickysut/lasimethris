@@ -10,9 +10,10 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>
-            {{ trans('panel.site_title') }}
-        </title>
+		
+		<title>
+			{{ env('APP_NAME')}} | {{ ($page_title ?? '3.0') }}
+		</title>
         <meta name="description" content="Page Title">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Commitment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class CommitmentController extends Controller
 {
@@ -15,6 +17,8 @@ class CommitmentController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('commitment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $module_name = 'User task' ;
         $page_title = 'Commitment';
         $page_heading = 'Daftar Komitmen Wajib Tanam' ;

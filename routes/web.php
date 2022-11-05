@@ -70,9 +70,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('galeri', 'BerkasController@indexgaleri')->name('galeri');
         Route::get('template', 'BerkasController@indextemplate')->name('template');
     });
+
+    
     
 
 });
+
+Route::group(['prefix' => 'verification', 'as' => 'verification.', 'namespace' => 'Verifikator', 'middleware' => ['auth']], function () {
+    Route::resource('onfarm', 'OnfarmController');
+    Route::resource('online', 'OnlineController');
+    Route::resource('completed', 'CompletedController');
+    
+});
+
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
     if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {

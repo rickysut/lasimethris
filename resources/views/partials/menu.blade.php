@@ -250,16 +250,30 @@
         </li>
         @endcan
         
-        @can('setting_access')
-            <li class="c-sidebar-nav-item {{ request()->is("admin/settings") || request()->is("admin/settings/*") ? "active" : "" }}">
-                <a href="{{ route("admin.settings.index") }}" data-filter-tags="{{ strtolower(trans('cruds.setting.title_lang')) }}">
-                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
-
-                    </i>
-                    {{ trans('cruds.setting.title_lang') }}
+        {{-- @can('verification_access') --}}
+            <li class="nav-title" data-i18n="nav.administation">VERIFICATOR TASK</li>
+            @can('onfarm_access')
+            <li class="c-sidebar-nav-item {{ request()->is("verification/onfarm") ? "active" : "" }}">
+                <a href="{{ route("verification.onfarm.index") }}" data-filter-tags="{{ strtolower(trans('cruds.onfarm.title_lang')) }}">
+                    <i class="fal fa-map-marker-check c-sidebar-nav-icon"></i>{{ trans('cruds.onfarm.title_lang') }}
                 </a>
             </li>
-        @endcan
+            @endcan
+            @can('online_access')
+            <li class="c-sidebar-nav-item {{ request()->is("verification/online") ? "active" : "" }}">
+                <a href="{{ route("verification.online.index") }}" data-filter-tags="{{ strtolower(trans('cruds.online.title_lang')) }}">
+                    <i class="fal fa-ballot-check c-sidebar-nav-icon"></i>{{ trans('cruds.online.title_lang') }}
+                </a>
+            </li>
+            @endcan
+            @can('completed_access')
+            <li class="c-sidebar-nav-item {{ request()->is("verification/completed") ? "active" : "" }}">
+                <a href="{{ route("verification.completed.index") }}" data-filter-tags="{{ strtolower(trans('cruds.completed.title_lang')) }}">
+                    <i class="fal fa-file-certificate c-sidebar-nav-icon"></i>{{ trans('cruds.completed.title_lang') }}
+                </a>
+            </li>
+            @endcan
+        {{-- @endcan --}}
         
         <li class="nav-title" data-i18n="nav.administation">PERSONAL</li>
         @php($unread = \App\Models\QaTopic::unreadCount())

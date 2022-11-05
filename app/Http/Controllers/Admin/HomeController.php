@@ -15,7 +15,7 @@ class HomeController extends Controller
         if ($roleaccess==1)
         {
             $module_name = 'Beranda' ;
-            $page_title = '';
+            $page_title = 'Beranda';
             $page_heading = 'Daftar Pengajuan';
             $heading_class = 'fal fa-ballot-check';
             return view('admin.landing.indexdirjen', compact('module_name', 'page_title', 'page_heading', 'heading_class'));  

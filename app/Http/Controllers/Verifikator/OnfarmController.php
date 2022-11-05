@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Verifikator;
 
-use App\Models\PullRiph;
+use App\Models\Onfarm;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class PullRiphController extends Controller
+class OnfarmController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +17,14 @@ class PullRiphController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('pull_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('onfarm_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $module_name = 'User task' ;
-        $page_title = 'Pull Data RIPH';
-        $page_heading = 'Pull/Sync Data RIPH' ;
-        $heading_class = 'fa fa-sync-alt';
-        return view('admin.pullriph.index', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+        $module_name = 'Onfarm' ;
+        $page_title = 'Onfarm';
+        $page_heading = 'Onfarm' ;
+        $heading_class = 'fal fa-map-marker-check';
+        return view('verifikator.onfarm.index', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+    
     }
 
     /**
@@ -50,10 +51,10 @@ class PullRiphController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PullRiph  $pullRiph
+     * @param  \App\Models\Onfarm  $onfarm
      * @return \Illuminate\Http\Response
      */
-    public function show(PullRiph $pullRiph)
+    public function show(Onfarm $onfarm)
     {
         //
     }
@@ -61,10 +62,10 @@ class PullRiphController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PullRiph  $pullRiph
+     * @param  \App\Models\Onfarm  $onfarm
      * @return \Illuminate\Http\Response
      */
-    public function edit(PullRiph $pullRiph)
+    public function edit(Onfarm $onfarm)
     {
         //
     }
@@ -73,10 +74,10 @@ class PullRiphController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PullRiph  $pullRiph
+     * @param  \App\Models\Onfarm  $onfarm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PullRiph $pullRiph)
+    public function update(Request $request, Onfarm $onfarm)
     {
         //
     }
@@ -84,10 +85,10 @@ class PullRiphController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PullRiph  $pullRiph
+     * @param  \App\Models\Onfarm  $onfarm
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PullRiph $pullRiph)
+    public function destroy(Onfarm $onfarm)
     {
         //
     }

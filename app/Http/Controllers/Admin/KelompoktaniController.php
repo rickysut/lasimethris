@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Kelompoktani;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class KelompoktaniController extends Controller
 {
@@ -15,6 +17,8 @@ class KelompoktaniController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('kelompoktani_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $module_name = 'User task' ;
         $page_title = 'Kelompok Tani';
         $page_heading = 'Kelompok Tani' ;

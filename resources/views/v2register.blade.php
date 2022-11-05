@@ -107,7 +107,7 @@
                                                 <div class="flex-fill">
                                                     <span class="h5">PERHATIAN</span>
                                                     <p>
-                                                        Pendaftaran ini hanya diperuntukkan bagi Pelaku Usaha yang akan melakukan pelaporan realisasi tanam-produksi untuk RIPH periode 2021 dan sebelumnya. Bagi Anda Pemegang RIPH periode 2022 dan setelahnya, silahkan gunakan Tautan ini (link).
+                                                        Pendaftaran ini hanya diperuntukkan bagi Pelaku Usaha yang akan melakukan pelaporan realisasi tanam-produksi untuk RIPH periode 2021 dan sebelumnya. Bagi Anda Pemegang RIPH periode 2022 dan setelahnya, silahkan gunakan Tautan ini (<a href="/">link</a>).
                                                     </p>
                                                 </div>
                                             </div>

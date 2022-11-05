@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Berkas;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class BerkasController extends Controller
 {
@@ -15,6 +17,8 @@ class BerkasController extends Controller
      */
     public function indexberkas()
     {
+        abort_if(Gate::denies('berkas_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $module_name = 'User task' ;
         $page_title = 'Berkas Saya';
         $page_heading = 'Berkas Saya' ;
@@ -25,6 +29,8 @@ class BerkasController extends Controller
 
     public function indexgaleri()
     {
+        abort_if(Gate::denies('galeri_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $module_name = 'User task' ;
         $page_title = 'Galeri Saya';
         $page_heading = 'Galeri Saya' ;
@@ -35,6 +41,8 @@ class BerkasController extends Controller
 
     public function indextemplate()
     {
+        abort_if(Gate::denies('template_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $module_name = 'User task' ;
         $page_title = 'Template Master';
         $page_heading = 'Template Master' ;
