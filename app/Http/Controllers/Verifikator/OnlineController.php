@@ -19,10 +19,10 @@ class OnlineController extends Controller
     {
         abort_if(Gate::denies('online_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $module_name = 'Online' ;
+        $module_name = 'Verification' ;
         $page_title = 'Online';
         $page_heading = 'Online' ;
-        $heading_class = 'fal fa-file-certificate';
+        $heading_class = 'fal fa-ballot-check';
         return view('verifikator.online.index', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
     
     }

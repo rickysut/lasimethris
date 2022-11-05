@@ -19,7 +19,7 @@ class OnfarmController extends Controller
     {
         abort_if(Gate::denies('onfarm_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $module_name = 'Onfarm' ;
+        $module_name = 'Verification' ;
         $page_title = 'Onfarm';
         $page_heading = 'Onfarm' ;
         $heading_class = 'fal fa-map-marker-check';

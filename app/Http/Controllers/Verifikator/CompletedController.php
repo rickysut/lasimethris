@@ -17,7 +17,14 @@ class CompletedController extends Controller
      */
     public function index()
     {
-        //
+        abort_if(Gate::denies('completed_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $module_name = 'Verification' ;
+        $page_title = 'Completed';
+        $page_heading = 'Completed' ;
+        $heading_class = 'fal fa-file-certificate';
+        return view('verifikator.completed.index', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+    
     }
 
     /**
