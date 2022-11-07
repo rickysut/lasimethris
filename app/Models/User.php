@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\DataUser;
 
 class User extends Authenticatable
 {
@@ -85,6 +86,11 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function data_user()
+    {
+        return $this->hasOne(DataUser::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)
