@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('data_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unique();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
             $table->string('mobile_phone');
             $table->string('fix_phone')->nullable();
             $table->string('company_name');

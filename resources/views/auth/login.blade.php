@@ -309,7 +309,7 @@
             if (role_access==1 || role_access==2){
                 regbut.href = 'http://riph.pertanian.go.id/';    
             } else {
-                regbut.href = '/v2/register'; 
+                regbut.href = "{{ route('register') }}"; 
             }
             
         }

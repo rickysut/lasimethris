@@ -18,7 +18,7 @@ Route::get('/home', function () {
 });
 
 
-Auth::routes(['register' => false]); // menghidupkan registration
+Auth::routes(['register' => true]); // menghidupkan registration
 
 
 
