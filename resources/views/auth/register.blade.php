@@ -62,6 +62,11 @@
 	-->
 
 <body>
+    <style>
+        .error {
+            color: red !important;
+        }
+    </style>
     <div class="page-wrapper auth">
         <div class="page-inner bg-brand-gradient">
             <div class="page-content-wrapper bg-transparent m-0">
@@ -117,7 +122,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form method="POST" action="{{ route('register') }}">
+                                    <form id="regform" method="POST" action="{{ route('register') }}">
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-4">
@@ -176,40 +181,22 @@
                                                             <div class="form-group row">
                                                                 <label class="col-xl-12 form-label" for="first_name">Nama Depan dan Belakang <span class="text-danger">*</span></label>
                                                                 <div class="col-6 pr-1">
-                                                                    <input type="text" name="first_name"  class="form-control" placeholder="Nama Depan" required>
-                                                                    <div class="invalid-feedback">Nama Depan harus diisi.</div>
-                                                                    {{-- @if($errors->has('first_name'))
-                                                                        <div class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></div>
-                                                                    @endif --}}
-                                                                    
-                                                                        
+                                                                    <input type="text" id="first_name" name="first_name"  class="form-control" placeholder="Nama Depan" required>
                                                                 </div>
                                                                 <div class="col-6 pl-1">
-                                                                    <input type="text" name="last_name"  class="form-control" placeholder="Nama Belakang" required>
-                                                                    <div class="invalid-feedback">Nama belakang harus diisi.</div>
+                                                                    <input type="text" id="last_name" name="last_name"  class="form-control" placeholder="Nama Belakang" required>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-lg-12 form-label" for="email">Email <span class="text-danger">*</span></label>
                                                                 <div class="col-lg-12">
                                                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                                                    @error('email')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
-                                                                    {{-- @if($errors->has('email'))
-                                                                        <div class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></div>
-                                                                    @endif
-                                                                    <div class="help-block">Gunakan Email Perusahaan</div> --}}
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-lg-12 form-label" for="mobile_phone">No. Handphone <span class="text-danger">*</span></label>
                                                                 <div class="col-lg-6">
                                                                     <input type="text" name="mobile_phone" class="form-control" placeholder="No. Handphone" required>
-                                                                    <div class="invalid-feedback">No, you missed this one.</div>
                                                                     <div class="help-block">Jangan menggunakan no. pribadi.</div>
                                                                 </div>
                                                                 <div class="col-lg-6">
@@ -233,28 +220,24 @@
                                                                 <label class="col-xl-12 form-label" for="company_name">Nama Perusahaan <span class="text-danger">*</span></label>
                                                                 <div class="col-md-12 pr-1">
                                                                     <input type="text" name="company_name" class="form-control" placeholder="Nama Perusahaan" required>
-                                                                    <div class="invalid-feedback">Nama perusahaan belum diisi.</div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-xl-12 form-label" for="direktur_name">Nama Direktur <span class="text-danger">*</span></label>
                                                                 <div class="col-md-12 pr-1">
                                                                     <input type="text" name="direktur_name" class="form-control" placeholder="Nama Direktur/Penanggungjawab Perusahaan" required>
-                                                                    <div class="invalid-feedback">Nama direktur belum diisi.</div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-xl-12 form-label" for="npwp_company">Nomor Pokok Wajib Pajak (NPWP) <span class="text-danger">*</span></label>
                                                                 <div class="col-md-12 pr-1">
                                                                     <input type="text" name="npwp_company" class="form-control" placeholder="Nomor Pokok Wajib Pajak (NPWP) Perusahaan" required>
-                                                                    <div class="invalid-feedback">NPWP harus diisi.</div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-xl-12 form-label" for="nib_company">Nomor Induk Berusaha (NIB) <span class="text-danger">*</span></label>
                                                                 <div class="col-md-12 pr-1">
                                                                     <input type="text" name="nib_company" class="form-control" placeholder="Nomor Induk Berusaha" required>
-                                                                    <div class="invalid-feedback">NIB harus diisi.</div>
                                                                 </div>
                                                             </div>
                                                             <hr>
@@ -262,7 +245,6 @@
                                                                 <label class="col-xl-12 form-label" for="address_company">Alamat  <span class="text-danger">*</span></label>
                                                                 <div class="col-md-12 pr-1">
                                                                     <textarea type="text" name="address_company" class="form-control" placeholder="Alamat" rows="3" required></textarea>
-                                                                    <div class="invalid-feedback">Alamat belumm diisi.</div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -278,7 +260,6 @@
                                                                             <option>Prov. Jawa Timur</option>
                                                                         </optgroup>
                                                                     </select>
-                                                                    <div class="invalid-feedback">Pilih provisi</div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label class="form-label" for="kabupaten">Kabupaten <span class="text-danger">*</span></label>
@@ -288,7 +269,6 @@
                                                                         <option>Kab. Wonosobo</option>
                                                                         <option>Kab. Temanggung</option>
                                                                     </select>
-                                                                    <div class="invalid-feedback">Pilih kabupaten.</div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -300,7 +280,6 @@
                                                                         <option>kec. Wonosobo</option>
                                                                         <option>kec. Temanggung</option>
                                                                     </select>
-                                                                    <div class="invalid-feedback">Pilih kecamatan.</div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label class="form-label" for="desa">Desa <span class="text-danger">*</span></label>
@@ -310,7 +289,6 @@
                                                                         <option>Desa Wonosobo</option>
                                                                         <option>Desa Temanggung</option>
                                                                     </select>
-                                                                    <div class="invalid-feedback">Pilih Desa</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -333,7 +311,6 @@
                                                                     <input type="file" class="custom-file-input" name="ktp" aria-describedby="ktp" value="" required>
                                                                     <label class="custom-file-label" for="ktp"></label>
                                                                 </div>
-                                                                <div class="invalid-feedback">KTP harus diunggah</div>
                                                                 <span class="help-block">Unggah foto KTP</span>
                                                             </div>
                                                             <div class="form-group">
@@ -342,7 +319,6 @@
                                                                     <input type="file" class="custom-file-input" name="assignment" aria-describedby="assignment" value="" required>
                                                                     <label class="custom-file-label" for="assignment"></label>
                                                                 </div>
-                                                                <div class="invalid-feedback">Surat tugas harus diunggah </div>
                                                                 <span class="help-block">Unggah surat tugas</span>
                                                             </div>
                                                         </div>
@@ -363,7 +339,6 @@
                                                                 <label class="col-lg-12 form-label" for="username">Username<span class="text-danger">*</span></label>
                                                                 <div class="col-md-12 pr-1">
                                                                     <input type="text" name="username" class="form-control" placeholder="username" required>
-                                                                    <div class="invalid-feedback">Username harus diisi.</div>
                                                                     <div class="help-block">tidak boleh mengandung spasi dan tanda baca</div>
                                                                 </div>
                                                             </div>
@@ -371,11 +346,9 @@
                                                                 <label class="col-lg-12 form-label" for="password">Password<span class="text-danger">*</span></label>
                                                                 <div class="col-md-6 pr-1">
                                                                     <input type="password" name="password"  class="form-control" placeholder="password" required>
-                                                                    <div class="invalid-feedback">Password harus diisi.</div>
                                                                 </div>
                                                                 <div class="col-md-6 pr-1">
                                                                     <input type="password" name="password_confirmation"  class="form-control" placeholder="password konfirmasi" required>
-                                                                    <div class="invalid-feedback">Konfirmasi password anda.</div>
                                                                 </div>
                                                                 <div class="col-lg-12 help-block">password harus 8-20 karakter</div>
                                                             </div>
@@ -388,20 +361,18 @@
                                         <div name="panel-5">
                                             <div class="form-group demo">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" name="terms" required>
-                                                    <label class="custom-control-label" for="terms"> Kami menyatakan bahwa data yang kami berikan adalah benar dan dapat dipertanggungjawabkan.</label>
-                                                    <div class="invalid-feedback">Anda belum memberikan pernyataan</div>
+                                                    <input type="checkbox" class="custom-control-input" name="dataok" required>
+                                                    <label class="custom-control-label" for="dataok"> Kami menyatakan bahwa data yang kami berikan adalah benar dan dapat dipertanggungjawabkan.</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" name="newsletter" required>
-                                                    <label class="custom-control-label" for="newsletter">Kami setuju dengan syarat dan ketentuan yang diberlakukan</label>
-                                                    <div class="invalid-feedback">Anda belum memberikan persetujuan.</div>
+                                                    <input type="checkbox" class="custom-control-input" name="terms" required>
+                                                    <label class="custom-control-label" for="terms">Kami setuju dengan syarat dan ketentuan yang diberlakukan</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row no-gutters">
                                             <div class="col-md-4 ml-auto text-right">
-                                                <button name="js-login-btn" type="submit" class="btn btn-block btn-danger btn-sm mt-3">Daftar</button>
+                                                <button name="js-login-btn" type="submit" class="btn btn-block btn-danger btn-sm mt-3 next">Daftar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -420,6 +391,8 @@
     <!-- Smartadmin core -->
     <script src="{{ asset('js/vendors.bundle.js') }}"></script>
     <script src="{{ asset('js/app.bundle.js') }}"></script>
+    <script src="{{ asset('js/jquery/jquery.validate.js') }}"></script>
+    <script src="{{ asset('js/jquery/additional-methods.js') }}"></script>
     <!-- Smartadmin plugin -->
     <script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/moment/moment.min.js') }}"></script>
@@ -447,21 +420,175 @@
 
     <script>
         $(document).ready(function() {
-            $(function() {
-                $(".select2-prov").select2({
-                    placeholder: "Select Province"
-                });
-                $(".select2-kab").select2({
-                    placeholder: "Select Kabupaten"
-                });
-                $(".select2-kec").select2({
-                    placeholder: "Select Kecamatan"
-                });
-                $(".select2-des").select2({
-                    placeholder: "Select Desa"
-                });
+            var $validator = $("#regform").validate({
+            rules: {
+                first_name: {
+                    required: true
+                },
+                last_name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                },
+                mobile_phone: {
+                    required: true,
+                    minlength: 10
+                },
+                company_name: {
+                    required: true
+                },
+                direktur_name: {
+                    required: true
+                },
+                npwp_company: {
+                    required: true,
+                    minlength: 16
+                },
+                nib_company: {
+                    required: true,
+                    minlength: 13
+                },
+                address_company: {
+                    required: true
+                },
+                provinsi: {
+                    required: true
+                },
+                kabupaten: {
+                    required: true
+                },
+                kecamatan: {
+                    required: true
+                },
+                username: {
+                    required: true,
+                    minlength: 3
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                password_confirmation: {
+                    required: true,
+                    minlength: 6
+                },
+                ktp: {
+                    required: true
+                    
+                },
+                assignment: {
+                    required: true
+                    
+                },
+                dataok: {
+                    required: true
+                    
+                },
+                terms: {
+                    required: true
+                    
+                }
+            },
+            messages:{
+                first_name:
+                {
+                    required:"Nama depan harus diisi"
+                },
+                last_name:
+                {
+                    required:"Nama belakang harus diisi"
+                },
+                email:
+                {
+                    required:"Email harus diisi",
+                    email: "Format Email tidak benar"
+                },
+                mobile_phone:
+                {
+                    required:"No handphone harus diisi",
+                    minlength: "minimal {0} digit"
+                },
+                company_name:
+                {
+                    required:"Nama perusahaan harus diisi"
+                    
+                },
+                direktur_name:
+                {
+                    required:"Nama direktur harus diisi"
+                },
+                npwp_company: {
+                    required: "NPWP perusahaan harus diisi",
+                    minlength: "minimal {0} digit"
+                },
+                nib_company: {
+                    required: "NIB perusahaan harus diisi",
+                    minlength: "minimal {0} digit"
+                },
+                address_company: {
+                    required: "Alamat perusahaan harus diisi"
+                },
+                provinsi: {
+                    required: "Pilih provinsi"
+                },
+                kabupaten: {
+                    required: "Pilih kabupaten"
+                },
+                kecamatan: {
+                    required: "Pilih kecamatan"
+                },
+                username: {
+                    required: "Username harus diisi",
+                    minlength: "minimal {0} karakter"
+                },
+                password: {
+                    required: "Password harus diisi",
+                    minlength: "minimal {0} karakter"
+                },
+                password_confirmation: {
+                    required: "Password belum dikonfirmmasi",
+                    minlength: "minimal {0} karakter"
+                },
+                ktp: {
+                    required: "KTP belum diunggah"
+                },
+                assignment: {
+                    required: "Surat tugas belum diunggah"
+                },
+                dataok: {
+                    required: "!"
+                },
+                terms: {
+                    required: "!"
+                    
+                }
+            }
+        })
+    
+
+        $(".next").click(function(){
+            var $valid = $("#regform").valid();
+            if (!$valid) {
+                $validator.focusInvalid();
+                return false;
+            }
+        })
+        $(function() {
+            $(".select2-prov").select2({
+                placeholder: "Select Province"
+            });
+            $(".select2-kab").select2({
+                placeholder: "Select Kabupaten"
+            });
+            $(".select2-kec").select2({
+                placeholder: "Select Kecamatan"
+            });
+            $(".select2-des").select2({
+                placeholder: "Select Desa"
             });
         });
+    })    
     </script>
 
     
