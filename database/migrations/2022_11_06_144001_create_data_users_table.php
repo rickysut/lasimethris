@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('ktp')->nullable();
             $table->string('assignment')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

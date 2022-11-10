@@ -361,12 +361,12 @@
                                         <div name="panel-5">
                                             <div class="form-group demo">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" name="dataok" required>
-                                                    <label class="custom-control-label" for="dataok"> Kami menyatakan bahwa data yang kami berikan adalah benar dan dapat dipertanggungjawabkan.</label>
+                                                    <input type="checkbox"  name="dataok" required>
+                                                    <label  for="dataok"> Kami menyatakan bahwa data yang kami berikan adalah benar dan dapat dipertanggungjawabkan.</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" name="terms" required>
-                                                    <label class="custom-control-label" for="terms">Kami setuju dengan syarat dan ketentuan yang diberlakukan</label>
+                                                    <input type="checkbox"  name="terms" required>
+                                                    <label  for="terms">Kami setuju dengan syarat dan ketentuan yang diberlakukan</label>
                                                 </div>
                                             </div>
                                         </div>

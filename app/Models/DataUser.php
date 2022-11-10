@@ -26,7 +26,6 @@ class DataUser extends Model
         'user_id',
         'first_name',
         'last_name',
-        'email',
         'mobile_phone',
         'fix_phone',
         'company_name',
