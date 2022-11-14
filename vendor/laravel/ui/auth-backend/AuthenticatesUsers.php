@@ -6,10 +6,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 trait AuthenticatesUsers
 {
     use RedirectsUsers, ThrottlesLogins;
+
+   
 
     /**
      * Show the application's login form.
@@ -31,32 +34,75 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
-        $this->validateLogin($request);
 
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
+        if ($request->string('roleaccess') == '2'){
 
-            return $this->sendLockoutResponse($request);
-        }
+            try {
+                $options = array(
+                    'soap_version' => SOAP_1_1,
+                    'exceptions' => true,
+                    'trace' => 1,
+                    'cache_wsdl' => WSDL_CACHE_MEMORY,
+                    // 'login' => $system['webuser'],
+                    // 'password' => $system['webpass'],
+                    'connection_timeout' => 25,
+                    'style' => SOAP_RPC,
+                    'use' => SOAP_ENCODED,
+                );
+        
+                $client = new \SoapClient('http://riph.pertanian.go.id/api.php/simethris?wsdl', $options);
+                $parameter = array(
+                    'user' => 'simethris',
+                    'pass' => 'wsriphsimethris',
+                    'user_riph' => $request->string('username'),
+                    'pass_riph' =>  $request->string('password')
+                    // 'user_riph' => 'hortikultura.jaya',
+                    // 'pass_riph' => 'P@ssw0rd123'
+                );
+                $response = $client->__soapCall('get_akses', $parameter);
+            } catch (\Exception $e) {
+    
+                Log::error('Soap Exception: ' . $e->getMessage());
+                throw new \Exception('Problem with SOAP call');
+            }
+            $res = json_decode(json_encode((array)simplexml_load_string($response)),true);
+            dd($res);
+            // if ($res['keterangan'] == 'SUCCESS'){
+                
+            //     if ($response = $this->authenticated($request, $this->guard()->user())) {
+            //         dd( $response);
+            //     }
+            // }
 
-        if ($this->attemptLogin($request)) {
-            if ($request->hasSession()) {
-                $request->session()->put('auth.password_confirmed_at', time());
+            
+        } else {
+            $this->validateLogin($request);
+
+            // If the class is using the ThrottlesLogins trait, we can automatically throttle
+            // the login attempts for this application. We'll key this by the username and
+            // the IP address of the client making these requests into this application.
+            if (method_exists($this, 'hasTooManyLoginAttempts') &&
+                $this->hasTooManyLoginAttempts($request)) {
+                $this->fireLockoutEvent($request);
+
+                return $this->sendLockoutResponse($request);
             }
 
-            return $this->sendLoginResponse($request);
+            if ($this->attemptLogin($request)) {
+                if ($request->hasSession()) {
+                    $request->session()->put('auth.password_confirmed_at', time());
+                }
+
+                return $this->sendLoginResponse($request);
+            }
+
+            // If the login attempt was unsuccessful we will increment the number of attempts
+            // to login and redirect the user back to the login form. Of course, when this
+            // user surpasses their maximum number of attempts they will get locked out.
+            $this->incrementLoginAttempts($request);
+
+            return $this->sendFailedLoginResponse($request);
         }
-
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
-
-        return $this->sendFailedLoginResponse($request);
     }
 
     /**

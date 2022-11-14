@@ -36,6 +36,8 @@ class KabupatenApiController extends Controller
         return new KabupatenResource($kabupaten->load(['kd_prop']));
     }
 
+    
+
     public function update(UpdateKabupatenRequest $request, Kabupaten $kabupaten)
     {
         $kabupaten->update($request->all());

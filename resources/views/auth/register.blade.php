@@ -252,22 +252,20 @@
                                                                     <label class="form-label" for="provinsi">Provinsi <span class="text-danger">*</span></label>
                                                                     <select class="select2-prov form-control w-100" name="provinsi" required>
                                                                         <optgroup label="Provinsi">
-                                                                            <option>Prov. Aceh</option>
-                                                                            <option>Prov. DKI Jakarta</option>
-                                                                            <option>Prov. Jawa Barat</option>
-                                                                            <option>Prov. Jawa Tengah</option>
-                                                                            <option>Prov. DI Yogyakarta</option>
-                                                                            <option>Prov. Jawa Timur</option>
+                                                                            @foreach ($provinsi['data'] as $data )
+                                                                                
+                                                                                <option value="{{ $data['kd_prop'] }}">{{ $data['nm_prop'] }}</option>    
+                                                                            @endforeach
+                                                                            
                                                                         </optgroup>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label class="form-label" for="kabupaten">Kabupaten <span class="text-danger">*</span></label>
                                                                     <select class="select2-kab form-control w-100" name="kabupaten" required>
-                                                                        <option>Kab. Bandung</option>
-                                                                        <option>Kab. Garut</option>
-                                                                        <option>Kab. Wonosobo</option>
-                                                                        <option>Kab. Temanggung</option>
+                                                                        @foreach ($kabupaten['data'] as $data )
+                                                                            <option value="{{ $data['kd_kab'] }}">{{ $data['nama_kab'] }}</option>    
+                                                                        @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -275,19 +273,18 @@
                                                                 <div class="col-md-6">
                                                                     <label class="form-label" for="kecamatan">Kecamatan <span class="text-danger">*</span></label>
                                                                     <select class="select2-kec form-control w-100" name="kecamatan" required>
-                                                                        <option>kec. Bandung</option>
-                                                                        <option>kec. Garut</option>
-                                                                        <option>kec. Wonosobo</option>
-                                                                        <option>kec. Temanggung</option>
+                                                                        @foreach ($kecamatan['data'] as $data )
+                                                                            <option value="{{ $data['kd_kec'] }}">{{ $data['nm_kec'] }}</option>    
+                                                                        @endforeach
+                                                                        
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label class="form-label" for="desa">Desa <span class="text-danger">*</span></label>
                                                                     <select class="select2-des form-control w-100" name="desa" required>
-                                                                        <option>Desa Bandung</option>
-                                                                        <option>Desa Garut</option>
-                                                                        <option>Desa Wonosobo</option>
-                                                                        <option>Desa Temanggung</option>
+                                                                        @foreach ($desa['data'] as $data )
+                                                                            <option value="{{ $data['kd_desa'] }}">{{ $data['nm_desa'] }}</option>    
+                                                                        @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
