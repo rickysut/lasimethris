@@ -18,6 +18,7 @@
                 </a>
 			</div>
 		</div>
+        
         <div class="info-card">
             <img src="{{ asset('/img/avatars/farmer.png') }}" class="profile-image rounded-circle" alt="">
             <div class="info-card-text">
@@ -26,7 +27,8 @@
                         {{ Auth::user()->username }}
                     </span>
                 </a>
-                <span class="d-inline-block text-truncate text-truncate-sm">Company Name</span>
+                
+                <span class="d-inline-block text-truncate text-truncate-sm">{{ Auth::user()::find(Auth::user()->id)->data_user->company_name }}</span>
             </div>
             <img src="{{ asset('/img/card-backgrounds/cover-2-lg.png') }}" class="cover" alt="cover">
             <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">

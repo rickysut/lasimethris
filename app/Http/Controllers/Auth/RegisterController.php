@@ -66,7 +66,7 @@ class RegisterController extends Controller
         DB::beginTransaction();
         try {
             $user = User::create([
-                'name'     => $data['first_name'] . ' ' .$data['last_name'],
+                'name'     => $data['name'],
                 'username' => $data['username'],
                 'email'    => $data['email'],
                 'password' => Hash::make($data['password']),
@@ -89,12 +89,12 @@ class RegisterController extends Controller
                 $user->roles()->attach(4);
                 $datauser = DataUser::create([
                     'user_id'       => $user->id,
-                    'first_name'    => $data['first_name'] ,
-                    'last_name'     => $data['last_name'] ,
+                    'name'          => $data['name'] ,
                     'mobile_phone'  => $data['mobile_phone'],
                     'fix_phone'     => $data['fix_phone'],
                     'company_name'  => $data['company_name'],
-                    'direktur_name' => $data['direktur_name'],
+                    'pic_name'      => $data['pic_name'],
+                    'jabatan'       => $data['jabatan'],
                     'npwp_company'  => $data['npwp_company'],
                     'nib_company'   => $data['nib_company'],
                     'address_company' => $data['address_company'],
@@ -102,8 +102,13 @@ class RegisterController extends Controller
                     'kabupaten'     => $data['kabupaten'],
                     'kecamatan'     => $data['kecamatan'],
                     'desa'          => $data['desa'],
+                    'kodepos'       => $data['kodepos'],
                     'ktp'           => $data['ktp'],
-                    'assignment'    => $data['assignment']  
+                    'ktp_image'     => $data['ktp_image'],
+                    'assignment'    => $data['assignment'], 
+                    'avatar'        => $data['avatar'], 
+                    'logo'          => $data['logo'], 
+                    'email_company' => $data['email_company']
                 ]);
                 $user->data_user()->save($datauser);
                 

@@ -124,51 +124,10 @@
                                     </div>
                                     <form id="regform" method="POST" action="{{ route('register') }}">
                                         @csrf
+                                        <input type="hidden" id="token" name="token" value="{{ $access_token }}">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div name="panel-1" class="panel" data-title="Panel Data" data-intro="Panel ini berisi data-data" data-step="2" >
-                                                    <div class="panel-container show">
-                                                        <div class="panel-content">
-                                                            <div class="d-flex flex-column align-items-center justify-content-center">
-                                                                <div class="d-flex flex-column align-items-center justify-content-center">
-                                                                    <img src="{{ asset('img/avatars/farmer.png') }}" class="img-thumbnail rounded-circle shadow-2" alt="">
-                                                                    <h5 class="mb-0 fw-700 text-center mt-3 mb-3">
-                                                                        Foto Anda
-                                                                    </h5>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="form-label" for="firstname">Ganti foto</label>
-                                                                    <div class="custom-file">
-                                                                        <input type="file" class="custom-file-input" name="assetImage" aria-describedby="assetImage" value="">
-                                                                        <label class="custom-file-label" for="assetImage"></label>
-                                                                    </div>
-                                                                    <span class="help-block">Klik browse untuk memilih file</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="panel-content">
-                                                            <div class="d-flex flex-column align-items-center justify-content-center">
-                                                                <div class="d-flex flex-column align-items-center justify-content-center">
-                                                                    <img src="{{ asset('img/logo-big.png') }}" class="img-thumbnail rounded-circle shadow-2" alt="">
-                                                                    <h5 class="mb-0 fw-700 text-center mt-3 mb-3">
-                                                                        Logo Perusahaan
-                                                                    </h5>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="form-label" for="firstname">Ganti Logo Perusahaan</label>
-                                                                    <div class="custom-file">
-                                                                        <input type="file" class="custom-file-input" name="assetImage" aria-describedby="assetImage" value="">
-                                                                        <label class="custom-file-label" for="assetImage"></label>
-                                                                    </div>
-                                                                    <span class="help-block">Klik browse untuk mengganti logo</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
+                                            
+                                            <div class="col-md-12">
                                                 <div name="panel-1" class="panel" data-title="Panel Data" data-intro="Panel ini berisi data-data" data-step="2">
                                                     <div class="panel-hdr">
                                                         <h2>
@@ -179,29 +138,25 @@
                                                     <div class="panel-container show">
                                                         <div class="panel-content">
                                                             <div class="form-group row">
-                                                                <label class="col-xl-12 form-label" for="first_name">Nama Depan dan Belakang <span class="text-danger">*</span></label>
-                                                                <div class="col-6 pr-1">
-                                                                    <input type="text" id="first_name" name="first_name"  class="form-control" placeholder="Nama Depan" required>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="name">Nama Lengkap <span class="text-danger">*</span></label>
+                                                                    <input type="text" id="name" name="name"  class="form-control" placeholder="Nama Lengkap" required>
                                                                 </div>
-                                                                <div class="col-6 pl-1">
-                                                                    <input type="text" id="last_name" name="last_name"  class="form-control" placeholder="Nama Belakang" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-lg-12 form-label" for="email">Email <span class="text-danger">*</span></label>
-                                                                <div class="col-lg-12">
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
                                                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label class="col-lg-12 form-label" for="mobile_phone">No. Handphone <span class="text-danger">*</span></label>
-                                                                <div class="col-lg-6">
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="mobile_phone">No. Handphone <span class="text-danger">*</span></label>
                                                                     <input type="text" name="mobile_phone" class="form-control" placeholder="No. Handphone" required>
                                                                     <div class="help-block">Jangan menggunakan no. pribadi.</div>
                                                                 </div>
-                                                                <div class="col-lg-6">
-                                                                    <input type="text" name="fix_phone" class="form-control" placeholder="No. Telp">
-                                                                    <div class="help-block">No. Telp Kantor</div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label" for="ktp">No. KTP <span class="text-danger">*</span></label>
+                                                                    <input type="text" name="ktp" class="form-control" placeholder="No. KTP">
+                                                                    <div class="help-block">Diisi digit no KTP</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -214,78 +169,143 @@
                                                         </h2>
                                                         
                                                     </div>
-                                                    <div class="panel-container show">
-                                                        <div class="panel-content">
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-12 form-label" for="company_name">Nama Perusahaan <span class="text-danger">*</span></label>
-                                                                <div class="col-md-12 pr-1">
-                                                                    <input type="text" name="company_name" class="form-control" placeholder="Nama Perusahaan" required>
+                                                    <div class="panel-container show row">
+                                                        <div class="col-md-3">
+                                                            <div class="panel-container show">
+                                                                <div class="panel-content">
+                                                                    <div class="d-flex flex-column align-items-center justify-content-center">
+                                                                        <div class="d-flex flex-column align-items-center justify-content-center">
+                                                                            <img src="{{ asset('img/avatars/farmer.png') }}" class="img-thumbnail rounded-circle shadow-2" alt="" style="width: 90px; height: 90px">
+                                                                            <h5 class="mb-0 fw-700 text-center mt-3 mb-3">
+                                                                                Foto Anda
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="form-label" for="firstname">Ganti foto</label>
+                                                                            <div class="custom-file">
+                                                                                <input type="file" class="custom-file-input" name="avatar" aria-describedby="avatar" value="">
+                                                                                <label class="custom-file-label" for="avatar"></label>
+                                                                            </div>
+                                                                            <span class="help-block">Klik browse untuk memilih file</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="panel-content">
+                                                                    <div class="d-flex flex-column align-items-center justify-content-center">
+                                                                        <div class="d-flex flex-column align-items-center justify-content-center">
+                                                                            <img src="{{ asset('img/logo-big.png') }}" class="img-thumbnail rounded-circle shadow-2" alt="" style="width: 90px; height: 90px">
+                                                                            <h5 class="mb-0 fw-700 text-center mt-3 mb-3">
+                                                                                Logo Perusahaan
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="form-label" for="firstname">Ganti Logo Perusahaan</label>
+                                                                            <div class="custom-file">
+                                                                                <input type="file" class="custom-file-input" name="logo" aria-describedby="logo" value="">
+                                                                                <label class="custom-file-label" for="logo"></label>
+                                                                            </div>
+                                                                            <span class="help-block">Klik browse untuk mengganti logo</span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-12 form-label" for="direktur_name">Nama Direktur <span class="text-danger">*</span></label>
-                                                                <div class="col-md-12 pr-1">
-                                                                    <input type="text" name="direktur_name" class="form-control" placeholder="Nama Direktur/Penanggungjawab Perusahaan" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-12 form-label" for="npwp_company">Nomor Pokok Wajib Pajak (NPWP) <span class="text-danger">*</span></label>
-                                                                <div class="col-md-12 pr-1">
-                                                                    <input type="text" name="npwp_company" class="form-control" placeholder="Nomor Pokok Wajib Pajak (NPWP) Perusahaan" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-12 form-label" for="nib_company">Nomor Induk Berusaha (NIB) <span class="text-danger">*</span></label>
-                                                                <div class="col-md-12 pr-1">
-                                                                    <input type="text" name="nib_company" class="form-control" placeholder="Nomor Induk Berusaha" required>
-                                                                </div>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-12 form-label" for="address_company">Alamat  <span class="text-danger">*</span></label>
-                                                                <div class="col-md-12 pr-1">
-                                                                    <textarea type="text" name="address_company" class="form-control" placeholder="Alamat" rows="3" required></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label" for="provinsi">Provinsi <span class="text-danger">*</span></label>
-                                                                    <select class="select2-prov form-control w-100" name="provinsi" required>
-                                                                        <optgroup label="Provinsi">
-                                                                            @foreach ($provinsi['data'] as $data )
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <div class="panel-container show">
+                                                                <div class="panel-content">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-xl-12 form-label" for="company_name">Nama Perusahaan <span class="text-danger">*</span></label>
+                                                                        <div class="col-md-12">
+                                                                            <input type="text" name="company_name" class="form-control" placeholder="Nama Perusahaan" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="pic_name">Penanggung Jawab <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="pic_name" class="form-control" placeholder="Nama Penanggung Jawab" required>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="jabatan">Jabatan <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="jabatan" class="form-control" placeholder="Jabatan Di Perusahaan" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="npwp_company">Nomor Pokok Wajib Pajak (NPWP) <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="npwp_company" class="form-control" placeholder="Nomor Pokok Wajib Pajak (NPWP) Perusahaan" required>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="nib_company">Nomor Induk Berusaha (NIB) <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="nib_company" class="form-control" placeholder="Nomor Induk Berusaha" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="fix_phone">No. Telepon</label>
+                                                                            <input type="text" name="fix_phone" class="form-control" placeholder="Nomor Telepon Perusahaan" >
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="fax">No. Fax</label>
+                                                                            <input type="text" name="fax" class="form-control" placeholder="Nomor Fax Perusahaan">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-xl-12 form-label" for="address_company">Alamat  <span class="text-danger">*</span></label>
+                                                                        <div class="col-md-12">
+                                                                            <textarea type="text" name="address_company" class="form-control" placeholder="Alamat" rows="2" required></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="provinsi">Provinsi <span class="text-danger">*</span></label>
+                                                                            <select id="province" class="select2-prov form-control w-100" name="provinsi" required>
+                                                                                <optgroup label="Provinsi">
+                                                                                    @foreach ($provinsi['data'] as $data )
+                                                                                        <option value="{{ $data['kd_prop'] }}">{{ $data['nm_prop'] }}</option>    
+                                                                                    @endforeach
+                                                                                    
+                                                                                </optgroup>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="kabupaten">Kabupaten <span class="text-danger">*</span></label>
+                                                                            <select id="kabupaten" class="select2-kab form-control w-100" name="kabupaten" required>
+                                                                                @foreach ($kabupaten['data'] as $data )
+                                                                                    <option value="{{ $data['kd_kab'] }}">{{ $data['nama_kab'] }}</option>    
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="kecamatan">Kecamatan <span class="text-danger">*</span></label>
+                                                                            <select id="kecamatan" class="select2-kec form-control w-100" name="kecamatan" required>
+                                                                                @foreach ($kecamatan['data'] as $data )
+                                                                                    <option value="{{ $data['kd_kec'] }}">{{ $data['nm_kec'] }}</option>    
+                                                                                @endforeach
                                                                                 
-                                                                                <option value="{{ $data['kd_prop'] }}">{{ $data['nm_prop'] }}</option>    
-                                                                            @endforeach
-                                                                            
-                                                                        </optgroup>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label" for="kabupaten">Kabupaten <span class="text-danger">*</span></label>
-                                                                    <select class="select2-kab form-control w-100" name="kabupaten" required>
-                                                                        @foreach ($kabupaten['data'] as $data )
-                                                                            <option value="{{ $data['kd_kab'] }}">{{ $data['nama_kab'] }}</option>    
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label" for="kecamatan">Kecamatan <span class="text-danger">*</span></label>
-                                                                    <select class="select2-kec form-control w-100" name="kecamatan" required>
-                                                                        @foreach ($kecamatan['data'] as $data )
-                                                                            <option value="{{ $data['kd_kec'] }}">{{ $data['nm_kec'] }}</option>    
-                                                                        @endforeach
-                                                                        
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label" for="desa">Desa <span class="text-danger">*</span></label>
-                                                                    <select class="select2-des form-control w-100" name="desa" required>
-                                                                        @foreach ($desa['data'] as $data )
-                                                                            <option value="{{ $data['kd_desa'] }}">{{ $data['nm_desa'] }}</option>    
-                                                                        @endforeach
-                                                                    </select>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="desa">Desa <span class="text-danger">*</span></label>
+                                                                            <select id="desa" class="select2-des form-control w-100" name="desa" required>
+                                                                                @foreach ($desa['data'] as $data )
+                                                                                    <option value="{{ $data['kd_desa'] }}">{{ $data['nm_desa'] }}</option>    
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="kodepos">Kode Pos <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="kodepos" class="form-control" placeholder="Kode Pos" required>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label" for="kodepos">Email Perusahaan <span class="text-danger"></span></label>
+                                                                            <input type="text" name="email_company" class="form-control" placeholder="Email Perusahaan" required>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -305,7 +325,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label" for="ktp">ID Card/KTP</label>
                                                                 <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" name="ktp" aria-describedby="ktp" value="" required>
+                                                                    <input type="file" class="custom-file-input" name="ktp_image" aria-describedby="ktp_image" value="">
                                                                     <label class="custom-file-label" for="ktp"></label>
                                                                 </div>
                                                                 <span class="help-block">Unggah foto KTP</span>
@@ -313,7 +333,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label" for="assignment">Assignment/Surat Tugas</label>
                                                                 <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" name="assignment" aria-describedby="assignment" value="" required>
+                                                                    <input type="file" class="custom-file-input" name="assignment" aria-describedby="assignment" value="" >
                                                                     <label class="custom-file-label" for="assignment"></label>
                                                                 </div>
                                                                 <span class="help-block">Unggah surat tugas</span>
@@ -334,27 +354,27 @@
                                                         <div class="panel-content">
                                                             <div class="form-group row">
                                                                 <label class="col-lg-12 form-label" for="username">Username<span class="text-danger">*</span></label>
-                                                                <div class="col-md-12 pr-1">
+                                                                <div class="col-md-12">
                                                                     <input type="text" name="username" class="form-control" placeholder="username" required>
                                                                     <div class="help-block">tidak boleh mengandung spasi dan tanda baca</div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-lg-12 form-label" for="password">Password<span class="text-danger">*</span></label>
-                                                                <div class="col-md-6 pr-1">
+                                                                <div class="col-md-6">
                                                                     <input type="password" name="password"  class="form-control" placeholder="password" required>
+                                                                    <div class="help-block">password harus 8-20 karakter</div>
                                                                 </div>
-                                                                <div class="col-md-6 pr-1">
+                                                                <div class="col-md-6">
                                                                     <input type="password" name="password_confirmation"  class="form-control" placeholder="password konfirmasi" required>
                                                                 </div>
-                                                                <div class="col-lg-12 help-block">password harus 8-20 karakter</div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr>
                                         <div name="panel-5">
                                             <div class="form-group demo">
                                                 <div class="custom-control custom-checkbox">
@@ -369,7 +389,7 @@
                                         </div>
                                         <div class="row no-gutters">
                                             <div class="col-md-4 ml-auto text-right">
-                                                <button name="js-login-btn" type="submit" class="btn btn-block btn-danger btn-sm mt-3 next">Daftar</button>
+                                                <button name="js-login-btn" type="submit" class="btn btn-block btn-danger btn-xm mt-3 next">DAFTAR</button>
                                             </div>
                                         </div>
                                     </form>
@@ -417,12 +437,10 @@
 
     <script>
         $(document).ready(function() {
+
             var $validator = $("#regform").validate({
             rules: {
-                first_name: {
-                    required: true
-                },
-                last_name: {
+                name: {
                     required: true
                 },
                 email: {
@@ -432,10 +450,17 @@
                     required: true,
                     minlength: 10
                 },
+                ktp: {
+                    required: true,
+                    minlength: 16 
+                },
                 company_name: {
                     required: true
                 },
-                direktur_name: {
+                pic_name: {
+                    required: true
+                },
+                jabatan: {
                     required: true
                 },
                 npwp_company: {
@@ -458,6 +483,12 @@
                 kecamatan: {
                     required: true
                 },
+                desa: {
+                    required: true
+                },
+                kodepos: {
+                    required: true
+                },
                 username: {
                     required: true,
                     minlength: 3
@@ -470,14 +501,7 @@
                     required: true,
                     minlength: 6
                 },
-                ktp: {
-                    required: true
-                    
-                },
-                assignment: {
-                    required: true
-                    
-                },
+                
                 dataok: {
                     required: true
                     
@@ -488,13 +512,9 @@
                 }
             },
             messages:{
-                first_name:
+                name:
                 {
-                    required:"Nama depan harus diisi"
-                },
-                last_name:
-                {
-                    required:"Nama belakang harus diisi"
+                    required:"Nama harus diisi"
                 },
                 email:
                 {
@@ -506,14 +526,23 @@
                     required:"No handphone harus diisi",
                     minlength: "minimal {0} digit"
                 },
+                ktp:
+                {
+                    required:"No KTP harus diisi",
+                    minlength: "minimal {0} digit"
+                },
                 company_name:
                 {
                     required:"Nama perusahaan harus diisi"
                     
                 },
-                direktur_name:
+                pic_name:
                 {
-                    required:"Nama direktur harus diisi"
+                    required:"Nama penanggung jawab harus diisi"
+                },
+                jabatan:
+                {
+                    required:"Jabatan harus diisi"
                 },
                 npwp_company: {
                     required: "NPWP perusahaan harus diisi",
@@ -535,6 +564,12 @@
                 kecamatan: {
                     required: "Pilih kecamatan"
                 },
+                desa: {
+                    required: "Pilih Desa / Kelurahan"
+                },
+                kodepos: {
+                    required: "Kode Pos harus diisi"
+                },
                 username: {
                     required: "Username harus diisi",
                     minlength: "minimal {0} karakter"
@@ -547,12 +582,7 @@
                     required: "Password belum dikonfirmmasi",
                     minlength: "minimal {0} karakter"
                 },
-                ktp: {
-                    required: "KTP belum diunggah"
-                },
-                assignment: {
-                    required: "Surat tugas belum diunggah"
-                },
+                
                 dataok: {
                     required: "!"
                 },
@@ -561,6 +591,27 @@
                     
                 }
             }
+
+            // $(document)).on('change', '#province', function() {
+            //     var province_id =$(this).val();
+            //     var div = $(this).parent();
+            //     var op = " ";
+            //     $.ajax({
+            //         type: 'get',
+            //         url: '{ !! URL :: to(findIDProvince) !! }',
+            //         data: {'id':province_id},
+            //         success: function(data){
+            //             for (var i = 0; i < data.length; i++){
+            //                 op += '<option value="'+data[i].id+'">'+data[i].city_name+'</option>';
+            //             }
+            //             div.find('#city').html(" ");
+            //             div.find('#city').append(op);
+            //         },
+            //         error: function(){
+            //             console.log('success');
+            //         },
+            //     });
+            // });
         })
     
 

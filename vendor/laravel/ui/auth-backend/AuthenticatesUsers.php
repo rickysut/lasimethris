@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use App\Models\DataUser;
+use Illuminate\Support\Facades\Hash;
+
 
 trait AuthenticatesUsers
 {
@@ -65,17 +69,46 @@ trait AuthenticatesUsers
                 Log::error('Soap Exception: ' . $e->getMessage());
                 throw new \Exception('Problem with SOAP call');
             }
-            $res = json_decode(json_encode((array)simplexml_load_string($response)),true);
-            dd($res);
-            // if ($res['keterangan'] == 'SUCCESS'){
+            //$res = json_decode(json_encode((array)simplexml_load_string($response)),true);
+           
+            $res = simplexml_load_string($response);
+            // dd((string)$res->riph->company_profile->fax);
+            if ((string)$res->keterangan == 'SUCCESS'){
                 
-            //     if ($response = $this->authenticated($request, $this->guard()->user())) {
-            //         dd( $response);
-            //     }
-            // }
-
+                $user = User::firstOrCreate(
+                    ['username' => $request->string('username'), 'roleaccess' => 2],
+                    ['name' => (string)$res->riph->user_profile->nama, 'password' => Hash::make( $request->string('password')), 'email' => (string)$res->riph->user_profile->email]
+                );
+ 
+                if ($user) {
+                    $user->roles()->attach(2); // user V3
+                    $datauser = DataUser::updateOrCreate(
+                        ['user_id' => $user->id, 'company_name' =>  (string)$res->riph->company_profile->nama],
+                        [
+                            'name' => (string)$res->riph->user_profile->nama,
+                            'mobile_phone' => (string)$res->riph->user_profile->telepon,
+                            'fix_phone' => (string)$res->riph->company_profile->telepon,
+                            'pic_name' => (string)$res->riph->company_profile->penanggung_jawab,
+                            'jabatan' => (string)$res->riph->company_profile->jabatan,
+                            'npwp_company' => (string)$res->riph->company_profile->npwp,
+                            'nib_company' => (string)$res->riph->company_profile->nib,
+                            'address_company' => (string)$res->riph->company_profile->alamat,
+                            'provinsi' => (string)$res->riph->company_profile->kdprop,
+                            'kabupaten' => (string)$res->riph->company_profile->kdkab,
+                            'kodepos' => (string)$res->riph->company_profile->kodepos,
+                            'ktp' => (string)$res->riph->user_profile->ktp,
+                            'fax' => (string)$res->riph->company_profile->fax,
+                            'email_company' => (string)$res->riph->company_profile->email
+                        ]
+                    );
+                    // if ($datauser) dd('updated...'); else dd('update or create fail');
+                };
+                
+            }
             
-        } else {
+        } 
+        
+        
             $this->validateLogin($request);
 
             // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -102,7 +135,6 @@ trait AuthenticatesUsers
             $this->incrementLoginAttempts($request);
 
             return $this->sendFailedLoginResponse($request);
-        }
     }
 
     /**
