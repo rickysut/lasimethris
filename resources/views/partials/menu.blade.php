@@ -28,7 +28,7 @@
                     </span>
                 </a>
                 
-                <span class="d-inline-block text-truncate text-truncate-sm">{{ Auth::user()::find(Auth::user()->id)->data_user->company_name }}</span>
+                <span class="d-inline-block text-truncate text-truncate-sm">{{ (Auth::user()::find(Auth::user()->id)->data_user->company_name ?? 'user') }}</span>
             </div>
             <img src="{{ asset('/img/card-backgrounds/cover-2-lg.png') }}" class="cover" alt="cover">
             <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
