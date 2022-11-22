@@ -403,14 +403,22 @@
 		<!-- app user menu -->
 		<div>
 			<a href="#" data-toggle="dropdown" title="{{ Auth::user()->name }}" class="header-icon d-flex align-items-center justify-content-center ml-2">
-				<img src="{{ asset('/img/favicon.png') }}" class="profile-image rounded-circle" alt="{{ Auth::user()->name }}">
-				
+				@if (!empty(Auth::user()::find(Auth::user()->id)->data_user->logo))
+             		<img src="{{ Storage::disk('public')->url(Auth::user()::find(Auth::user()->id)->data_user->logo)}}" class="profile-image rounded-circle">
+            	@else
+					<img src="{{ asset('/img/favicon.png') }}" class="profile-image rounded-circle" alt="{{ Auth::user()->name }}">
+				@endif
 			</a>
 			<div class="dropdown-menu dropdown-menu-animated dropdown-lg">
 				<div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
 					<div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
 						<span class="mr-2">
-							<img src="{{ asset('/img/favicon.png') }}" class="rounded-circle profile-image" alt="users">
+							@if (!empty(Auth::user()::find(Auth::user()->id)->data_user->avatar))
+								<img src="{{ Storage::disk('public')->url(Auth::user()::find(Auth::user()->id)->data_user->avatar)}}" class="profile-image rounded-circle">
+							@else
+								<img src="{{ asset('/img/avatars/farmer.png') }}" class="profile-image rounded-circle" alt="{{ Auth::user()->name }}">
+							@endif
+							
 						</span>
 						<div class="info-card-text">
 							<div class="fs-lg text-truncate text-truncate-lg">{{ Auth::user()->name }}</div>

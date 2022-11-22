@@ -175,7 +175,7 @@
                                                                 <div class="panel-content">
                                                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                                                         <div class="d-flex flex-column align-items-center justify-content-center">
-                                                                            <img src="{{ asset('img/avatars/farmer.png') }}" class="img-thumbnail rounded-circle shadow-2" alt="" style="width: 90px; height: 90px">
+                                                                            <img id="imgavatar" src="{{ asset('img/avatars/farmer.png') }}" class="img-thumbnail rounded-circle shadow-2" alt="" style="width: 90px; height: 90px">
                                                                             <h5 class="mb-0 fw-700 text-center mt-3 mb-3">
                                                                                 Foto Anda
                                                                             </h5>
@@ -183,7 +183,7 @@
                                                                         <div class="form-group">
                                                                             <label class="form-label" for="firstname">Ganti foto</label>
                                                                             <div class="custom-file">
-                                                                                <input type="file" class="custom-file-input" name="avatar" aria-describedby="avatar" value="">
+                                                                                <input type="file" class="custom-file-input" name="avatar" aria-describedby="avatar" onchange="readURL(this,1);">
                                                                                 <label class="custom-file-label" for="avatar"></label>
                                                                             </div>
                                                                             <span class="help-block">Klik browse untuk memilih file</span>
@@ -194,7 +194,7 @@
                                                                 <div class="panel-content">
                                                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                                                         <div class="d-flex flex-column align-items-center justify-content-center">
-                                                                            <img src="{{ asset('img/logo-big.png') }}" class="img-thumbnail rounded-circle shadow-2" alt="" style="width: 90px; height: 90px">
+                                                                            <img id="imglogo" src="{{ asset('img/logo-big.png') }}" class="img-thumbnail rounded-circle shadow-2" alt="" style="width: 90px; height: 90px">
                                                                             <h5 class="mb-0 fw-700 text-center mt-3 mb-3">
                                                                                 Logo Perusahaan
                                                                             </h5>
@@ -202,7 +202,7 @@
                                                                         <div class="form-group">
                                                                             <label class="form-label" for="firstname">Ganti Logo Perusahaan</label>
                                                                             <div class="custom-file">
-                                                                                <input type="file" class="custom-file-input" name="logo" aria-describedby="logo" value="">
+                                                                                <input type="file" class="custom-file-input" name="logo" aria-describedby="logo" onchange="readURL(this,2);">
                                                                                 <label class="custom-file-label" for="logo"></label>
                                                                             </div>
                                                                             <span class="help-block">Klik browse untuk mengganti logo</span>
@@ -302,7 +302,7 @@
                                                                             <input type="text" name="kodepos" class="form-control" placeholder="Kode Pos" required>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <label class="form-label" for="kodepos">Email Perusahaan <span class="text-danger"></span></label>
+                                                                            <label class="form-label" for="email_company">Email Perusahaan <span class="text-danger">*</span></label>
                                                                             <input type="text" name="email_company" class="form-control" placeholder="Email Perusahaan" required>
                                                                         </div>
                                                                     </div>
@@ -323,10 +323,10 @@
                                                     <div class="panel-container show">
                                                         <div class="panel-content">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="ktp">ID Card/KTP</label>
+                                                                <label class="form-label" for="imagektp">ID Card/KTP</label>
                                                                 <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" name="ktp_image" aria-describedby="ktp_image" value="">
-                                                                    <label class="custom-file-label" for="ktp"></label>
+                                                                    <input type="file" class="custom-file-input" name="imagektp" aria-describedby="imagektp" value="">
+                                                                    <label class="custom-file-label" for="imagektp"></label>
                                                                 </div>
                                                                 <span class="help-block">Unggah foto KTP</span>
                                                             </div>
@@ -686,12 +686,38 @@
             $(".select2-des").select2({
                 placeholder: "Select Desa"
             });
+
+
+            
         });
            
     </script>
 
     
     <script>
+            function readURL(input, id) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        if (id == 1){
+                            $('#imgavatar')
+                                .attr('src', e.target.result)
+                                .width(90)
+                                .height(90);
+                        }
+                        if (id == 2){
+                            $('#imglogo')
+                                .attr('src', e.target.result)
+                                .width(90)
+                                .height(90);
+                        }
+                        
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
         $("#js-login-btn").click(function(event) {
 
             // Fetch form to apply custom Bootstrap validation

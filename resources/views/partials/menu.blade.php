@@ -20,7 +20,12 @@
 		</div>
         
         <div class="info-card">
-            <img src="{{ asset('/img/avatars/farmer.png') }}" class="profile-image rounded-circle" alt="">
+            @if (!empty(Auth::user()::find(Auth::user()->id)->data_user->avatar))
+             <img src="{{ Storage::disk('public')->url(Auth::user()::find(Auth::user()->id)->data_user->avatar)}}" class="profile-image rounded-circle" alt="">
+            @else
+                <img src="{{ asset('/img/avatars/farmer.png') }}" class="profile-image rounded-circle" alt="">    
+            @endif
+            
             <div class="info-card-text">
                 <a href="#" class="d-flex align-items-center text-white">
                     <span class="text-truncate text-truncate-sm d-inline-block">

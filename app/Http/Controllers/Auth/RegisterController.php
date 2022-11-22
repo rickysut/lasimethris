@@ -53,6 +53,8 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'avatar' => ['mimes:jpg,jpeg,png','max:2048'],
+            // 'logo' => ['mimes:jpg,jpeg,png','max:2048'],
         ]);
     }
 
@@ -63,6 +65,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
         DB::beginTransaction();
         try {
             $user = User::create([
@@ -87,7 +90,7 @@ class RegisterController extends Controller
         try {
             if ($user){
                 $user->roles()->attach(4);
-                $datauser = DataUser::create([
+                $regdata = [
                     'user_id'       => $user->id,
                     'name'          => $data['name'] ,
                     'mobile_phone'  => $data['mobile_phone'],
@@ -104,12 +107,38 @@ class RegisterController extends Controller
                     'desa'          => $data['desa'],
                     'kodepos'       => $data['kodepos'],
                     'ktp'           => $data['ktp'],
-                    'ktp_image'     => $data['ktp_image'],
-                    'assignment'    => $data['assignment'], 
-                    'avatar'        => $data['avatar'], 
-                    'logo'          => $data['logo'], 
                     'email_company' => $data['email_company']
-                ]);
+                ];
+                $avatar_path = '';
+                if  ($data['avatar']!=null){
+                    $file_name = $data['company_name'].'_'.'avatar.'.$data['avatar']->getClientOriginalExtension();
+                    $file_path = $data['avatar']->storeAs('uploads', $file_name, 'public');
+                    $avatar_path = $file_path;
+                    $regdata += array('avatar' => $avatar_path);
+                };
+                $logo_path = '';
+                if  ($data['logo']!=null){
+                    $file_name = $data['company_name'].'_'.'logo.'.$data['logo']->getClientOriginalExtension();
+                    $file_path = $data['logo']->storeAs('uploads', $file_name, 'public');
+                    $logo_path = $file_path;
+                    $regdata += array('logo' => $logo_path);
+                };
+                $ktp_path = '';
+                if  ($data['imagektp']!=null){
+                    $file_name = $data['company_name'].'_'.'ktp.'.$data['imagektp']->getClientOriginalExtension();
+                    $file_path = $data['imagektp']->storeAs('uploads', $file_name, 'public');
+                    $ktp_path = $file_path;
+                    $regdata += array('ktp_image' => $ktp_path);
+                };
+                $assign_path = '';
+                if  ($data['assignment']!=null){
+                    $file_name = $data['company_name'].'_'.'assignment.'.$data['assignment']->getClientOriginalExtension();
+                    $file_path = $data['assignment']->storeAs('uploads', $file_name, 'public');
+                    $assign_path = $file_path;
+                    $regdata += array('assignment' => $assign_path);
+                };
+                //dd($regdata);
+                $datauser = DataUser::create($regdata);
                 $user->data_user()->save($datauser);
                 
             }
