@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form id="regform" method="POST" action="{{ route('register') }}">
+                                    <form id="regform" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" id="token" name="token" value="{{ $access_token }}">
                                         <div class="row">
@@ -439,190 +439,241 @@
         $(document).ready(function() {
 
             var $validator = $("#regform").validate({
-            rules: {
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                },
-                mobile_phone: {
-                    required: true,
-                    minlength: 10
-                },
-                ktp: {
-                    required: true,
-                    minlength: 16 
-                },
-                company_name: {
-                    required: true
-                },
-                pic_name: {
-                    required: true
-                },
-                jabatan: {
-                    required: true
-                },
-                npwp_company: {
-                    required: true,
-                    minlength: 16
-                },
-                nib_company: {
-                    required: true,
-                    minlength: 13
-                },
-                address_company: {
-                    required: true
-                },
-                provinsi: {
-                    required: true
-                },
-                kabupaten: {
-                    required: true
-                },
-                kecamatan: {
-                    required: true
-                },
-                desa: {
-                    required: true
-                },
-                kodepos: {
-                    required: true
-                },
-                username: {
-                    required: true,
-                    minlength: 3
-                },
-                password: {
-                    required: true,
-                    minlength: 6
-                },
-                password_confirmation: {
-                    required: true,
-                    minlength: 6
-                },
-                
-                dataok: {
-                    required: true
+                rules: {
+                    name: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                    },
+                    mobile_phone: {
+                        required: true,
+                        minlength: 10
+                    },
+                    ktp: {
+                        required: true,
+                        minlength: 16 
+                    },
+                    company_name: {
+                        required: true
+                    },
+                    pic_name: {
+                        required: true
+                    },
+                    jabatan: {
+                        required: true
+                    },
+                    npwp_company: {
+                        required: true,
+                        minlength: 16
+                    },
+                    nib_company: {
+                        required: true,
+                        minlength: 13
+                    },
+                    address_company: {
+                        required: true
+                    },
+                    provinsi: {
+                        required: true
+                    },
+                    kabupaten: {
+                        required: true
+                    },
+                    kecamatan: {
+                        required: true
+                    },
+                    desa: {
+                        required: true
+                    },
+                    kodepos: {
+                        required: true
+                    },
+                    username: {
+                        required: true,
+                        minlength: 3
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    password_confirmation: {
+                        required: true,
+                        minlength: 6
+                    },
                     
+                    dataok: {
+                        required: true
+                        
+                    },
+                    terms: {
+                        required: true
+                        
+                    }
                 },
-                terms: {
-                    required: true
+                messages:{
+                    name:
+                    {
+                        required:"Nama harus diisi"
+                    },
+                    email:
+                    {
+                        required:"Email harus diisi",
+                        email: "Format Email tidak benar"
+                    },
+                    mobile_phone:
+                    {
+                        required:"No handphone harus diisi",
+                        minlength: "minimal {0} digit"
+                    },
+                    ktp:
+                    {
+                        required:"No KTP harus diisi",
+                        minlength: "minimal {0} digit"
+                    },
+                    company_name:
+                    {
+                        required:"Nama perusahaan harus diisi"
+                        
+                    },
+                    pic_name:
+                    {
+                        required:"Nama penanggung jawab harus diisi"
+                    },
+                    jabatan:
+                    {
+                        required:"Jabatan harus diisi"
+                    },
+                    npwp_company: {
+                        required: "NPWP perusahaan harus diisi",
+                        minlength: "minimal {0} digit"
+                    },
+                    nib_company: {
+                        required: "NIB perusahaan harus diisi",
+                        minlength: "minimal {0} digit"
+                    },
+                    address_company: {
+                        required: "Alamat perusahaan harus diisi"
+                    },
+                    provinsi: {
+                        required: "Pilih provinsi"
+                    },
+                    kabupaten: {
+                        required: "Pilih kabupaten"
+                    },
+                    kecamatan: {
+                        required: "Pilih kecamatan"
+                    },
+                    desa: {
+                        required: "Pilih Desa / Kelurahan"
+                    },
+                    kodepos: {
+                        required: "Kode Pos harus diisi"
+                    },
+                    username: {
+                        required: "Username harus diisi",
+                        minlength: "minimal {0} karakter"
+                    },
+                    password: {
+                        required: "Password harus diisi",
+                        minlength: "minimal {0} karakter"
+                    },
+                    password_confirmation: {
+                        required: "Password belum dikonfirmmasi",
+                        minlength: "minimal {0} karakter"
+                    },
                     
+                    dataok: {
+                        required: "!"
+                    },
+                    terms: {
+                        required: "!"
+                        
+                    }
                 }
-            },
-            messages:{
-                name:
-                {
-                    required:"Nama harus diisi"
-                },
-                email:
-                {
-                    required:"Email harus diisi",
-                    email: "Format Email tidak benar"
-                },
-                mobile_phone:
-                {
-                    required:"No handphone harus diisi",
-                    minlength: "minimal {0} digit"
-                },
-                ktp:
-                {
-                    required:"No KTP harus diisi",
-                    minlength: "minimal {0} digit"
-                },
-                company_name:
-                {
-                    required:"Nama perusahaan harus diisi"
-                    
-                },
-                pic_name:
-                {
-                    required:"Nama penanggung jawab harus diisi"
-                },
-                jabatan:
-                {
-                    required:"Jabatan harus diisi"
-                },
-                npwp_company: {
-                    required: "NPWP perusahaan harus diisi",
-                    minlength: "minimal {0} digit"
-                },
-                nib_company: {
-                    required: "NIB perusahaan harus diisi",
-                    minlength: "minimal {0} digit"
-                },
-                address_company: {
-                    required: "Alamat perusahaan harus diisi"
-                },
-                provinsi: {
-                    required: "Pilih provinsi"
-                },
-                kabupaten: {
-                    required: "Pilih kabupaten"
-                },
-                kecamatan: {
-                    required: "Pilih kecamatan"
-                },
-                desa: {
-                    required: "Pilih Desa / Kelurahan"
-                },
-                kodepos: {
-                    required: "Kode Pos harus diisi"
-                },
-                username: {
-                    required: "Username harus diisi",
-                    minlength: "minimal {0} karakter"
-                },
-                password: {
-                    required: "Password harus diisi",
-                    minlength: "minimal {0} karakter"
-                },
-                password_confirmation: {
-                    required: "Password belum dikonfirmmasi",
-                    minlength: "minimal {0} karakter"
-                },
-                
-                dataok: {
-                    required: "!"
-                },
-                terms: {
-                    required: "!"
-                    
+            });
+            
+            $('#province').on('change', function() {
+                var province_id =$(this).val();
+                var token = "{{ $access_token }}";
+                $.ajax({
+                    type: 'get',
+                    url: '/api/getAPIKabupatenProp',
+                    data: {'token': token, 'provinsi':province_id},
+                    success: function(data){
+                        $('#kabupaten').find('option').remove().end();
+                        $('#kecamatan').find('option').remove().end();
+                        $('#desa').find('option').remove().end();
+                        for (var i = 0; i < data.data.length; i++){
+                            $('#kabupaten')
+                            .find('option')
+                            .end()
+                            .append('<option value="'+data.data[i].kd_kab+'">'+data.data[i].nama_kab+'</option>');
+                        }
+                        $('#kabupaten').trigger("change");
+                    },
+                    error: function(){
+                        console.log('error load kabupaten');
+                    },
+                });
+            });
+            $('#kabupaten').on('change', function() {
+                var kab_id =$(this).val();
+                var token = "{{ $access_token }}";
+                $.ajax({
+                    type: 'get',
+                    url: '/api/getAPIKecamatanKab',
+                    data: {'token': token, 'kabupaten':kab_id},
+                    success: function(data){
+                        $('#kecamatan').find('option').remove().end();
+                        $('#desa').find('option').remove().end();
+                        for (var i = 0; i < data.data.length; i++){
+                            $('#kecamatan')
+                            .find('option')
+                            .end()
+                            .append('<option value="'+data.data[i].kd_kec+'">'+data.data[i].nm_kec+'</option>');
+                        }
+                        $('#kecamatan').trigger("change");
+                    },
+                    error: function(){
+                        console.log('error load kecamatan');
+                    },
+                });
+            });
+            $('#kecamatan').on('change', function() {
+                var kec_id =$(this).val();
+                var token = "{{ $access_token }}";
+                console
+                $.ajax({
+                    type: 'get',
+                    url: '/api/getAPIDesaKec',
+                    data: {'token': token, 'kecamatan':kec_id},
+                    success: function(data){
+                        $('#desa').find('option').remove().end();
+                        for (var i = 0; i < data.data.length; i++){
+                            $('#desa')
+                            .find('option')
+                            .end()
+                            .append('<option value="'+data.data[i].kd_desa+'">'+data.data[i].nm_desa+'</option>');
+                        }
+                    },
+                    error: function(){
+                        console.log('error load desa');
+                    },
+                });
+            });
+            
+        
+        
+
+            $(".next").click(function(){
+                var $valid = $("#regform").valid();
+                if (!$valid) {
+                    $validator.focusInvalid();
+                    return false;
                 }
-            }
-
-            // $(document)).on('change', '#province', function() {
-            //     var province_id =$(this).val();
-            //     var div = $(this).parent();
-            //     var op = " ";
-            //     $.ajax({
-            //         type: 'get',
-            //         url: '{ !! URL :: to(findIDProvince) !! }',
-            //         data: {'id':province_id},
-            //         success: function(data){
-            //             for (var i = 0; i < data.length; i++){
-            //                 op += '<option value="'+data[i].id+'">'+data[i].city_name+'</option>';
-            //             }
-            //             div.find('#city').html(" ");
-            //             div.find('#city').append(op);
-            //         },
-            //         error: function(){
-            //             console.log('success');
-            //         },
-            //     });
-            // });
-        })
-    
-
-        $(".next").click(function(){
-            var $valid = $("#regform").valid();
-            if (!$valid) {
-                $validator.focusInvalid();
-                return false;
-            }
-        })
-        $(function() {
+            });
+            
             $(".select2-prov").select2({
                 placeholder: "Select Province"
             });
@@ -636,7 +687,7 @@
                 placeholder: "Select Desa"
             });
         });
-    })    
+           
     </script>
 
     

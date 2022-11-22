@@ -13,7 +13,7 @@ trait RegistersUsers
     use RedirectsUsers;
 
     public function getAPIAccessToken($username, $pass){
-        $response = Http::asForm()->post('http://simevi.test/api/getToken', [
+        $response = Http::asForm()->post(config('app.simevi_url').'getToken', [
             'username' => $username,
             'password' => $pass
         ]);
@@ -25,7 +25,7 @@ trait RegistersUsers
     public function getAPIProvinsiAll($token){
         $response = Http::withToken($token)->withHeaders([
             'Accept' => 'application/json'
-        ])->get('http://simevi.test/api/provinsis');
+        ])->get(config('app.simevi_url').'provinsis');
 
         
         return $response->json();
@@ -34,7 +34,7 @@ trait RegistersUsers
     public function getAPIKabupatenAll($token){
         $response = Http::withToken($token)->withHeaders([
             'Accept' => 'application/json'
-        ])->get('http://simevi.test/api/kabupatens');
+        ])->get(config('app.simevi_url').'kabupatens');
 
         
         return $response->json();
@@ -43,7 +43,7 @@ trait RegistersUsers
     public function getAPIKabupatenProp($token, $provinsi){
         $response = Http::withToken($token)->withHeaders([
             'Accept' => 'application/json'
-        ])->get('http://simevi.test/api/kabupatenwithprop/'.$provinsi);
+        ])->get(config('app.simevi_url').'kabupatenwithprop/'.$provinsi);
 
         
         return $response->json();
@@ -52,7 +52,7 @@ trait RegistersUsers
     public function getAPIKecamatanAll($token){
         $response = Http::withToken($token)->withHeaders([
             'Accept' => 'application/json'
-        ])->get('http://simevi.test/api/kecamatans');
+        ])->get(config('app.simevi_url').'kecamatans');
 
         
         return $response->json();
@@ -61,7 +61,7 @@ trait RegistersUsers
     public function getAPIKecamatanKab($token, $kabupaten){
         $response = Http::withToken($token)->withHeaders([
             'Accept' => 'application/json'
-        ])->get('http://simevi.test/api/kecamatanwithkab/'.$kabupaten);
+        ])->get(config('app.simevi_url').'kecamatanwithkab/'.$kabupaten);
 
         
         return $response->json();
@@ -70,7 +70,7 @@ trait RegistersUsers
     public function getAPIDesaAll($token){
         $response = Http::withToken($token)->withHeaders([
             'Accept' => 'application/json'
-        ])->get('http://simevi.test/api/desas');
+        ])->get(config('app.simevi_url').'desas');
 
         
         return $response->json();
@@ -79,7 +79,7 @@ trait RegistersUsers
     public function getAPIDesaKec($token, $kecamatan){
         $response = Http::withToken($token)->withHeaders([
             'Accept' => 'application/json'
-        ])->get('http://simevi.test/api/desawithkec/'.$kecamatan);
+        ])->get(config('app.simevi_url').'desawithkec/'.$kecamatan);
 
         
         return $response->json();
