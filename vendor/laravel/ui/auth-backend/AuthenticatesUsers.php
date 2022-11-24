@@ -81,7 +81,10 @@ trait AuthenticatesUsers
                 );
  
                 if ($user) {
-                    $user->roles()->attach(2); // user V3
+                    if ($user->wasRecentlyCreated) {
+                        $user->roles()->attach(2); // user V3
+                    } 
+                    
                     $datauser = DataUser::updateOrCreate(
                         ['user_id' => $user->id, 'company_name' =>  (string)$res->riph->company_profile->nama],
                         [
