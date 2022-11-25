@@ -194,7 +194,7 @@
                                         <div class="row no-gutters mt-3">
                                             <span>Belum memiliki akun?</span>
                                             <div class="col-lg-12 pl-lg-1 my-2">
-                                                <a href="#" id="regbutton" class="btn btn-block btn-danger btn-block btn-sm">Daftarkan Akun</a>
+                                                <a href="#" id="regbutton" class="btn btn-block btn-danger btn-block btn-sm hidden">Daftarkan Akun yuk</a>
                                             </div>
                                         </div>
                                     </form>
@@ -311,9 +311,15 @@
             const regbut = document.querySelector('#regbutton'); 
 
             roleaccess.value = role_access;  
-            if (role_access==1 || role_access==2){
+            if (role_access==1){
+                regbut.addClass('hidden');    
+            }
+            else
+            if (role_access==2){
+                regbut.addClass('d-none');
                 regbut.href = 'http://riph.pertanian.go.id/';    
             } else {
+                regbut.removeClass('hidden');
                 regbut.href = '/v2/register'; 
             }
             

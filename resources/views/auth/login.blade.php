@@ -304,11 +304,14 @@
         function loginClick(role_access) {
             const roleaccess = document.querySelector('#roleaccess'); 
             const regbut = document.querySelector('#regbutton'); 
-
             roleaccess.value = role_access;  
-            if (role_access==1 || role_access==2){
+            if (role_access==1){
+                $("#regbutton").hide();
+            } else if (role_access==2){
+                $("#regbutton").show();
                 regbut.href = 'http://riph.pertanian.go.id/';    
             } else {
+                $("#regbutton").show();
                 regbut.href = "{{ route('register') }}"; 
             }
             
