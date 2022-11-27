@@ -6,10 +6,4 @@
 
 /vendor
 !/vendor/laravel/ui/auth-backend/*
-<<<<<<< HEAD
-
-
-=======
-.env
 /vendor/composer
->>>>>>> 4d8180ffa275b63dfe4aa934629db2bf958f4571
