@@ -16,7 +16,7 @@ class AuditLogsController extends Controller
         abort_if(Gate::denies('audit_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            //$query = AuditLog::query()->select(sprintf('%s.*', (new AuditLog())->table));
+            // $query = AuditLog::query()->select(sprintf('%s.*', (new AuditLog())->table));
             $query = AuditLog::with(['user_info'])->select(sprintf('%s.*', (new AuditLog())->table));
             $table = Datatables::of($query);
 
@@ -51,8 +51,8 @@ class AuditLogsController extends Controller
                 return $row->subject_type ? $row->subject_type : '';
             });
             $table->editColumn('user_id', function ($row) {
-                //return $row->user_id ? $row->user_id : '';
-                return $row->user_id ? $row->user_info->name : '';
+                // return $row->user_id ? $row->user_id : '';
+                return $row->user_id ? ($row->user_info->name ?? '') : '';
             });
             $table->editColumn('host', function ($row) {
                 return $row->host ? $row->host : '';

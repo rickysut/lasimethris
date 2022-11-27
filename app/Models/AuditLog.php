@@ -4,6 +4,7 @@ namespace App\Models;
 
 use \DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class AuditLog extends Model
 {

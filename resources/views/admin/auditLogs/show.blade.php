@@ -58,7 +58,7 @@
                                             {{ trans('cruds.auditLog.fields.user_id') }}
                                         </th>
                                         <td>
-                                            {{ $auditLog->user_info->name }}
+                                            {{ ($auditLog->user_info->name ?? '-') }}
                                         </td>
                                     </tr>
                                     <tr>
