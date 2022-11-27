@@ -1,405 +1,409 @@
+<!-- BEGIN Left Aside -->
 <aside class="page-sidebar">
     <div class="page-logo">
-		<a href="/admin" class="page-logo-link press-scale-down d-flex align-items-center position-relative">
-			<img src="{{ asset('img/favicon.png') }}" alt="Simethris" aria-roledescription="logo">
-			<img src="{{ asset('img/logo-icon.png') }}" class="page-logo-text mr-1" alt="Simethris" aria-roledescription="logo" style="width:50px; height:auto;">
-							  
-		</a>
-        
-	</div>
-    
+        <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
+            <img src="/img/favicon.png" alt="Project WebApp" aria-roledescription="logo">
+            <img src="/img/logo-icon.png" class="page-logo-text mr-1" alt="Simethris" aria-roledescription="logo" style="width:50px; height:auto;">
+            <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
+            <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+        </a>
+    </div>
     <!-- BEGIN PRIMARY NAVIGATION -->
     <nav id="js-primary-nav" class="primary-nav" role="navigation">
         <div class="nav-filter">
-			<div class="position-relative">
-				<input type="text" id="nav_filter_input" placeholder="Cari menu" class="form-control" tabindex="0">
-				<a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
+            <div class="position-relative">
+                <input type="text" id="nav_filter_input" placeholder="Filter menu" class="form-control" tabindex="0">
+                <a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
                     <i class="fal fa-chevron-up"></i>
                 </a>
-			</div>
-		</div>
-        
+            </div>
+        </div>
         <div class="info-card">
-            @if (!empty(Auth::user()::find(Auth::user()->id)->data_user->avatar))
-             <img src="{{ Storage::disk('public')->url(Auth::user()::find(Auth::user()->id)->data_user->avatar)}}" class="profile-image rounded-circle" alt="">
-            @else
-                <img src="{{ asset('/img/avatars/farmer.png') }}" class="profile-image rounded-circle" alt="">    
-            @endif
-            
+            <img src="/img/demo/avatars/avatar-admin.png" class="profile-image rounded-circle" alt="Administrator">
             <div class="info-card-text">
                 <a href="#" class="d-flex align-items-center text-white">
                     <span class="text-truncate text-truncate-sm d-inline-block">
-                        {{ Auth::user()->username }}
+                        {{ Auth::user()->name }}
                     </span>
                 </a>
-                
-                <span class="d-inline-block text-truncate text-truncate-sm">{{ (Auth::user()::find(Auth::user()->id)->data_user->company_name ?? 'user') }}</span>
+                <span class="d-inline-block text-truncate text-truncate-sm">{{ Auth::user()->type }}</span>
             </div>
-            <img src="{{ asset('/img/card-backgrounds/cover-2-lg.png') }}" class="cover" alt="cover">
+            <img src="/img/card-backgrounds/cover-2-lg.png" class="cover" alt="cover">
             <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
                 <i class="fal fa-angle-down"></i>
             </a>
         </div>
+        <!-- 
+						TIP: The menu items are not auto translated. You must have a residing lang file associated with the menu saved inside dist/media/data with reference to each 'data-i18n' attribute.
+						-->
+
         <ul id="js-nav-menu" class="nav-menu">
+            <!-- BERANDA
+                Q: Siapa yang dapat mengakses menu ini?
+                A: Seluruh Pengguna
+                Q: Data apa yang dilihat
+                A:  Administrator   = All Feeds & His Messages
+                    Verifikator     = All Feeds & His Messages
+                    User            = Feeds for him & His Messages
+            -->
+            @if (\Auth::user()->type=='admin')
+            <li class="{{ request()->is('admin/home') ? 'active' : '' }}">
+                <a href="{{route('admin.home')}}" title="Beranda" data-filter-tags="beranda home">
+                    <i class="fal fa-home"></i>
+                    <span class="nav-link-text" data-i18n="nav.home">Beranda</span>
+                </a>
+            </li>
+            @endif
 
-            {{-- landing / beranda --}}
-            @can('landing_access')
-                <li class="c-sidebar-nav-item {{ request()->is("admin")  ? "active" : "" }}">
-                    <a href="{{ route("admin.home") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.landing.title_lang')) }}">
-                        <i class="c-sidebar-nav-icon fal fa-home-alt">
-                        </i>
-                        <span class="nav-link-text" data-i18n="nav.landing_page">{{ trans('cruds.landing.title_lang') }}</span>
-                    </a>
-                </li>
-            @endcan
+            @if (\Auth::user()->type=='verifikator')
+            <li class="{{ request()->is('*home*') ? 'active' : '' }}">
+                <a href="{{route('verif.home')}}" title="Beranda" data-filter-tags="beranda home">
+                    <i class="fal fa-home"></i>
+                    <span class="nav-link-text" data-i18n="nav.home">Beranda</span>
+                </a>
+            </li>
+            @endif
 
-            {{-- dashhboard --}}
-            @can('dashboard_access')
-                @if ((Auth::user()->roles[0]->title == 'User') || (Auth::user()->roles[0]->title == 'user_v2'))
-                <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
-                    <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
-                        <i class="fal fa-analytics"></i>
-                        <span class="nav-link-text" data-i18n="nav.dashboard_menu">{{ trans('cruds.dashboard.title_lang') }}</span>
-                    </a>
-                    <ul>
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
-                            <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardUser.title_lang')) }}">
-                                <i class="fa-fw fal fa-database c-sidebar-nav-icon"></i>{{ trans('cruds.dashboardUser.title_lang') }}
-                            </a>
-                        </li>
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
-                            <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
-                                <i class="fa-fw fal fa-map c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                @elseif (Auth::user()->roles[0]->title == 'Admin')
-                <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
-                    <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
-                        <i class="fal fa-analytics"></i>
-                        <span class="nav-link-text" data-i18n="nav.dashboard_menu">{{ trans('cruds.dashboard.title_lang') }}</span>
-                    </a>
-                    <ul>
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
-                            <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardAdmin.title_lang')) }}">
-                                <i class="fa-fw fal fa-stamp c-sidebar-nav-icon"></i>{{ trans('cruds.dashboardAdmin.title_lang') }}
-                            </a>
-                        </li>
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
-                            <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
-                                <i class="fa-fw fal fa-map c-sidebar-nav-icon"></i><span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                @elseif (Auth::user()->roles[0]->title == 'Verifikator')
-                <li class="{{ request()->is("admin/dashboard*") ? "active open" : "" }} ">
-                    <a href="#" title="Dashboard" data-filter-tags="dashboard pemantauan kinerja">
-                        <i class="fal fa-analytics"></i>
-                        <span class="nav-link-text" data-i18n="nav.dashboard_menu">{{ trans('cruds.dashboard.title_lang') }}</span>
-                    </a>
-                    <ul>
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard")  ? "active" : "" }}">
-                            <a href="{{ route("admin.dashboard") }}" class="c-sidebar-nav-link" data-filter-tags="{{ strtolower(trans('cruds.dashboardVerifikator.title_lang')) }}">
-                                <i class="fa-fw fal fa-stamp c-sidebar-nav-icon"></i>{{ trans('cruds.dashboardVerifikator.title_lang') }}
-                            </a>
-                        </li>
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/dashboard/map")  ? "active" : "" }}">
-                            <a href="{{ route("admin.dashboard.map") }}" title="Dashboard Pemetaan" data-filter-tags="dashboard pemetaan">
-                                <i class="fa-fw fal fa-map c-sidebar-nav-icon"></i><span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Pemetaan</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                @endif
-            @endcan
+            @if (\Auth::user()->type=='user')
+            <li class="{{ request()->is('*home*') ? 'active' : '' }}">
+                <a href="{{route('user.home')}}" title="Beranda" data-filter-tags="beranda home">
+                    <i class="fal fa-home"></i>
+                    <span class="nav-link-text" data-i18n="nav.home">Beranda</span>
+                </a>
+            </li>
+            @endif
 
-            {{-- user task --}}
-            @can('user_task_access')
-                <li class="nav-title" data-i18n="nav.user_task">{{ trans('cruds.pullSync.title_lang') }}</li>
-                <li>
-                    @can('pull_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/task/pull")  ? "active" : "" }}">
-                            <a href="{{ route("admin.task.pull") }}" data-filter-tags="{{ strtolower(trans('cruds.pullSync.title_lang')) }}">
-                                <i class="fa-fw fal fa-sync-alt c-sidebar-nav-icon">
-                                </i>
-                                {{ trans('cruds.pullSync.title_lang') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('commitment_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/task/commitment")  ? "active" : "" }}">
-                            <a href="{{ route("admin.task.commitment") }}" data-filter-tags="{{ strtolower(trans('cruds.commitment.title_lang')) }}">
-                                <i class="fa-fw fal fa-ballot c-sidebar-nav-icon">
+            @if (\Auth::user()->type=='v2')
+            <li class="{{ request()->is('*home*') ? 'active' : '' }}">
+                <a href="{{route('v2.home')}}" title="Beranda" data-filter-tags="beranda home">
+                    <i class="fal fa-home"></i>
+                    <span class="nav-link-text" data-i18n="nav.home">Beranda</span>
+                </a>
+            </li>
+            @endif
 
-                                </i>
-                                {{ trans('cruds.commitment.title_lang') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('kelompoktani_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/kelompoktani")  ? "active" : "" }}">
-                            <a href="{{ route("admin.task.kelompoktani.index") }}" data-filter-tags="{{ strtolower(trans('cruds.kelompoktani.title_lang')) }}">
-                                <i class="fa-fw fal fa-users c-sidebar-nav-icon">
-
-                                </i>
-                                {{ trans('cruds.kelompoktani.title_lang') }}
-                            </a>
-                        </li>
-                    @endcan
-                </li>
-            @endcan
-
-            
-
-            @can('verifikasi_access')
-                <li class="{{ request()->is("admin/task/pengajuan*")  || request()->is("admin/task/skl*") ? "active open" : "" }} ">
-                    <a href="#" title="Verifikasi & SKL" data-filter-tags="{{ strtolower(trans('cruds.verifikasi.title_lang')) }}">
-                        <i class="fa-fw fal fa-ballot"></i>
-                        <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.verifikasi.title_lang') }}</span>
-                    </a>
-                    <ul>
-                        @can('pengajuan_access')
-                            <li class="c-sidebar-nav-item {{ request()->is("admin/task/pengajuan") || request()->is("admin/task/pengajuan/*") ? "active" : "" }}">
-                                <a href="{{ route("admin.task.pengajuan.index") }}" title="Pengajuan" data-filter-tags="{{ strtolower(trans('cruds.pengajuan.title_lang')) }}">
-                                    <i class="fa-fw fal fa-file c-sidebar-nav-icon"></i>
-                                    <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.pengajuan.title_lang') }}</span>
-                                </a>
-                            </li>
-                        @endcan
-                        @can('skl_access')
-                            <li class="c-sidebar-nav-item {{ request()->is("admin/task/skl") || request()->is("admin/task/skl/*") ? "active" : "" }}">
-                                <a href="{{ route("admin.task.skl.index") }}" title="Skl" data-filter-tags="{{ strtolower(trans('cruds.skl.title_lang')) }}">
-                                    <i class="fa-fw fal fa-file c-sidebar-nav-icon"></i>
-                                    <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.skl.title_lang') }}</span>
-                                </a>
-                            </li>
-                        @endcan
-                        
-                    </ul>
-                </li>
-            @endcan
-
-            {{-- berkas --}}
-            @can('folder_access')
-            <li class="{{ request()->is("admin/task/berkas*")  || request()->is("admin/task/galeri*") || request()->is("admin/task/template*") ? "active open" : "" }} ">
-                <a href="#" title="Pengelolaan Berkas" data-filter-tags="{{ strtolower(trans('cruds.folder.title_lang')) }}">
-                    <i class="fa-fw fal fa-folders"></i>
-                    <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.folder.title_lang') }}</span>
+            <li class="{{ request()->is('*dashboard*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" title="Dashboard" data-filter-tags="dashboard">
+                    <i class="fal fa-analytics"></i>
+                    <span class="nav-link-text" data-i18n="nav.dashboard">Dashboard</span>
                 </a>
                 <ul>
-                    @can('berkas_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/task/berkas") || request()->is("admin/task/berkas/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.task.berkas") }}" title="Berkas" data-filter-tags="{{ strtolower(trans('cruds.berkasberkasng')) }}">
-                                <i class="fa-fw fal fa-file c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.berkas.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('galeri_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/task/galeri") || request()->is("admin/task/skl/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.task.galeri") }}" title="Galeri" data-filter-tags="{{ strtolower(trans('cruds.galeri.title_lang')) }}">
-                                <i class="fa-fw fal fa-images c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.galeri.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('template_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/task/template") || request()->is("admin/task/template/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.task.template") }}" title="Skl" data-filter-tags="{{ strtolower(trans('cruds.template.title_lang')) }}">
-                                <i class="fa-fw fal fa-heart c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.template.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    
+                    <!-- DASHBOARD
+                        Q: Siapa yang dapat mengakses menu ini?
+                        A: Seluruh Pengguna
+                        Q: Data apa yang dilihat
+                        A:  Administrator   = His Dashboard & All Maps
+                            Verifikator     = His Data & Maps
+                            User            = His Data & Maps
+                    -->
+                    @if (\Auth::user()->type=='admin')
+                    <li class="{{ request()->is('admin/dashboard/data') ? 'active' : '' }}">
+                        <a href="{{route('admin.dashboard.data')}}" title="Monitoring Realisasi" data-filter-tags="dashboard data monitoring">
+                            <span class="nav-link-text" data-i18n="nav.dashboard">Monitoring Realisasi</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('admin/dashboard/peta') ? 'active' : '' }}">
+                        <a href="{{route('admin.dashboard.peta')}}" title="Peta Realisasi" data-filter-tags="dashboard pemetaan">
+                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Peta Realisasi</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if (\Auth::user()->type=='verifikator')
+                    <li class="{{ request()->is('*dashboard/data*') ? 'active' : '' }}">
+                        <a href="{{route('verif.dashboard.data')}}" title="Monitoring Realisasi" data-filter-tags="dashboard data monitoring">
+                            <span class="nav-link-text" data-i18n="nav.dashboard">Monitoring Realisasi</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('*dashboard/peta*') ? 'active' : '' }}">
+                        <a href="{{route('verif.dashboard.peta')}}" title="Peta Realisasi" data-filter-tags="dashboard pemetaan">
+                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Peta Realisasi</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if (\Auth::user()->type=='user')
+                    <li class="{{ request()->is('*dashboard/data*') ? 'active' : '' }}">
+                        <a href="{{route('user.dashboard.data')}}" title="Monitoring Realisasi" data-filter-tags="dashboard data monitoring">
+                            <span class="nav-link-text" data-i18n="nav.dashboard">Monitoring Realisasi</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('*dashboard/peta*') ? 'active' : '' }}">
+                        <a href="{{route('user.dashboard.peta')}}" title="Peta Realisasi" data-filter-tags="dashboard pemetaan">
+                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Peta Realisasi</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if (\Auth::user()->type=='v2')
+                    <li class="{{ request()->is('*dashboard/data*') ? 'active' : '' }}">
+                        <a href="{{route('v2.dashboard.data')}}" title="Monitoring Realisasi" data-filter-tags="dashboard data monitoring">
+                            <span class="nav-link-text" data-i18n="nav.dashboard">Monitoring Realisasi</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('*dashboard/peta*') ? 'active' : '' }}">
+                        <a href="{{route('v2.dashboard.peta')}}" title="Peta Realisasi" data-filter-tags="dashboard pemetaan">
+                            <span class="nav-link-text" data-i18n="nav.dashboard_pemetaan">Peta Realisasi</span>
+                        </a>
+                    </li>
+                    @endif
                 </ul>
             </li>
-            @endcan
 
-            {{-- Feed & Messages --}}
-            @can('feedmsg_access')
-                <li class="nav-title">FEEDS & MESSAGES</li>  
-                @can('feeds_access')
-                    <li class="c-sidebar-nav-item {{ request()->is("feedmsg/feeds") ? "active" : "" }}">
-                        <a href="" data-filter-tags="{{ strtolower(trans('cruds.feeds.title_lang')) }}">
-                            <i class="fal fa-rss c-sidebar-nav-icon"></i>{{ trans('cruds.feeds.title_lang') }}
+            <!-- USER TASKS
+                Q: Siapa yang dapat mengakses menu ini?
+                A: User Only
+                Q: Data apa yang dilihat
+                A:  Administrator   = Restrict
+                    Verificator     = Restrict
+                    User            = CRUD
+            -->
+            <!-- Feed Messages
+                Q: Siapa yang dapat mengakses menu ini?
+                A: Seluruh Pengguna
+                Q: Data apa yang dilihat
+                A:  Administrator   = CRUD All Feeds & His Messages
+                    Verifikator     = Read All Feeds & His Messages
+                    User            = Read Feeds for him & His Messages
+            -->
+            @if (\Auth::user()->type=='verifikator')
+            <li class="nav-title">Verifikator tasks</li>
+            <li class="{{ request()->is('*verify/onfarm*') ? 'active' : '' }}">
+                <a href="{{route('verif.onfarm')}}" title="On-farm verification" data-filter-tags="on site verification">
+                    <i class="fal fa-map-marker-check"></i>
+                    <span class="nav-link-text" data-i18n="nav.on_site_verification">Onfarm</span>
+                    <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">197 request</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('*verify/online*') ? 'active' : '' }}">
+                <a href="{{route('verif.online')}}" title="on line verification" data-filter-tags="on line verification">
+                    <i class="fal fa-ballot-check"></i>
+                    <span class="nav-link-text" data-i18n="nav.online_verification">Online</span>
+                    <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">197 request</span>
+                </a>
+            </li>
+            @endif
+
+            @if (\Auth::user()->type=='user')
+            <li class="nav-title">User tasks</li>
+            @endif
+
+            @if (\Auth::user()->type=='v2')
+            <li class="nav-title">User tasks</li>
+            @endif
+            <li class="nav-title">Feeds & Messages</li>
+            <li class="{{ request()->is('feeds*') ? 'active' : '' }}">
+                <a href="{{route('feeds')}}" title="Feeds" data-filter-tags="feeds news information">
+                    <i class="fal fa-rss"></i>
+                    <span class="nav-link-text" data-i18n="nav.feeds">Feeds</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('messenger*') ? 'active' : '' }}">
+                <a href="{{route('messenger')}}" title="Messenger" data-filter-tags="messages pesan mail messenger">
+                    <i class="fal fa-mailbox"></i>
+                    <span class="nav-link-text" data-i18n="nav.messenger">Messenger</span>
+                    <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">197 new</span>
+                </a>
+            </li>
+            <!-- Administrator Tasks
+                Q: Siapa yang dapat mengakses menu ini?
+                A: Administrator
+                Q: Data apa yang dilihat
+                A:  Administrator   = CRUD
+                    Verifikator     = Restrict
+                    User            = Restrict
+            -->
+            @if (\Auth::user()->type=='admin')
+            <li class="nav-title">Administrator Tasks</li>
+            <li class="{{ request()->is('admin/manage*') ? 'active' : '' }}">
+                <a href="javascript:void(0);" title="Users Management" data-filter-tags="users management">
+                    <i class="fal fa-users"></i>
+                    <span class="nav-link-text" data-i18n="nav.users_management">Users Management</span>
+                </a>
+                <ul>
+                    <li class="{{ request()->is('admin/manage/permissions') ? 'active' : '' }}">
+                        <a href="{{route('admin.permissions')}}" title="Permissions" data-filter-tags="user permissions">
+                            <span class="nav-link-text" data-i18n="nav.user_permissions">Permissions</span>
                         </a>
                     </li>
-                @endcan  
-                @can('messenger_access')
-                    @php($unread = \App\Models\QaTopic::unreadCount())
-                    <li class="c-sidebar-nav-item {{ request()->is("admin/messenger") || request()->is("admin/messenger/*") ? "active" : "" }}">
-                        <a href="{{ route("admin.messenger.index") }}" data-filter-tags="{{ strtolower(trans('global.messages')) }}">
-                            <i class="c-sidebar-nav-icon fal fa-envelope"></i>
-                            <span class="nav-link-text">{{ trans('global.messages') }}</span>
-                            @if($unread > 0)
-                                <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ $unread }} pesan</span>
-                            @endif
-        
+                    <li class="{{ request()->is('admin/manage/roles') ? 'active' : '' }}">
+                        <a href="{{route('admin.roles')}}" title="Roles" data-filter-tags="user roles">
+                            <span class="nav-link-text" data-i18n="nav.user_roles">Roles</span>
                         </a>
                     </li>
-                @endcan  
-            @endcan
-            {{-- end feed --}}
+                    <li class="{{ request()->is('admin/manage/users') ? 'active' : '' }}">
+                        <a href="{{route('admin.users')}}" title="Users" data-filter-tags="user list">
+                            <span class="nav-link-text" data-i18n="nav.user">Users List</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="{{ request()->is('*riph*') ? 'active' : '' }}">
+                <a href="{{route('admin.riph')}}" title="Master Data RIPH" data-filter-tags="master data riph">
+                    <i class="fab fa-stack-overflow"></i>
+                    <span class="nav-link-text" data-i18n="nav.home">Master Data RIPH</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('*files*') ? 'active' : '' }}">
+                <a href="{{route('admin.files')}}" title="Master Templat" data-filter-tags="create master template">
+                    <i class="fal fa-file-upload"></i>
+                    <span class="nav-link-text" data-i18n="nav.master_template">Master Template</span>
+                </a>
+            </li>
 
-
-            {{-- verificator task --}}
-            @can('verificator_task_access')
-                <li class="nav-title" data-i18n="nav.administation">VERIFICATOR TASK</li>
-                @can('onfarm_access')
-                <li class="c-sidebar-nav-item {{ request()->is("verification/onfarm") ? "active" : "" }}">
-                    <a href="{{ route("verification.onfarm.index") }}" data-filter-tags="{{ strtolower(trans('cruds.onfarm.title_lang')) }}">
-                        <i class="fal fa-map-marker-check c-sidebar-nav-icon"></i>
-                        <span class="nav-link-text">{{ trans('cruds.onfarm.title_lang') }}</span>
-                        {{-- @php($unread = \App\Models\QaTopic::unreadCount()) --}}
-                        @if($unread > 0)
-                            <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ $unread }} request</span>
-                        @endif
-        
-                        
-                    </a>
-                </li>
-                @endcan
-                @can('online_access')
-                <li class="c-sidebar-nav-item {{ request()->is("verification/online") ? "active" : "" }}">
-                    <a href="{{ route("verification.online.index") }}" data-filter-tags="{{ strtolower(trans('cruds.online.title_lang')) }}">
-                        <i class="fal fa-ballot-check c-sidebar-nav-icon"></i>
-                        <span class="nav-link-text">{{ trans('cruds.online.title_lang') }}</span>
-                        {{-- @php($unread = \App\Models\QaTopic::unreadCount()) --}}
-                        @if($unread > 0)
-                            <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ $unread }} request</span>
-                        @endif
-                    </a>
-                </li>
-                @endcan
-                @can('completed_access')
-                <li class="c-sidebar-nav-item {{ request()->is("verification/completed") ? "active" : "" }}">
-                    <a href="{{ route("verification.completed.index") }}" data-filter-tags="{{ strtolower(trans('cruds.completed.title_lang')) }}">
-                        <i class="fal fa-file-certificate c-sidebar-nav-icon"></i>
-                        <span class="nav-link-text">{{ trans('cruds.completed.title_lang') }}</span>
-                        {{-- @php($unread = \App\Models\QaTopic::unreadCount()) --}}
-                        @if($unread > 0)
-                            <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ $unread }} request</span>
-                        @endif
-                        
-                    </a>
-                </li>
-                @endcan
-                @can('verification_skl_access') 
-                    <li class="{{ request()->is("admin/verification/skl/*") ? "active open" : "" }} ">
-                        <a href="#" title="SKL" data-filter-tags="{{ strtolower(trans('cruds.sklverifikator.title_lang')) }}">
-                            <i class="fal fal fa-file"></i>
-                            <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.sklverifikator.title_lang') }}</span>
+            <li class="{{ request()->is('*report*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" title="Data Report" data-filter-tags="data report laporan">
+                    <i class="fal fa-landmark"></i>
+                    <span class="nav-link-text" data-i18n="nav.files">Data Report</span>
+                </a>
+                <ul>
+                    <li class="{{ request()->is('*report/commitment*') ? 'active' : '' }}">
+                        <a href="{{route('admin.report.commitment')}}" title="Commitmen Lists" data-filter-tags="report laporan commitment lists daftar riph">
+                            <span class="nav-link-text" data-i18n="nav.my_files">Commitmen Lists</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('*report/verification*') ? 'active open' : '' }}">
+                        <a href="javascript:void(0);" title="Verification Report" data-filter-tags="verification report laporan verifikasi">
+                            <span class="nav-link-text" data-i18n="nav.verification_report">Verification Report</span>
                         </a>
                         <ul>
-                            @can('list_skl_access')
-                                <li class="c-sidebar-nav-item {{ request()->is("verification/skl/listskl") ? "active" : "" }}">
-                                    <a href="{{ route("admin.permissions.index") }}" title="listskl" data-filter-tags="{{ strtolower(trans('cruds.listskl.title_lang')) }}">
-                                        <i class="fa-fw fal fa-list c-sidebar-nav-icon"></i>
-                                        <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.listskl.title_lang') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('create_skl_access')
-                                <li class="c-sidebar-nav-item {{ request()->is("verification/skl/createskl")  ? "active" : "" }}">
-                                    <a href="{{ route("admin.roles.index") }}" title="createskl" data-filter-tags="{{ strtolower(trans('cruds.createskl.title_lang')) }}">
-                                        <i class="fa-fw fal fa-plus c-sidebar-nav-icon"></i>
-                                        <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.createskl.title_lang') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('issued_skl_access')
-                                <li class="c-sidebar-nav-item {{ request()->is("verification/skl/issuedskl")? "active" : "" }}">
-                                    <a href="{{ route("admin.users.index") }}" title="issuedskl" data-filter-tags="{{ strtolower(trans('cruds.issuedskl.title_lang')) }}">
-                                        <i class="fa-fw fal fa-briefcase c-sidebar-nav-icon"></i>
-                                        <span class="nav-link-text" data-i18n="nav.administation_sub1_menu3">{{ trans('cruds.issuedskl.title_lang') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            
-                            
+                            <li class="{{ request()->is('*onfarm*') ? 'active' : '' }}">
+                                <a href="{{route('admin.report.verification.onfarm')}}" title="Onfarm Report" data-filter-tags="laporan report verifikasi verification onfarm lapangan">
+                                    <span class="nav-link-text" data-i18n="nav.onfarm_report">Onfarm Report</span>
+                                </a>
+                            </li>
+                            <li class="{{ request()->is('*online*') ? 'active' : '' }}">
+                                <a href="{{route('admin.report.verification.online')}}" title="Onfarm Report" data-filter-tags="laporan report verifikasi verification online">
+                                    <span class="nav-link-text" data-i18n="nav.online_report">Online Report</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
-                    @endcan
-            @endcan
-
-            {{-- user management --}}
-            @can('user_management_access')
-            <li class="nav-title" data-i18n="nav.administation">ADMINISTRATOR</li>
-            <li class="{{ request()->is("admin/permissions*")  || request()->is("admin/roles*") || request()->is("admin/users*") || request()->is("admin/audit-logs*")  ? "active open" : "" }} ">
-                <a href="#" title="User Management" data-filter-tags="{{ strtolower(trans('cruds.userManagement.title_lang')) }}">
-                    <i class="fal fal fa-users"></i>
-                    <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.userManagement.title_lang') }}</span>
-                </a>
-                <ul>
-                    @can('permission_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/permissions") || request()->is("admin/permissions/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.permissions.index") }}" title="Permission" data-filter-tags="{{ strtolower(trans('cruds.permission.title_lang')) }}">
-                                <i class="fa-fw fal fa-unlock-alt c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.permission.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('role_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/roles") || request()->is("admin/roles/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.roles.index") }}" title="Roles" data-filter-tags="{{ strtolower(trans('cruds.role.title_lang')) }}">
-                                <i class="fa-fw fal fa-briefcase c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.role.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('user_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/users") || request()->is("admin/users/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.users.index") }}" title="User" data-filter-tags="{{ strtolower(trans('cruds.user.title_lang')) }}">
-                                <i class="fa-fw fal fa-user c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu3">{{ trans('cruds.user.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('audit_log_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/audit-logs") || request()->is("admin/audit-logs/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.audit-logs.index") }}" title="Audit Log" data-filter-tags="{{ strtolower(trans('cruds.auditLog.title_lang')) }}">
-                                <i class="fa-fw fal fa-file-alt c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu4">{{ trans('cruds.auditLog.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    
                 </ul>
             </li>
-            @endcan
-            
-        
-        
-        
-        <li class="nav-title" data-i18n="nav.administation">PERSONAL</li>
-            
-            @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
-                @can('profile_password_edit')
-                    <li class="c-sidebar-nav-item {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}" >
-                        <a href="{{ route('profile.password.edit') }}" data-filter-tags="{{ strtolower(trans('global.change_password')) }}">
-                            <i class="fa-fw fas fa-key c-sidebar-nav-icon">
-                            </i>
-                            {{ trans('global.change_password') }}
+            <li class="{{ request()->is('*admin/skl*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" title="SKL" data-filter-tags="surat keterangan lunas">
+                    <i class="fal fa-file-certificate"></i>
+                    <span class="nav-link-text" data-i18n="nav.skl">SKL</span>
+                </a>
+                <ul>
+                    <li class="{{ request()->is('admin/skl') ? 'active' : '' }}">
+                        <a href="{{route('admin.sklindex')}}" title="on line verification" data-filter-tags="on line verification">
+                            <span class="nav-link-text" data-i18n="nav.admin_skl_list">SKL</span>
+                            <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">197 request</span>
                         </a>
                     </li>
-                @endcan
+                    <li class="{{ request()->is('*skl/create') ? 'active' : '' }}">
+                        <a href="{{route('admin.skl.create')}}" title="SKL Issued" data-filter-tags="penerbitan skl surat keterangan lunas">
+                            <span class="nav-link-text" data-i18n="nav.skl_create">Create SKL</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             @endif
-            <li class="c-sidebar-nav-item">
-                <a href="#" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
-                    <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt">
-
-                    </i>
-                    {{ trans('global.logout') }}
+            <!-- Documentation
+                Q: Siapa yang dapat mengakses menu ini?
+                A: Administrator
+                Q: Data apa yang dilihat
+                A:  Administrator   = Read
+                    Verifikator     = Read
+                    User            = Read
+            -->
+            <li class="nav-title">Documentations</li>
+            <li class="{{ request()->is('v2/howto*') ? 'active' : '' }}">
+                <a href="/v2/howto" title="How To" data-filter-tags="how to manual tutorial">
+                    <i class="fal fa-books"></i>
+                    <span class="nav-link-text" data-i18n="nav.feeds">How To's</span>
                 </a>
-            </li>    
+            </li>
+            <li class="{{ request()->is('v2/build*') ? 'active' : '' }}">
+                <a href="/v2/build" title="Build Note" data-filter-tags="build note version control">
+                    <i class="fal fa-code"></i>
+                    <span class="nav-link-text" data-i18n="nav.build">Build Notes</span>
+                </a>
+            </li>
+            <li class="nav-title">Settings</li>
+            <!-- Profile & Password
+                Q: Siapa yang dapat mengakses menu ini?
+                A: Administrator
+                Q: Data apa yang dilihat
+                A:  Administrator   = CRUD
+                    Verifikator     = CRUD
+                    User            = CRUD
+            -->
+            <li class="{{ request()->is('profile*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" title="Profiles" data-filter-tags="Profiles">
+                    <i class="fal fa-address-card"></i>
+                    <span class="nav-link-text" data-i18n="nav.users_management">Profiles</span>
+                </a>
+                <ul>
+                    <li class="{{ request()->is('*myprofile*') ? 'active' : '' }}">
+                        <a href="{{route('myprofile')}}" title="My Profile" data-filter-tags="my profile">
+                            <span class="nav-link-text" data-i18n="nav.category">My Profile</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('*password') ? 'active' : '' }}">
+                        <a href="{{route('password')}}" title="Change Password" data-filter-tags="change password">
+                            <span class="nav-link-text" data-i18n="nav.change_password">Change Password</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-title">Navigation Title</li>
+            <li>
+                <a href="#" title="Category" data-filter-tags="category">
+                    <i class="fal fa-file"></i>
+                    <span class="nav-link-text" data-i18n="nav.category">Category</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="javascript:void(0);" title="Menu child" data-filter-tags="utilities menu child">
+                            <span class="nav-link-text" data-i18n="nav.utilities_menu_child">Sub-category</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);" title="Sublevel Item" data-filter-tags="utilities menu child sublevel item">
+                                    <span class="nav-link-text" data-i18n="nav.utilities_menu_child_sublevel_item">Sublevel Item</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" title="Another Item" data-filter-tags="utilities menu child another item">
+                                    <span class="nav-link-text" data-i18n="nav.utilities_menu_child_another_item">Another Item</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="disabled">
+                        <a href="javascript:void(0);" title="Disabled item" data-filter-tags="utilities disabled item">
+                            <span class="nav-link-text" data-i18n="nav.utilities_disabled_item">Disabled item</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
+        <div class="filter-message js-filter-message bg-success-600"></div>
     </nav>
     <!-- END PRIMARY NAVIGATION -->
-	
+    <!-- NAV FOOTER -->
+    <div class="nav-footer shadow-top">
+        <a href="#" onclick="return false;" data-action="toggle" data-class="nav-function-minify" class="hidden-md-down">
+            <i class="ni ni-chevron-right"></i>
+            <i class="ni ni-chevron-right"></i>
+        </a>
+        <ul class="list-table m-auto nav-footer-buttons">
+            <li>
+                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Chat logs">
+                    <i class="fal fa-comments"></i>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Support Chat">
+                    <i class="fal fa-life-ring"></i>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Make a call">
+                    <i class="fal fa-phone"></i>
+                </a>
+            </li>
+        </ul>
+    </div> <!-- END NAV FOOTER -->
 </aside>
-
-
+<!-- END Left Aside -->
