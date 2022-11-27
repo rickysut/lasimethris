@@ -240,10 +240,10 @@ return [
             'is_parent'      => '0', 
             'is_hidden'      => '0',
             'can_view'       => '1',
-            'can_edit'       => '0', 
-            'can_delete'     => '0',  
+            'can_edit'       => '1', 
+            'can_delete'     => '1',  
             'can_access'     => '1', 
-            'can_create'     => '0',
+            'can_create'     => '1',
         ],
         'messenger' => [
             'title'          => 'Messenger',
@@ -302,6 +302,52 @@ return [
         'can_access'     => '1', 
         'can_create'     => '1',
     ],
+    'sklverifikator' => [
+        'title'          => 'Verificator SKL',
+        'title_lang'     => 'Verifikasi SKL',
+        'is_parent'      => '1', 
+        'is_hidden'      => '0',
+        'can_view'       => '0',
+        'can_edit'       => '0', 
+        'can_delete'     => '0',  
+        'can_access'     => '1', 
+        'can_create'     => '0',
+    ],
+        'listskl' => [
+            'title'          => 'SKL List',
+            'title_lang'     => 'Daftar SKL',
+            'is_parent'      => '0', 
+            'is_hidden'      => '0',
+            'can_view'       => '0',
+            'can_edit'       => '0', 
+            'can_delete'     => '0',  
+            'can_access'     => '1', 
+            'can_create'     => '0',
+        ],
+        'createskl' => [
+            'title'          => 'Create SKL',
+            'title_lang'     => 'Buat SKL baru',
+            'is_parent'      => '0', 
+            'is_hidden'      => '0',
+            'can_view'       => '0',
+            'can_edit'       => '0', 
+            'can_delete'     => '0',  
+            'can_access'     => '1', 
+            'can_create'     => '0',
+        ],
+        'issuedskl' => [
+            'title'          => 'Issued SKL',
+            'title_lang'     => 'SKL diterbitkan',
+            'is_parent'      => '0', 
+            'is_hidden'      => '0',
+            'can_view'       => '0',
+            'can_edit'       => '0', 
+            'can_delete'     => '0',  
+            'can_access'     => '1', 
+            'can_create'     => '0',
+        ],
+
+    
 
     'userManagement' => [
         'title'          => 'User management',
@@ -434,6 +480,8 @@ return [
             'updated_at_helper'   => ' ',
         ],
     ],
+
+    
     'profile' =>[
         'title'          => 'Profile',
         'title_lang'     => 'Profil',

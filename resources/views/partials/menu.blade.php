@@ -220,6 +220,29 @@
             @endcan
 
             {{-- Feed & Messages --}}
+            @can('feedmsg_access')
+                <li class="nav-title">FEEDS & MESSAGES</li>  
+                @can('feeds_access')
+                    <li class="c-sidebar-nav-item {{ request()->is("feedmsg/feeds") ? "active" : "" }}">
+                        <a href="" data-filter-tags="{{ strtolower(trans('cruds.feeds.title_lang')) }}">
+                            <i class="fal fa-rss c-sidebar-nav-icon"></i>{{ trans('cruds.feeds.title_lang') }}
+                        </a>
+                    </li>
+                @endcan  
+                @can('messenger_access')
+                    @php($unread = \App\Models\QaTopic::unreadCount())
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/messenger") || request()->is("admin/messenger/*") ? "active" : "" }}">
+                        <a href="{{ route("admin.messenger.index") }}" data-filter-tags="{{ strtolower(trans('global.messages')) }}">
+                            <i class="c-sidebar-nav-icon fal fa-envelope"></i>
+                            <span class="nav-link-text">{{ trans('global.messages') }}</span>
+                            @if($unread > 0)
+                                <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ $unread }} pesan</span>
+                            @endif
+        
+                        </a>
+                    </li>
+                @endcan  
+            @endcan
             {{-- end feed --}}
 
 
@@ -229,24 +252,78 @@
                 @can('onfarm_access')
                 <li class="c-sidebar-nav-item {{ request()->is("verification/onfarm") ? "active" : "" }}">
                     <a href="{{ route("verification.onfarm.index") }}" data-filter-tags="{{ strtolower(trans('cruds.onfarm.title_lang')) }}">
-                        <i class="fal fa-map-marker-check c-sidebar-nav-icon"></i>{{ trans('cruds.onfarm.title_lang') }}
+                        <i class="fal fa-map-marker-check c-sidebar-nav-icon"></i>
+                        <span class="nav-link-text">{{ trans('cruds.onfarm.title_lang') }}</span>
+                        {{-- @php($unread = \App\Models\QaTopic::unreadCount()) --}}
+                        @if($unread > 0)
+                            <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ $unread }} request</span>
+                        @endif
+        
+                        
                     </a>
                 </li>
                 @endcan
                 @can('online_access')
                 <li class="c-sidebar-nav-item {{ request()->is("verification/online") ? "active" : "" }}">
                     <a href="{{ route("verification.online.index") }}" data-filter-tags="{{ strtolower(trans('cruds.online.title_lang')) }}">
-                        <i class="fal fa-ballot-check c-sidebar-nav-icon"></i>{{ trans('cruds.online.title_lang') }}
+                        <i class="fal fa-ballot-check c-sidebar-nav-icon"></i>
+                        <span class="nav-link-text">{{ trans('cruds.online.title_lang') }}</span>
+                        {{-- @php($unread = \App\Models\QaTopic::unreadCount()) --}}
+                        @if($unread > 0)
+                            <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ $unread }} request</span>
+                        @endif
                     </a>
                 </li>
                 @endcan
                 @can('completed_access')
                 <li class="c-sidebar-nav-item {{ request()->is("verification/completed") ? "active" : "" }}">
                     <a href="{{ route("verification.completed.index") }}" data-filter-tags="{{ strtolower(trans('cruds.completed.title_lang')) }}">
-                        <i class="fal fa-file-certificate c-sidebar-nav-icon"></i>{{ trans('cruds.completed.title_lang') }}
+                        <i class="fal fa-file-certificate c-sidebar-nav-icon"></i>
+                        <span class="nav-link-text">{{ trans('cruds.completed.title_lang') }}</span>
+                        {{-- @php($unread = \App\Models\QaTopic::unreadCount()) --}}
+                        @if($unread > 0)
+                            <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ $unread }} request</span>
+                        @endif
+                        
                     </a>
                 </li>
                 @endcan
+                @can('verification_skl_access') 
+                    <li class="{{ request()->is("admin/verification/skl/*") ? "active open" : "" }} ">
+                        <a href="#" title="SKL" data-filter-tags="{{ strtolower(trans('cruds.sklverifikator.title_lang')) }}">
+                            <i class="fal fal fa-file"></i>
+                            <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.sklverifikator.title_lang') }}</span>
+                        </a>
+                        <ul>
+                            @can('list_skl_access')
+                                <li class="c-sidebar-nav-item {{ request()->is("verification/skl/listskl") ? "active" : "" }}">
+                                    <a href="{{ route("admin.permissions.index") }}" title="listskl" data-filter-tags="{{ strtolower(trans('cruds.listskl.title_lang')) }}">
+                                        <i class="fa-fw fal fa-list c-sidebar-nav-icon"></i>
+                                        <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.listskl.title_lang') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('create_skl_access')
+                                <li class="c-sidebar-nav-item {{ request()->is("verification/skl/createskl")  ? "active" : "" }}">
+                                    <a href="{{ route("admin.roles.index") }}" title="createskl" data-filter-tags="{{ strtolower(trans('cruds.createskl.title_lang')) }}">
+                                        <i class="fa-fw fal fa-plus c-sidebar-nav-icon"></i>
+                                        <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.createskl.title_lang') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('issued_skl_access')
+                                <li class="c-sidebar-nav-item {{ request()->is("verification/skl/issuedskl")? "active" : "" }}">
+                                    <a href="{{ route("admin.users.index") }}" title="issuedskl" data-filter-tags="{{ strtolower(trans('cruds.issuedskl.title_lang')) }}">
+                                        <i class="fa-fw fal fa-briefcase c-sidebar-nav-icon"></i>
+                                        <span class="nav-link-text" data-i18n="nav.administation_sub1_menu3">{{ trans('cruds.issuedskl.title_lang') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            
+                            
+                        </ul>
+                    </li>
+                    @endcan
             @endcan
 
             {{-- user management --}}
@@ -294,23 +371,12 @@
                 </ul>
             </li>
             @endcan
+            
         
         
         
         <li class="nav-title" data-i18n="nav.administation">PERSONAL</li>
-        @php($unread = \App\Models\QaTopic::unreadCount())
-            <li class="c-sidebar-nav-item {{ request()->is("admin/messenger") || request()->is("admin/messenger/*") ? "active" : "" }}">
-                <a href="{{ route("admin.messenger.index") }}" data-filter-tags="{{ strtolower(trans('global.messages')) }}">
-                    <i class="c-sidebar-nav-icon fa-fw fa fa-envelope">
-
-                    </i>
-                    <span>{{ trans('global.messages') }}</span>
-                    @if($unread > 0)
-                        <strong>( {{ $unread }} )</strong>
-                    @endif
-
-                </a>
-            </li>
+            
             @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                 @can('profile_password_edit')
                     <li class="c-sidebar-nav-item {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}" >
