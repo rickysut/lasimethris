@@ -6,3 +6,4 @@
 /vendor
 !/vendor/laravel/ui/auth-backend/*
 .env
+/vendor/composer
