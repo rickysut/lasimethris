@@ -1,9 +1,10 @@
 /node_modules
 /public/storage
 /storage/*.key
+.env
 !/vendor
 
 /vendor
 !/vendor/laravel/ui/auth-backend/*
-.env
+
 
