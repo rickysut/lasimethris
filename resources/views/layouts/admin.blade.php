@@ -1,16 +1,7 @@
 <!DOCTYPE html>
-<!-- 
-Template Name:  SmartAdmin Responsive WebApp - Template build with Twitter Bootstrap 4
-Version: 4.5.1
-Author: Sunnyat A.
-Website: http://gootbootstrap.com
-Purchase: https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0?ref=myorange
-License: You must have a valid license purchased only from wrapbootstrap.com (link above) in order to legally use this theme for your project.
--->
 <html lang="en">
     <head>
         <meta charset="utf-8">
-		
 		<title>
 			{{ env('APP_NAME')}} | {{ ($page_title ?? '3.0') }}
 		</title>
@@ -45,7 +36,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/formplugins/summernote/summernote.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/miscellaneous/nestable/nestable.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/miscellaneous/reactions/reactions.css') }}">
-        {{-- <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/skins/skin-master.css') }}"> --}}
+        <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/skins/skin-master.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/statistics/c3/c3.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/statistics/chartist/chartist.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/statistics/chartjs/chartjs.css') }}">
@@ -54,28 +45,17 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/fa-solid.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('css/smartadmin/fa-brands.css') }}">
 		
-		<!-- coreui -->
-		{{-- <link href="{{ asset('css/ajax/all.css') }}" rel="stylesheet" />
-		<link href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
-		<link href="{{ asset('css/datatables/buttons.dataTables.min.css') }}" rel="stylesheet" />
-		<link href="{{ asset('css/datatables/select.dataTables.min.css') }}" rel="stylesheet" /> --}}
-		
+		{{-- <!-- intro.js node_modules\intro.js -->
+		{{-- tidak perlu lagi krn sudah pake npm  --}}
+		{{-- <link rel="stylesheet" media="screen, print" href="{{ asset('css/intro.js/introjs.css') }}">
+		<link rel="stylesheet" media="screen, print" href="{{ asset('css/intro.js/minified/introjs.min.css') }}">
+		<link rel="stylesheet" media="screen, print" href="{{ asset('css/intro.js/minified/introjs.min.css.map') }}">
+		  --}}
 		
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		@yield('styles')
     </head>
 
-	{{-- <style>
-		.dataTables_wrapper .dataTables_filter label {
-    			display: -webkit-inline-box !important;
-		}
-
-	</style> --}}
-	<!--
-		ditambahkan class fixed footer "footer-function-fixed"
-		pada body class sebagai default layout antisipasi
-		saat tampil di android webview
-	-->
 	<body class="mod-bg-1 mod-nav-link footer-function-fixed">
 		<script src="{{ asset('js/smartadmin/pagesetting.js') }}"></script>
 		<!-- begin page wrapper -->
@@ -96,7 +76,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true"><i class="fal fa-times-circle"></i></span>
 							</button>
-							<strong>INFO!</strong> {{ session('message') }}.
+							<strong>{{ session('message') }}.</strong> 
 						</div>
 						@endif
 						<!-- end alert pesan -->
@@ -165,20 +145,17 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 		<script src="{{ asset('js/smartadmin/statistics/echart/echarts.min.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/statistics/easypiechart/easypiechart.bundle.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/statistics/sparkline/sparkline.bundle.js') }}"></script>
+		{{-- <script src="{{ asset('js/smartadmin/statistics/flot/flot.bundle.js') }}"></script> --}}
 		
-		<!-- coreui -->
-		
-		{{-- <script src="{{ asset('js/pdfmake/pdfmake.min.js') }}"></script>
-		<script src="{{ asset('js/pdfmake/vfs_fonts.js') }}"></script>
-		<script src="{{ asset('js/jszip/jszip.min.js') }}"></script> 
-		 --}}
-		{{-- <script type="text/javascript">
-            /* Activate smart panels */
-            $('#js-page-content').smartPanel();
-			
-        </script> --}}
+		<!-- intro.js -->
+		{{-- <script src="{{ asset('js/intro.js/minified/intro.min.js') }}"></script>
+		<script src="{{ asset('js/intro.js/intro.js') }}"></script>
+		<script src="{{ asset('js/intro.js/minified/intro.min.js.map') }}"></script> --}}
+
 		<!-- search bar -->
-		<script>
+		<script type="text/javascript">
+			
+
 			console.log("Init Language");
 			if (!$.i18n) {
 				initApp.loadScript("/js/i18n/i18n.js", 
@@ -209,146 +186,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 				
 			}
 			
-			// $(function() {
-			// 	let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
-			// 	let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
-			// 	let excelButtonTrans = '{{ trans('global.datatables.excel') }}'
-			// 	let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
-			// 	let printButtonTrans = '{{ trans('global.datatables.print') }}'
-			// 	let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}'
-			// 	let selectAllButtonTrans = '{{ trans('global.select_all') }}'
-			// 	let selectNoneButtonTrans = '{{ trans('global.deselect_all') }}'
-
-			// 	let languages = {
-			// 		'en': '{{ url("lang/English.json")  }}',
-			// 		'id': '{{ url("lang/Indonesian.json") }}'
-			// 	};
-
-  			// 	$.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
-  			// 	$.extend(true, $.fn.dataTable.defaults, {
-			// 		language: {
-			// 			url: languages['{{ app()->getLocale() }}'],
-			// 			paginate: {
-			// 				previous: "<i class='fal fa-chevron-left'></i>",
-			// 				next: "<i class='fal fa-chevron-right'></i>"
-			// 			},
-			// 			processing: '<div class="d-flex align-items-center justify-content-center fs-lg"><div class="spinner-border spinner-border-sm text-primary mr-2" role="status"><span class="sr-only"> Loading...</span></div> Processing...</div>',
-			// 			/* replace the default search lable text with a nice icon */
-			// 			search: '<div class="input-group-text d-inline-flex width-3 align-items-center justify-content-center border-bottom-right-radius-0 border-top-right-radius-0 border-right-0"><i class="fal fa-search"></i></div>',
-			// 			/* add search filter */
-			// 			searchPlaceholder: "{{ trans('global.search') }}",
-			// 			/* change text for zero records */
-			// 			zeroRecords: "{{ trans('global.no_results') }}"
-			// 		},
-			// 		// columnDefs: [{
-			// 		// 	orderable: false,
-			// 		// 	className: 'select-checkbox',
-			// 		// 	targets: 0
-			// 		// }, {
-			// 		// 	orderable: false,
-			// 		// 	searchable: false,
-			// 		// 	targets: -1
-			// 		// }],
-			// 		// select: {
-			// 		// style:    'multi+shift',
-			// 		// selector: 'td:first-child'
-			// 		// },
-			// 		order: [],
-			// 		scrollX: true,
-			// 		pageLength: 100,
-			// 		dom: 
-			// 		"<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
-			// 		"<'row'<'col-sm-12'tr>>" +
-			// 		"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-
-			// 		// "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-8 d-flex'B><'col-sm-12 col-md-2 d-flex justify-content-end'f>>" +
-			// 		// "<'row'<'col-sm-12 col-md-12'tr>>" +
-			// 		// "<'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'p>>",
-					
-			// 		buttons: [
-			// 		{
-			// 			extend: 'colvis',
-			// 			className: 'btn-outline-info btn-xs mr-sm-3 ml-5',
-			// 			text: colvisButtonTrans,
-			// 			titleAttr: 'Col visibility',
-			// 			exportOptions: {
-			// 			columns: ':visible'
-			// 			}
-			// 		},
-			// 		{
-			// 			extend: 'pdfHtml5',
-			// 			className: 'btn-outline-danger btn-xs mr-1',
-			// 			text: pdfButtonTrans,
-			// 			titleAttr: 'Generate PDF',
-			// 			exportOptions: {
-			// 			columns: ':visible'
-			// 			}
-			// 		},
-			// 		{
-			// 			extend: 'excelHtml5',
-			// 			className: 'btn-outline-success btn-xs mr-1',
-			// 			text: excelButtonTrans,
-			// 			titleAttr: 'Generate Excel',
-			// 			exportOptions: {
-			// 			columns: ':visible'
-			// 			}
-			// 		},
-			// 		// {
-			// 		// 	extend: 'selectAll',
-			// 		// 	className: 'btn-primary  waves-effect waves-themed btn-sm mr-1',
-			// 		// 	text: selectAllButtonTrans,
-			// 		// 	exportOptions: {
-			// 		// 	columns: ':visible'
-			// 		// 	},
-			// 		// 	action: function(e, dt) {
-			// 		// 	e.preventDefault()
-			// 		// 	dt.rows().deselect();
-			// 		// 	dt.rows({ search: 'applied' }).select();
-			// 		// 	}
-			// 		// },
-			// 		// {
-			// 		// 	extend: 'selectNone',
-			// 		// 	className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
-			// 		// 	text: selectNoneButtonTrans,
-			// 		// 	exportOptions: {
-			// 		// 	columns: ':visible'
-			// 		// 	}
-			// 		// },
-			// 		/*{
-			// 			extend: 'copyHtml5',
-			// 			text: copyButtonTrans,
-			// 			titleAttr: 'Copy to clipboard',
-			// 			className: 'btn-primary btn-sm mr-1',
-			// 			exportOptions: {
-			// 			columns: ':visible'
-			// 			}
-			// 		},*/
-			// 		// {
-			// 		// 	extend: 'csvHtml5',
-			// 		// 	text: csvButtonTrans,
-			// 		// 	titleAttr: 'Generate CSV',
-			// 		// 	className: 'btn-dark  waves-effect waves-themed  btn-sm mr-1',
-			// 		// 	exportOptions: {
-			// 		// 	columns: ':visible'
-			// 		// 	}
-			// 		// },
-					
-					
-			// 		{
-			// 			extend: 'print',
-			// 			className: 'btn-outline-primary btn-xs',
-			// 			text: printButtonTrans,
-			// 			titleAttr: 'Print Table',
-			// 			exportOptions: {
-			// 			columns: ':visible'
-			// 			}
-			// 		}
-					
-			// 		]
-			// 	});
-
-  			// 	$.fn.dataTable.ext.classes.sPageButton = 'button primary_button paginate_button';
-			// });
+			
 		$(document).ready(function() {
 		  $('.searchable-field').select2({
 			minimumInputLength: 3,

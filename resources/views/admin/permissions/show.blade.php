@@ -23,7 +23,7 @@
                                 <tbody >
                                     <tr>
                                         <th>
-                                            {{ trans('cruds.permission.fields.title') }}
+                                            {{ __('Nama') }}
                                         </th>
                                         <td>
                                             {{ $permission->title }}
@@ -31,7 +31,7 @@
                                     </tr>
                                     <tr>
                                         <th>
-                                            {{ trans('cruds.permission.fields.perm_type') }}
+                                            {{ __('Type')}}
                                         </th>
                                         <td>
                                             {{ App\Models\Permission::PERM_TYPE_SELECT[$permission->perm_type] ?? '' }}
@@ -39,7 +39,7 @@
                                     </tr>
                                     <tr>
                                         <th>
-                                            {{ trans('cruds.permission.fields.grp_title') }}
+                                            {{ __('Group') }}
                                         </th>
                                         <td>
                                             {{ $permission->grp_title }}

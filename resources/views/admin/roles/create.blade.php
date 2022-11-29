@@ -28,21 +28,21 @@
                             <div class="col-12">
 
                                 <div class="form-group">
-                                    <label class="required" for="title">{{ trans('cruds.role.fields.title') }}</label>
+                                    <label class="required" for="title">{{ __('Nama') }}</label>
                                     <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', '') }}" required>
                                     @if($errors->has('title'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('title') }}
                                         </div>
                                     @endif
-                                    <span class="help-block">{{ trans('cruds.role.fields.title_helper') }}</span>
+                                    <span class="help-block">{{ __('Nama') }}</span>
                                 </div>
                                 <div class="form-group">
                                     <table class="table table-bordered table-striped table-hover ajaxTable datatable datatable-Role1">
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    {{ trans('cruds.permission.title') }}
+                                                    {{ __('Hak') }}
                                                     <div>
                                                     <span class="btn btn-info  waves-effect waves-themed btn-xs check-all" style="border-radius: 10">{{ trans('global.select_all') }}</span>
                                                     <span class="btn btn-info  waves-effect waves-themed btn-xs decheck-all" style="border-radius: 10">{{ trans('global.deselect_all') }}</span>
@@ -71,10 +71,12 @@
                                                 @if ($label['is_hidden'] == "0") 
                                                 <tr>
                                                     <td>
-                                                        @if ($label['is_parent'] == "1") 
+                                                        @if (($label['is_parent'] == "1") && ($label['level'] == "0")) 
                                                             <strong>{{ $label['title'] }}</strong>
-                                                        @else
+                                                        @elseif ($label['level'] == "1") 
                                                             &nbsp;&nbsp;&nbsp;{{ $label['title'] }}
+                                                        @elseif ($label['level'] == "2") 
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $label['title'] }}
                                                         @endif
                                                         
                                                     </td>

@@ -27,17 +27,17 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label class="required" for="title">{{ trans('cruds.permission.fields.title') }}</label>
+                                    <label class="required" for="title">{{ __('Nama') }}</label>
                                     <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $permission->title) }}" required>
                                     @if($errors->has('title'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('title') }}
                                         </div>
                                     @endif
-                                    <span class="help-block">{{ trans('cruds.permission.fields.title_helper') }}</span>
+                                    <span class="help-block">{{ __('Nama') }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label class="required">{{ trans('cruds.permission.fields.perm_type') }}</label>
+                                    <label class="required">{{ __('Type') }}</label>
                                     <select class="form-control {{ $errors->has('perm_type') ? 'is-invalid' : '' }}" name="perm_type" id="perm_type" required>
                                         <option value disabled {{ old('perm_type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                                         @foreach(App\Models\Permission::PERM_TYPE_SELECT as $key => $label)
@@ -49,15 +49,22 @@
                                             {{ $errors->first('perm_type') }}
                                         </div>
                                     @endif
-                                    <span class="help-block">{{ trans('cruds.permission.fields.perm_type_helper') }}</span>
+                                    <span class="help-block">{{ __('Jenis hak akses') }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label class="required">{{ trans('cruds.permission.fields.grp_title') }}</label>
+                                    <label class="required">{{ __('Group') }}</label>
                                     <select class="form-control {{ $errors->has('grp_title') ? 'is-invalid' : '' }}" name="grp_title" id="grp_title" required>
                                         <option value disabled {{ old('grp_title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                                         @foreach($grpTitle as $key => $label)
                                             @if ($label['is_hidden'] == '0')
-                                                <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }}>{{ $label['title'] }}</option>    
+                                                {{-- <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }}>{{ $label['title'] }}</option>   --}}
+                                                @if($label['level']=='0')
+                                                    <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }} >{{ $label['title'] }}</option>    
+                                                @elseif ($label['level']=='1')
+                                                    <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;{{ $label['title'] }}</option>
+                                                @elseif ($label['level']=='2')
+                                                    <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $label['title'] }}</option>
+                                                @endif  
                                             @endif
                                         @endforeach
                                     </select>
@@ -66,7 +73,7 @@
                                             {{ $errors->first('grp_title') }}
                                         </div>
                                     @endif
-                                    <span class="help-block">{{ trans('cruds.permission.fields.grp_title_helper') }}</span>
+                                    <span class="help-block">{{ __('Group permission') }}</span>
                                 </div>
                             </div>
                         </div>

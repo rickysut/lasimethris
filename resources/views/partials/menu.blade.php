@@ -327,49 +327,56 @@
             @endcan
 
             {{-- user management --}}
-            @can('user_management_access')
-            <li class="nav-title" data-i18n="nav.administation">ADMINISTRATOR</li>
-            <li class="{{ request()->is("admin/permissions*")  || request()->is("admin/roles*") || request()->is("admin/users*") || request()->is("admin/audit-logs*")  ? "active open" : "" }} ">
-                <a href="#" title="User Management" data-filter-tags="{{ strtolower(trans('cruds.userManagement.title_lang')) }}">
-                    <i class="fal fal fa-users"></i>
-                    <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.userManagement.title_lang') }}</span>
-                </a>
-                <ul>
-                    @can('permission_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/permissions") || request()->is("admin/permissions/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.permissions.index") }}" title="Permission" data-filter-tags="{{ strtolower(trans('cruds.permission.title_lang')) }}">
-                                <i class="fa-fw fal fa-unlock-alt c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.permission.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('role_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/roles") || request()->is("admin/roles/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.roles.index") }}" title="Roles" data-filter-tags="{{ strtolower(trans('cruds.role.title_lang')) }}">
-                                <i class="fa-fw fal fa-briefcase c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.role.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('user_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/users") || request()->is("admin/users/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.users.index") }}" title="User" data-filter-tags="{{ strtolower(trans('cruds.user.title_lang')) }}">
-                                <i class="fa-fw fal fa-user c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu3">{{ trans('cruds.user.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('audit_log_access')
-                        <li class="c-sidebar-nav-item {{ request()->is("admin/audit-logs") || request()->is("admin/audit-logs/*") ? "active" : "" }}">
-                            <a href="{{ route("admin.audit-logs.index") }}" title="Audit Log" data-filter-tags="{{ strtolower(trans('cruds.auditLog.title_lang')) }}">
-                                <i class="fa-fw fal fa-file-alt c-sidebar-nav-icon"></i>
-                                <span class="nav-link-text" data-i18n="nav.administation_sub1_menu4">{{ trans('cruds.auditLog.title_lang') }}</span>
-                            </a>
-                        </li>
-                    @endcan
+            @can('administrator_access')
+                <li class="nav-title" data-i18n="nav.administation">ADMINISTRATOR</li>
+                @can('user_management_access')
+                <li class="{{ request()->is("admin/permissions*")  || request()->is("admin/roles*") || request()->is("admin/users*") || request()->is("admin/audit-logs*")  ? "active open" : "" }} ">
+                    <a href="#" title="User Management" data-filter-tags="{{ strtolower(trans('cruds.userManagement.title_lang')) }}">
+                        <i class="fal fal fa-users"></i>
+                        <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.userManagement.title_lang') }}</span>
+                    </a>
+                    <ul>
+                        @can('permission_access')
+                            <li class="c-sidebar-nav-item {{ request()->is("admin/permissions") || request()->is("admin/permissions/*") ? "active" : "" }}">
+                                <a href="{{ route("admin.permissions.index") }}" title="Permission" data-filter-tags="{{ strtolower(trans('cruds.permission.title_lang')) }}">
+                                    <i class="fa-fw fal fa-unlock-alt c-sidebar-nav-icon"></i>
+                                    <span class="nav-link-text" data-i18n="nav.administation_sub1_menu1">{{ trans('cruds.permission.title_lang') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('role_access')
+                            <li class="c-sidebar-nav-item {{ request()->is("admin/roles") || request()->is("admin/roles/*") ? "active" : "" }}">
+                                <a href="{{ route("admin.roles.index") }}" title="Roles" data-filter-tags="{{ strtolower(trans('cruds.role.title_lang')) }}">
+                                    <i class="fa-fw fal fa-briefcase c-sidebar-nav-icon"></i>
+                                    <span class="nav-link-text" data-i18n="nav.administation_sub1_menu2">{{ trans('cruds.role.title_lang') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('user_access')
+                            <li class="c-sidebar-nav-item {{ request()->is("admin/users") || request()->is("admin/users/*") ? "active" : "" }}">
+                                <a href="{{ route("admin.users.index") }}" title="User" data-filter-tags="{{ strtolower(trans('cruds.user.title_lang')) }}">
+                                    <i class="fa-fw fal fa-user c-sidebar-nav-icon"></i>
+                                    <span class="nav-link-text" data-i18n="nav.administation_sub1_menu3">{{ trans('cruds.user.title_lang') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('audit_log_access')
+                            <li class="c-sidebar-nav-item {{ request()->is("admin/audit-logs") || request()->is("admin/audit-logs/*") ? "active" : "" }}">
+                                <a href="{{ route("admin.audit-logs.index") }}" title="Audit Log" data-filter-tags="{{ strtolower(trans('cruds.auditLog.title_lang')) }}">
+                                    <i class="fa-fw fal fa-file-alt c-sidebar-nav-icon"></i>
+                                    <span class="nav-link-text" data-i18n="nav.administation_sub1_menu4">{{ trans('cruds.auditLog.title_lang') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        
+                    </ul>
+                </li>
+                @endcan
+
+                {{-- Master data RIPH --}}
+                @can('master_riph_access')
                     
-                </ul>
-            </li>
+                @endcan
             @endcan
             
         

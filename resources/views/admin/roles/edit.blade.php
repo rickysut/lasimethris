@@ -72,10 +72,12 @@
                                                 @if ($label['is_hidden'] == "0") 
                                                 <tr>
                                                     <td>
-                                                        @if ($label['is_parent'] == "1") 
+                                                        @if (($label['is_parent'] == "1") && ($label['level'] == "0")) 
                                                             <strong>{{ $label['title'] }}</strong>
-                                                        @else
+                                                        @elseif ($label['level'] == "1") 
                                                             &nbsp;&nbsp;&nbsp;{{ $label['title'] }}
+                                                        @elseif ($label['level'] == "2") 
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $label['title'] }}
                                                         @endif
                                                         
                                                     </td>

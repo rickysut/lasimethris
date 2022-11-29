@@ -29,13 +29,13 @@
 
                       </th>
                       <th>
-                          {{ trans('cruds.permission.fields.title') }}
+                          {{ __('Nama') }}
                       </th>
                       <th>
-                          {{ trans('cruds.permission.fields.perm_type') }}
+                          {{ __('Type') }}
                       </th>
                       <th>
-                          {{ trans('cruds.permission.fields.grp_title') }}
+                          {{ __('Group') }}
                       </th>
                       <th style="width:15%">
                           {{ trans('global.actions') }}

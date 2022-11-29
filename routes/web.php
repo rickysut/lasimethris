@@ -80,7 +80,7 @@ Route::group(['prefix' => 'verification', 'as' => 'verification.', 'namespace' =
     Route::resource('onfarm', 'OnfarmController');
     Route::resource('online', 'OnlineController');
     Route::resource('completed', 'CompletedController');
-    
+    Route::resource('skl', 'SklController' );   
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

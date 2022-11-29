@@ -28,10 +28,10 @@
 
                           </th>
                           <th>
-                              {{ trans('cruds.role.fields.title') }}
+                              {{ __('Nama') }}
                           </th>
                           <th >
-                              {{ trans('cruds.role.fields.permissions') }}
+                              {{ __('Hak') }}
                           </th>
                           <th style="width:15%">
                             {{ trans('global.actions') }}
