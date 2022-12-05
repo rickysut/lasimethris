@@ -57,7 +57,6 @@
                                         <option value disabled {{ old('grp_title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                                         @foreach($grpTitle as $key => $label)
                                             @if ($label['is_hidden'] == '0')
-                                                {{-- <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }}>{{ $label['title'] }}</option>   --}}
                                                 @if($label['level']=='0')
                                                     <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }} >{{ $label['title'] }}</option>    
                                                 @elseif ($label['level']=='1')

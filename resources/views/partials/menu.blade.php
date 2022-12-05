@@ -326,7 +326,7 @@
                     @endcan
             @endcan
 
-            {{-- user management --}}
+            {{-- administrator access --}}
             @can('administrator_access')
                 <li class="nav-title" data-i18n="nav.administation">ADMINISTRATOR</li>
                 @can('user_management_access')
@@ -375,7 +375,50 @@
 
                 {{-- Master data RIPH --}}
                 @can('master_riph_access')
-                    
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/masterriph") ? "active" : "" }}">
+                        <a href="" data-filter-tags="{{ strtolower(trans('cruds.masterriph.title_lang')) }}">
+                            <i class="fab fa-stack-overflow c-sidebar-nav-icon"></i>{{ trans('cruds.masterriph.title_lang') }}
+                        </a>
+                    </li>
+                @endcan
+
+                {{-- Master template --}}
+                @can('master_template_access')
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/mastertemplate") ? "active" : "" }}">
+                        <a href="" data-filter-tags="{{ strtolower(trans('cruds.mastertemplate.title_lang')) }}">
+                            <i class="fal fa-file-upload c-sidebar-nav-icon"></i>{{ trans('cruds.mastertemplate.title_lang') }}
+                        </a>
+                    </li>
+                @endcan
+
+                  
+
+                {{-- data report --}}
+                @can('data_report_access')
+                    <li class="{{ request()->is("admin/datareport") || request()->is("admin/datareport/*") ? "active open" : "" }}">
+                        <a href="#" title="Data Report" data-filter-tags="{{ strtolower(trans('cruds.datareport.title_lang')) }}">
+                            <i class="fal fa-landmark c-sidebar-nav-icon"></i>
+                            <span class="nav-link-text" data-i18n="nav.administation_sub1">{{ trans('cruds.datareport.title_lang') }}</span>
+                        </a>
+                        <ul>
+                            @can('commitment_list_access')
+                                <li class="c-sidebar-nav-item {{ request()->is("admin/datareport/comlist") ? "active" : "" }}">
+                                    <a href="{{ route("admin.audit-logs.index") }}" title="Commitment List" data-filter-tags="{{ strtolower(trans('cruds.commitmentlist.title_lang')) }}">
+                                        <i class="fa-fw fal fa-file-alt c-sidebar-nav-icon"></i>
+                                        <span class="nav-link-text" data-i18n="nav.administation_sub1_menu4">{{ trans('cruds.commitmentlist.title_lang') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('verification_report_access')
+                                <li class="c-sidebar-nav-item {{ request()->is("admin/datareport/verification")  ? "active" : "" }}">
+                                    <a href="{{ route("admin.audit-logs.index") }}" title="Audit Log" data-filter-tags="{{ strtolower(trans('cruds.verificationreport.title_lang')) }}">
+                                        <i class="fa-fw fal fa-file-alt c-sidebar-nav-icon"></i>
+                                        <span class="nav-link-text" data-i18n="nav.administation_sub1_menu4">{{ trans('cruds.verificationreport.title_lang') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
                 @endcan
             @endcan
             
