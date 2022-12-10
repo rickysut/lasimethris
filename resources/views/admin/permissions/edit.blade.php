@@ -63,7 +63,9 @@
                                                     <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;{{ $label['title'] }}</option>
                                                 @elseif ($label['level']=='2')
                                                     <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $label['title'] }}</option>
-                                                @endif  
+                                                @elseif ($label['level']=='3')
+                                                    <option value="{{ $label['title'] }}" {{ old('grp_title', $permission->grp_title) === $label['title'] ? 'selected' : '' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $label['title'] }}</option>
+                                               @endif  
                                             @endif
                                         @endforeach
                                     </select>

@@ -78,7 +78,9 @@
                                                             &nbsp;&nbsp;&nbsp;{{ $label['title'] }}
                                                         @elseif ($label['level'] == "2") 
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $label['title'] }}
-                                                        @endif
+                                                        @elseif ($label['level'] == "3") 
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $label['title'] }}
+                                                       @endif
                                                         
                                                     </td>
                                                     <td style="padding-left: 44px;">

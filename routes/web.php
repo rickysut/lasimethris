@@ -15,6 +15,7 @@ Route::get('/home', function () {
     }
 
     return redirect()->route('admin.home');
+    
 });
 
 
@@ -45,6 +46,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
+
+
+    //feeds
+    Route::get('feeds', 'MessengerController@index')->name('feeds.index');
+    
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('messenger/create', 'MessengerController@createTopic')->name('messenger.createTopic');
     Route::post('messenger', 'MessengerController@storeTopic')->name('messenger.storeTopic');

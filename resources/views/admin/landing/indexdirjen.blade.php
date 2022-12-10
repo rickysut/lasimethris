@@ -8,7 +8,7 @@
 		<div class="panel" id="panel-1">
 			<div class="panel-hdr">
 				<h2>
-					<span class="badge badge-danger fw-n mr-1">5</span> Pengajuan Baru </span>
+					<span class="badge badge-danger fw-n mr-1">0</span> Pengajuan Baru </span>
 				</h2>
 				<div class="panel-toolbar">
 					@include('layouts.globaltoolbar')
@@ -28,7 +28,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							{{-- <tr>
 								<td class="text-center">
 									<span class="mr-2">
 										<img src="{{ asset('/img/logo-big.png') }}" class="profile-image rounded-circle" alt="company logo">
@@ -69,7 +69,7 @@
 									<div class="">Date: 30-04-2022</div>
 									<div class="">by: Verificator Name</div>
 								</td>
-							</tr>
+							</tr> --}}
 						</tbody>
 					</table>
 				</div>

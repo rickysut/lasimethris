@@ -43,7 +43,7 @@ class QaTopic extends Model
             $query
                 ->where('creator_id', Auth::user()->id)
                 ->orWhere('receiver_id', Auth::user()->id);
-        })
+            })
             ->with('messages')
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -59,5 +59,36 @@ class QaTopic extends Model
         }
 
         return $unreadCount;
+    }
+
+    public static function unreadMsg()
+    {
+        $topics = QaTopic::where(function ($query) {
+            $query
+                ->where('creator_id', Auth::user()->id)
+                ->orWhere('receiver_id', Auth::user()->id);
+        })
+            ->with('messages')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $unreadMsg = array();
+
+        foreach ($topics as $topic) {
+            foreach ($topic->messages as $message) {
+                if ($message->sender_id !== Auth::user()->id && $message->read_at === null) {
+                    $msg = [
+                        'sender' => $message->sender_id,
+                        'subject' => $topic->subject,
+                        'content' => $message->content,
+                        'create_at' => $topic->created_at->format('d/m/Y h:i:s')
+                    ];
+                    array_push($unreadMsg, $msg);
+                }
+                
+            }
+        }
+
+        return $unreadMsg;
     }
 }

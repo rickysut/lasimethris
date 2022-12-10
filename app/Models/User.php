@@ -56,6 +56,18 @@ class User extends Authenticatable
         'deleted_at',
     ];
 
+    public static function getUserById($id)
+    {
+        $user = User::where(function ($query) use($id) {
+            $query
+                ->where('id', $id);
+            })
+            ->with('data_user')
+            ->get();
+        
+        return $user;
+    }
+
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('id', 1)->exists();

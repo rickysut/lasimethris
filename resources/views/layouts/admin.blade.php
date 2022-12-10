@@ -124,7 +124,7 @@
 		
 		<script src="{{ asset('js/vendors.bundle.js') }}"></script>
 		
-        <script src="{{ asset('js/app.bundle.js') }}"></script>
+        <script src="{{ asset('js/app.bundle.js?v=1.0') }}"></script>
 		<!-- Smartadmin plugin -->
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.bundle.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.export.js') }}"></script>

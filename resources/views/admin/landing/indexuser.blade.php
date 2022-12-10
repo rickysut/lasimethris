@@ -1,35 +1,27 @@
 @extends('layouts.admin')
 @section('content')
-{{-- @include('partials.subheader') --}}
 @can('landing_access')
-<!-- welcome message -->
+
 <div class="row mb-5">
 	<div class="col text-center">
-		<h1 class="display-4 hidden-md-down">Selamat Datang di Simethris, <span class="fw-700">{{ Auth::user()->name }}</span></h1>
-		<h1 class="display-4 hidden-sm-up">Hallo, <span class="fw-700">{{ Auth::user()->name }}</span></h1>
-		<h4 class="hidden-md-down">If the world is to big for you to hold, then make it smaller to fits in your hands!</h4>
+		<h3 class="display-4 hidden-md-down">Selamat Datang di Simethris, <span class="fw-700">{{ Auth::user()->name }}</span></h3>
+		<h2 class="display-4 hidden-sm-up">Hallo, <span class="fw-700">{{ Auth::user()->name }}</span></h2>
+		<h4 class="hidden-md-down"><p> {{ $quote }}</p></h4>
 		<span class="text-muted js-get-date"></span>
 	</div>
 </div>
-<!-- end welcome message -->
-<!-- Page Content -->
 
+<!-- Page Content -->
 <div class="row">
 	<div class="col-lg-7">
 		<div id="panel-1" class="panel">
-			<!--
-				Yang ingin dicapi pada panel ini adalah:
-				
-				Berita/Feed adalah informasi yang disampaikan oleh Administrator kepada seluruh pengguna sesuai role. bersifat Umum Terbatas.
-				Feed ditampilkan sesuai dengan role pengguna.
-				Fitur Pembuatan Berita/Feed pada halaman lainnya.
-			-->
+			
 			<div class="panel-hdr">
 				<h2>
 					<i class="subheader-icon fal fa-rss mr-1"></i>New Feeds
 				</h2>
 				<div class="panel-toolbar">
-					<a href="/feeds" data-toggle="tooltip" title data-original-title="Lihat semua Feeds" class="btn btn-xs btn-primary waves-effect waves-themed" type="button" href="/">Lihat</a>
+					<a href="{{ route('admin.feeds.index') }}" data-toggle="tooltip" title data-original-title="Lihat semua Feeds" class="btn btn-xs btn-primary waves-effect waves-themed" type="button" href="/">Lihat</a>
 				</div>
 			</div>
 			<div class="panel-container show">
@@ -92,17 +84,13 @@
 	</div>
 	<div class="col-lg-5">
 		<div id="panel-2" class="panel">
-			<!--
-				Yang ingin dicapi pada panel ini adalah:
-				
-				Menampilkan daftar percakapan/perpesanan/messages baru dan atau terakhir antara Administrator dengan Pengguna. Bersifat Private per user.
-			-->
+			
 			<div class="panel-hdr">
 				<h2>
 					<i class="subheader-icon fal fa-envelope mr-1"></i>New Messages
 				</h2>
 				<div class="panel-toolbar">
-					<a href="/messenger" data-toggle="tooltip" title data-original-title="Lihat semua pesan" class="btn btn-xs btn-primary waves-effect waves-themed" type="button" href="/">Lihat</a>
+					<a href="{{ route('admin.messenger.index') }}" data-toggle="tooltip" title data-original-title="Lihat semua pesan" class="btn btn-xs btn-primary waves-effect waves-themed" type="button" href="/">Lihat</a>
 				</div>
 			</div>
 			<div class="panel-container show">
