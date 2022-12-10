@@ -17,6 +17,7 @@ class CreateQaMessagesTable extends Migration
             $table->timestamp('read_at')->nullable();
             $table->text('content');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 }

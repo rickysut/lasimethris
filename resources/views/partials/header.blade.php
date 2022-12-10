@@ -84,7 +84,7 @@
 											<span class="name">{{  $user[0]->name  }}<span class="badge badge-primary fw-n position-absolute pos-top pos-right mt-1">INBOX</span></span>
 											<span class="msg-a fs-sm">{{ $item['subject'] }}</span>
 											<span class="msg-b fs-xs">{{ $item['content'] }}</span>
-											<span class="fs-nano text-muted mt-1">{{ $item['create_at'] }}</span>
+											<span class="fs-nano text-muted mt-1">{{ $item['create_at']->diffForHumans() }}</span>
 										</span>
 									</a>
 								</li>	

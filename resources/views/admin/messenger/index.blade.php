@@ -1,6 +1,22 @@
 @extends('admin.messenger.template')
 
-@section('title', $title)
+{{-- @section('title', $title) --}}
+@section ('style')
+<style>
+    .unread {
+        background: #e9ecef;
+        font-weight: 900 !important;
+    }
+
+    .read {
+        color: #92969c;
+    }
+
+    .trashed {
+        color: #b5bbc4;
+    }
+</style>
+@endsection
 
 @section('messenger-content')
 <div class="row">
@@ -12,18 +28,18 @@
                         <a href="{{ route('admin.messenger.showMessages', [$topic->id]) }}">
                             @php($receiverOrCreator = $topic->receiverOrCreator())
                                 @if($topic->hasUnreads())
-                                    <strong>
-                                        {{ $receiverOrCreator !== null ? $receiverOrCreator->email : '' }}
+                                    <strong class="color-info-900">
+                                        {{ $receiverOrCreator !== null ? $receiverOrCreator->name   : '' }} ( {{ $receiverOrCreator !== null ?  $receiverOrCreator->data_user->company_name : '' }} )
                                     </strong>
                                 @else
-                                    {{ $receiverOrCreator !== null ? $receiverOrCreator->email : '' }}
+                                    {{ $receiverOrCreator !== null ? $receiverOrCreator->name : '' }} ( {{ $receiverOrCreator !== null ?  $receiverOrCreator->data_user->company_name : '' }} )
                                 @endif
                         </a>
                     </div>
                     <div class="col-lg-5">
                         <a href="{{ route('admin.messenger.showMessages', [$topic->id]) }}">
                             @if($topic->hasUnreads())
-                                <strong>
+                                <strong class="color-info-900">
                                     {{ $topic->subject }}
                                 </strong>
                             @else
@@ -39,7 +55,6 @@
                             <button class="btn-danger waves-effect waves-themed btn-xs" type="submit">
                                 {{ trans('global.delete') }}
                             </button>
-                            {{-- <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}"> --}}
                         </form>
                     </div>
                 </div>

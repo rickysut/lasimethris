@@ -17,7 +17,7 @@
                             </label>
                             <select name="recipient" class="form-control">
                                 @foreach($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->email }}</option>
+                                    <option value="{{ $user->id }}">{{ $user->name }} - ( {{ $user->data_user->company_name ?? '' }} )</option>
                                 @endforeach
                             </select>
                         </div>

@@ -81,7 +81,7 @@ class QaTopic extends Model
                         'sender' => $message->sender_id,
                         'subject' => $topic->subject,
                         'content' => $message->content,
-                        'create_at' => $topic->created_at->format('d/m/Y h:i:s')
+                        'create_at' => $topic->created_at
                     ];
                     array_push($unreadMsg, $msg);
                 }

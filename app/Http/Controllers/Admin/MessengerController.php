@@ -11,32 +11,42 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+
 class MessengerController extends Controller
 {
+    
+
     public function index()
     {
         $topics = QaTopic::where(function ($query) {
             $query
                 ->where('creator_id', Auth::id())
                 ->orWhere('receiver_id', Auth::id());
-        })
+        })  
             ->orderBy('created_at', 'DESC')
             ->get();
 
+        $module_name = 'Messenger' ;
+        $page_title = 'Pesan';
+        $page_heading = 'Semua Pesan' ;
+        $heading_class = 'fal fa-envelope';
         $title   = trans('global.all_messages');
         $unreads = $this->unreadTopics();
 
-        return view('admin.messenger.index', compact('topics', 'title', 'unreads'));
+        return view('admin.messenger.index', compact('topics', 'title', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
     public function createTopic()
     {
-        $users = User::all()
-            ->except(Auth::id());
-
+        $users = User::with('data_user')
+            ->get()->except(Auth::id());
+        
+        $module_name = 'Messenger' ;
+        $page_title = 'Pesan';
+        $page_heading = 'Pesan baru' ;
+        $heading_class = 'fal fa-envelope';
         $unreads = $this->unreadTopics();
-
-        return view('admin.messenger.create', compact('users', 'unreads'));
+        return view('admin.messenger.create', compact('users', 'unreads',  'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
     public function storeTopic(QaTopicCreateRequest $request)
@@ -66,9 +76,13 @@ class MessengerController extends Controller
             }
         }
 
+        $module_name = 'Messenger' ;
+        $page_title = 'Pesan';
+        $page_heading = 'Isi pesan' ;
+        $heading_class = 'fal fa-envelope';
         $unreads = $this->unreadTopics();
 
-        return view('admin.messenger.show', compact('topic', 'unreads'));
+        return view('admin.messenger.show', compact('topic', 'unreads',  'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
     public function destroyTopic(QaTopic $topic)
@@ -88,9 +102,13 @@ class MessengerController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
+        $module_name = 'Messenger' ;
+        $page_title = 'Pesan';
+        $page_heading = 'Kotak masuk' ;
+        $heading_class = 'fal fa-envelope';
         $unreads = $this->unreadTopics();
 
-        return view('admin.messenger.index', compact('topics', 'title', 'unreads'));
+        return view('admin.messenger.index', compact('topics', 'title', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
     public function showOutbox()
@@ -101,9 +119,31 @@ class MessengerController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
+        $module_name = 'Messenger' ;
+        $page_title = 'Pesan';
+        $page_heading = 'Kotak keluar' ;
+        $heading_class = 'fal fa-envelope';
         $unreads = $this->unreadTopics();
 
-        return view('admin.messenger.index', compact('topics', 'title', 'unreads'));
+        return view('admin.messenger.index', compact('topics', 'title', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
+    }
+
+    public function showTrash()
+    {
+        $title = trans('global.outbox');
+
+        $topics = QaTopic::where('receiver_id', Auth::id())
+            ->with('messages')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $module_name = 'Messenger' ;
+        $page_title = 'Pesan';
+        $page_heading = 'Kotak sampah' ;
+        $heading_class = 'fal fa-envelope';
+        $unreads = $this->unreadTopics();
+
+        return view('admin.messenger.index', compact('topics', 'title', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
     public function replyToTopic(QaTopicReplyRequest $request, QaTopic $topic)
@@ -128,9 +168,13 @@ class MessengerController extends Controller
             abort(404);
         }
 
+        $module_name = 'Messenger' ;
+        $page_title = 'Pesan';
+        $page_heading = 'Pesan' ;
+        $heading_class = 'fal fa-envelope';
         $unreads = $this->unreadTopics();
 
-        return view('admin.messenger.reply', compact('topic', 'unreads'));
+        return view('admin.messenger.reply', compact('topic', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
     public function unreadTopics(): array
