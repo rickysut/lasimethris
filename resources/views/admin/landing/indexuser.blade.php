@@ -133,43 +133,7 @@
 							</a>
 						</li>	
 						@endforeach
-						{{-- <li class="unread">
-							<a href="#" class="d-flex align-items-center">
-								<span class="status mr-2">
-									<img src="{{ asset('/img/avatars/farmer.png') }}" class="profile-image rounded-circle" alt="">
-								</span>
-								<span class="d-flex flex-column flex-1 ml-1">
-									<span class="name">Administrator <span class="badge badge-danger fw-n position-absolute pos-top pos-right mt-1">NEW</span></span>
-									<span class="msg-a fs-sm">Re: New security codes</span>
-									<span class="msg-b fs-xs">Hello again and thanks for being part...</span>
-									<span class="fs-nano text-muted mt-1">56 seconds ago</span>
-								</span>
-							</a>
-						</li>
-						<li class="unread">
-							<a href="#" class="d-flex align-items-center">
-								<span class="status mr-2">
-									<img src="{{ asset('/img/demo/avatars/avatar-j.png') }}" class="profile-image rounded-circle" alt="">
-								</span>
-								<span class="d-flex flex-column flex-1 ml-1">
-									<span class="name">Adison Lee (Verificator)</span>
-									<span class="msg-a fs-sm">Msed quia non numquam eius</span>
-									<span class="fs-nano text-muted mt-1">2 minutes ago</span>
-								</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="d-flex align-items-center">
-								<span class="status status-success mr-2">
-									<img src="{{ asset('/img/demo/avatars/avatar-a.png') }}" class="profile-image rounded-circle" alt="">
-								</span>
-								<span class="d-flex flex-column flex-1 ml-1">
-									<span class="name">Sarah McBrook</span>
-									<span class="msg-a fs-sm">Msed quia non numquam eius</span>
-									<span class="fs-nano text-muted mt-1">3 days ago</span>
-								</span>
-							</a>
-						</li> --}}
+						
 					</ul>
 				</div>
 			</div>

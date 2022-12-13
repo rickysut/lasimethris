@@ -9,46 +9,46 @@
             <div class="panel" id="panel-1">
                 <div class="d-flex h-100 flex-column">
                     <div class="px-3 px-sm-4 px-lg-2 py-4 align-items-center">
-                        <a href="{{ route('admin.messenger.createTopic') }}" type="button" class="btn btn-success btn-sm btn-block fs-md" data-focus="message-to">{{ trans('global.new_message') }}</a>
+                        <a href="{{ route('admin.messenger.createTopic') }}" type="button" class="btn btn-primary btn-sm btn-block fs-md" data-focus="message-to">{{ trans('global.new_message') }}</a>
                     </div>
                     <div class="flex-1 pr-1">
                         <a href="{{ route('admin.messenger.index') }}" class="{{ request()->is('admin/messenger') ? 'active open' : '' }}      dropdown-item px-3 px-sm-4 pr-lg-3 pl-lg-5 py-2 fs-md  d-flex justify-content-between rounded-pill border-top-left-radius-0 border-bottom-left-radius-0">
                             <div>
                                 <i class="fal fa-envelope width-1"></i>{{ trans('global.all_messages') }}
                             </div>
-                            <div class="fw-400 fs-xs js-unread-emails-count"></div>
+                            <div class="fw-400 fs-xs js-unread-emails-count">({{ $unreads['all'] ?? ''}})</div>
                         </a>
                         <a href="{{ route('admin.messenger.showInbox') }}" class="{{ request()->is('admin/messenger/inbox') ? 'active' : '' }} dropdown-item px-3 px-sm-4 pr-lg-3 pl-lg-5 py-2 fs-md d-flex justify-content-between rounded-pill border-top-left-radius-0 border-bottom-left-radius-0 ">
                             <div>
                                 @if($unreads['inbox'] > 0)
                                     <strong>
-                                        <i class="fal fa-inbox-in width-1"></i>{{ trans('global.inbox') }}
-                                        ({{ $unreads['inbox'] }})
-                                    </strong>
-                                @else
-                                    <i class="fal fa-inbox-in width-1"></i>{{ trans('global.inbox') }}
                                 @endif
-                                
+                                        <i class="fal fa-inbox-in width-1"></i>{{ trans('global.inbox') }}
+                                @if($unreads['inbox'] > 0) 
+                                    </strong>
+                                @endif
                             </div>
-                            <div class="fw-400 fs-xs js-unread-emails-count"></div>
+                            <div class="fw-400 fs-xs js-unread-emails-count">
+                            @if($unreads['inbox'] > 0)
+                            <strong>
+                            @endif
+                            ({{ $unreads['inbox']  }})
+                            @if($unreads['inbox'] > 0)
+                            </strong>
+                            @endif</div>
                         </a>
                         <a href="{{ route('admin.messenger.showOutbox') }}" class="{{ request()->is('admin/messenger/outbox') ? 'active' : '' }} dropdown-item px-3 px-sm-4 pr-lg-3 pl-lg-5 py-2 fs-md d-flex justify-content-between rounded-pill border-top-left-radius-0 border-bottom-left-radius-0">
                             <div>
-                                @if($unreads['outbox'] > 0)
-                                    <strong>
-                                        <i class="fal fa-paper-plane width-1"></i>{{ trans('global.outbox') }}
-                                        ({{ $unreads['outbox'] }})
-                                    </strong>
-                                @else
-                                    <i class="fal fa-paper-plane width-1"></i>{{ trans('global.outbox') }}
-                                @endif
+                                <i class="fal fa-paper-plane width-1"></i>{{ trans('global.outbox') }}
                             </div>
+                            <div class="fw-400 fs-xs js-unread-emails-count">({{ $unreads['outbox'] }})</div>
                         </a>
-                        <a href="{{route('admin.messenger.showTrash')}}" class="{{ request()->is('admin/messenger/trash') ? 'active' : '' }} dropdown-item px-3 px-sm-4 pr-lg-3 pl-lg-5 py-2 fs-md d-flex justify-content-between rounded-pill border-top-left-radius-0 border-bottom-left-radius-0">
+                        {{-- <a href="{{route('admin.messenger.showTrash')}}" class="{{ request()->is('admin/messenger/trash') ? 'active' : '' }} dropdown-item px-3 px-sm-4 pr-lg-3 pl-lg-5 py-2 fs-md d-flex justify-content-between rounded-pill border-top-left-radius-0 border-bottom-left-radius-0">
                             <div>
                                 <i class="fal fa-trash width-1"></i>Kotak Sampah
                             </div>
-                        </a>
+                            <div class="fw-400 fs-xs js-unread-emails-count">({{ $unreads['outbox'] }})</div>
+                        </a> --}}
                     </div>
                     <div class="px-5 py-3 fs-nano fw-400 text-muted">
                         Simethris Messages System 1.0

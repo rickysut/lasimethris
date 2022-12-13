@@ -51,6 +51,13 @@
 		<link rel="stylesheet" media="screen, print" href="{{ asset('css/intro.js/minified/introjs.min.css') }}">
 		<link rel="stylesheet" media="screen, print" href="{{ asset('css/intro.js/minified/introjs.min.css.map') }}">
 		  --}}
+
+		<!-- coreui -->
+		<link href="{{ asset('css/ajax/all.css') }}" rel="stylesheet" />
+		<link href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+		<link href="{{ asset('css/datatables/buttons.dataTables.min.css') }}" rel="stylesheet" />
+		<link href="{{ asset('css/datatables/select.dataTables.min.css') }}" rel="stylesheet" />
+		
 		
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		@yield('styles')
@@ -124,7 +131,7 @@
 		
 		<script src="{{ asset('js/vendors.bundle.js') }}"></script>
 		
-        <script src="{{ asset('js/app.bundle.js?v=1.0') }}"></script>
+        <script src="{{ asset('js/app.bundle.js?v=1.1') }}"></script>
 		<!-- Smartadmin plugin -->
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.bundle.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.export.js') }}"></script>
@@ -152,6 +159,12 @@
 		<script src="{{ asset('js/intro.js/intro.js') }}"></script>
 		<script src="{{ asset('js/intro.js/minified/intro.min.js.map') }}"></script> --}}
 
+		<!-- coreui -->
+		
+		<script src="{{ asset('js/pdfmake/pdfmake.min.js') }}"></script>
+		<script src="{{ asset('js/pdfmake/vfs_fonts.js') }}"></script>
+		<script src="{{ asset('js/jszip/jszip.min.js') }}"></script> 
+		
 		<!-- search bar -->
 		<script type="text/javascript">
 			

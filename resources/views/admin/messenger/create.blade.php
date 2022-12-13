@@ -7,8 +7,8 @@
     <div class="col-md-12">
         <form action="{{ route("admin.messenger.storeTopic") }}" method="POST">
             @csrf
-            <div class="card card-default">
-                <div class="card-body">
+            {{-- <div class="card card-default">
+                <div class="card-body"> --}}
                     <div class="row">
 
                         <div class="col-lg-12 form-group">
@@ -39,9 +39,8 @@
                     <button class="btn btn-success  waves-effect waves-themed btn-sm mt-4" type="submit">
                         {{ trans('global.submit') }}
                     </button>
-                    {{-- <input type="submit" value="{{ trans('global.submit') }}" class="btn btn-success " /> --}}
-                </div>
-            </div>
+                {{-- </div>
+            </div> --}}
         </form>
     </div>
 </div>

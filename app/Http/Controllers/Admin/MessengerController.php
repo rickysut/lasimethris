@@ -9,8 +9,9 @@ use App\Models\QaTopic;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class MessengerController extends Controller
 {
@@ -20,8 +21,7 @@ class MessengerController extends Controller
     {
         $topics = QaTopic::where(function ($query) {
             $query
-                ->where('creator_id', Auth::id())
-                ->orWhere('receiver_id', Auth::id());
+                ->Where('receiver_id', Auth::id());
         })  
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -40,13 +40,21 @@ class MessengerController extends Controller
     {
         $users = User::with('data_user')
             ->get()->except(Auth::id());
+
+        $topics = QaTopic::where(function ($query) {
+            $query
+                ->where('creator_id', Auth::id())
+                ->orWhere('receiver_id', Auth::id());
+        })  
+            ->orderBy('created_at', 'DESC')
+            ->get();
         
         $module_name = 'Messenger' ;
         $page_title = 'Pesan';
         $page_heading = 'Pesan baru' ;
         $heading_class = 'fal fa-envelope';
         $unreads = $this->unreadTopics();
-        return view('admin.messenger.create', compact('users', 'unreads',  'module_name', 'page_title', 'page_heading', 'heading_class'));
+        return view('admin.messenger.create', compact('topics','users', 'unreads',  'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
     public function storeTopic(QaTopicCreateRequest $request)
@@ -69,18 +77,20 @@ class MessengerController extends Controller
     {
         $this->checkAccessRights($topic);
 
-        foreach ($topic->messages as $message) {
-            if ($message->sender_id !== Auth::id() && $message->read_at === null) {
-                $message->read_at = Carbon::now();
-                $message->save();
-            }
-        }
+        // foreach ($topic->messages as $message) {
+        //     if ($message->sender_id !== Auth::id() && $message->read_at === null) {
+        //         $message->read_at = Carbon::now();
+        //         $message->save();
+        //     }
+        // }
+        
 
         $module_name = 'Messenger' ;
         $page_title = 'Pesan';
         $page_heading = 'Isi pesan' ;
         $heading_class = 'fal fa-envelope';
         $unreads = $this->unreadTopics();
+        
 
         return view('admin.messenger.show', compact('topic', 'unreads',  'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
@@ -98,10 +108,14 @@ class MessengerController extends Controller
     {
         $title = trans('global.inbox');
 
+        
         $topics = QaTopic::where('receiver_id', Auth::id())
-            ->orderBy('created_at', 'DESC')
-            ->get();
-
+        ->join('qa_messages', function ($join) {
+            $join->on('qa_messages.topic_id', '=', 'qa_topics.id')
+            ->whereNull('qa_messages.read_at');
+        })  
+        ->get();
+        
         $module_name = 'Messenger' ;
         $page_title = 'Pesan';
         $page_heading = 'Kotak masuk' ;
@@ -115,7 +129,10 @@ class MessengerController extends Controller
     {
         $title = trans('global.outbox');
 
-        $topics = QaTopic::where('creator_id', Auth::id())
+        $topics = QaTopic::where(function ($query) {
+            $query
+                ->where('creator_id', Auth::id());
+        })  
             ->orderBy('created_at', 'DESC')
             ->get();
 
@@ -132,8 +149,11 @@ class MessengerController extends Controller
     {
         $title = trans('global.outbox');
 
-        $topics = QaTopic::where('receiver_id', Auth::id())
-            ->with('messages')
+        $topics = QaTopic::where(function ($query) {
+            $query
+                ->where('creator_id', Auth::id())
+                ->orWhere('receiver_id', Auth::id());
+        })  
             ->orderBy('created_at', 'DESC')
             ->get();
 
@@ -155,6 +175,8 @@ class MessengerController extends Controller
             'content'   => $request->input('content'),
         ]);
 
+
+
         return redirect()->route('admin.messenger.index');
     }
 
@@ -168,13 +190,21 @@ class MessengerController extends Controller
             abort(404);
         }
 
+        $topics = QaTopic::where(function ($query) {
+            $query
+                ->where('creator_id', Auth::id())
+                ->orWhere('receiver_id', Auth::id());
+        })  
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
         $module_name = 'Messenger' ;
         $page_title = 'Pesan';
         $page_heading = 'Pesan' ;
         $heading_class = 'fal fa-envelope';
         $unreads = $this->unreadTopics();
 
-        return view('admin.messenger.reply', compact('topic', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
+        return view('admin.messenger.reply', compact('topics','topic', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
     public function unreadTopics(): array
@@ -190,23 +220,24 @@ class MessengerController extends Controller
 
         $inboxUnreadCount  = 0;
         $outboxUnreadCount = 0;
+        $allMsgCount = 0;
 
         foreach ($topics as $topic) {
+            if ($topic->receiver_id == Auth::id()) ++$allMsgCount;
+            if ($topic->creator_id == Auth::id()) ++$outboxUnreadCount;
             foreach ($topic->messages as $message) {
                 if (
                     $message->sender_id !== Auth::id()
-                    && $message->read_at === null
                 ) {
-                    if ($topic->creator_id !== Auth::id()) {
+                    if ($topic->creator_id !== Auth::id() && $message->read_at === null) {
                         ++$inboxUnreadCount;
-                    } else {
-                        ++$outboxUnreadCount;
-                    }
-                }
+                    } 
+                } 
             }
         }
 
         return [
+            'all'    => $allMsgCount,
             'inbox'  => $inboxUnreadCount,
             'outbox' => $outboxUnreadCount,
         ];

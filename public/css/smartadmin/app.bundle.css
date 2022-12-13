@@ -1034,7 +1034,7 @@ html {
   .notification.notification-layout-2:hover {
     cursor: pointer; }
   .notification:not(.notification-loading):before {
-    content: "No new messages";
+    content: "Tidak ada pesan baru";
     position: absolute;
     top: 0;
     left: 0;
