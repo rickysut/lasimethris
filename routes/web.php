@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('messenger', 'MessengerController@storeTopic')->name('messenger.storeTopic');
     Route::get('messenger/inbox', 'MessengerController@showInbox')->name('messenger.showInbox');
     Route::get('messenger/outbox', 'MessengerController@showOutbox')->name('messenger.showOutbox');
-    Route::get('messenger/trash', 'MessengerController@showTrash')->name('messenger.showTrash');
+    Route::post('messenger/{topic}/update', 'MessengerController@updateTopic')->name('messenger.updateTopic');
     Route::get('messenger/{topic}', 'MessengerController@showMessages')->name('messenger.showMessages');
     Route::delete('messenger/{topic}', 'MessengerController@destroyTopic')->name('messenger.destroyTopic');
     Route::post('messenger/{topic}/reply', 'MessengerController@replyToTopic')->name('messenger.reply');

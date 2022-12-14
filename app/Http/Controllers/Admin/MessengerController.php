@@ -145,25 +145,16 @@ class MessengerController extends Controller
         return view('admin.messenger.index', compact('topics', 'title', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
     }
 
-    public function showTrash()
+    public function updateTopic(QaTopic $topic)
     {
-        $title = trans('global.outbox');
+        foreach ($topic->messages as $message) {
+            if ($message->sender_id !== Auth::id() && $message->read_at === null) {
+                $message->read_at = Carbon::now();
+                $message->save();
+            }
+        }
 
-        $topics = QaTopic::where(function ($query) {
-            $query
-                ->where('creator_id', Auth::id())
-                ->orWhere('receiver_id', Auth::id());
-        })  
-            ->orderBy('created_at', 'DESC')
-            ->get();
-
-        $module_name = 'Messenger' ;
-        $page_title = 'Pesan';
-        $page_heading = 'Kotak sampah' ;
-        $heading_class = 'fal fa-envelope';
-        $unreads = $this->unreadTopics();
-
-        return view('admin.messenger.index', compact('topics', 'title', 'unreads', 'module_name', 'page_title', 'page_heading', 'heading_class'));
+        return 200;
     }
 
     public function replyToTopic(QaTopicReplyRequest $request, QaTopic $topic)

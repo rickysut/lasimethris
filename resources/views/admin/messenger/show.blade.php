@@ -45,3 +45,24 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+
+@parent
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            data: {
+                "_token": "{{ csrf_token() }}"
+            },
+            url: "/admin/messenger/"+{{ $topic->id }}+"/update",
+            type: "post",
+            success: function (response) {
+                //console.log(response);
+            },
+        });
+        
+    });
+</script>
+
+@endsection
