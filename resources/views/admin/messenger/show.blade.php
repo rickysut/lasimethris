@@ -4,15 +4,15 @@
 {{-- @section('title', $topic->subject) --}}
 
 @section('messenger-content')
-<div class="row">
+<div class="row px-3 px-sm-4 px-lg-2 py-2">
     <p>
         @if($topic->receiverOrCreator() !== null && !$topic->receiverOrCreator()->trashed())
-            <a href="{{ route('admin.messenger.reply', $topic) }}" class="btn btn-primary">
+            <a href="{{ route('admin.messenger.reply', $topic) }}" class="btn btn-primary btn-sm btn-block fs-md">
                 {{ trans('global.reply') }}
             </a>
         @endif
     </p>
-    <div class="col-lg-12">
+    <div class="col-lg-12 px-3 px-sm-4 px-lg-2 py-2 align-items-center">
         <div class="list-group">
             @foreach($topic->messages as $message)
                 @if ($message != null)
@@ -43,26 +43,6 @@
             @endforeach
         </div>
     </div>
+    
 </div>
-@endsection
-
-@section('scripts')
-
-@parent
-<script>
-    $(document).ready(function() {
-        $.ajax({
-            data: {
-                "_token": "{{ csrf_token() }}"
-            },
-            url: "/admin/messenger/"+{{ $topic->id }}+"/update",
-            type: "post",
-            success: function (response) {
-                //console.log(response);
-            },
-        });
-        
-    });
-</script>
-
 @endsection

@@ -75,15 +75,17 @@ class MessengerController extends Controller
 
     public function showMessages(QaTopic $topic)
     {
+        $topicId = $topic->id;
         $this->checkAccessRights($topic);
 
-        // foreach ($topic->messages as $message) {
-        //     if ($message->sender_id !== Auth::id() && $message->read_at === null) {
-        //         $message->read_at = Carbon::now();
-        //         $message->save();
-        //     }
-        // }
+        foreach ($topic->messages as $message) {
+            if ($message->sender_id !== Auth::id() && $message->read_at === null) {
+                $message->read_at = Carbon::now();
+                $message->save();
+            }
+        }
         
+        $topic = QaTopic::find($topicId);
 
         $module_name = 'Messenger' ;
         $page_title = 'Pesan';
