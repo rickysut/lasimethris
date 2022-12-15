@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\RiphAdmin;
 
 class DashboardController extends Controller
 {
@@ -21,7 +22,10 @@ class DashboardController extends Controller
                 $page_title = 'Monitoring Realisasi';
                 $page_heading = 'Monitoring' ;
                 $heading_class = 'fal fa-analytics';
-                return view('admin.dashboard.indexadmin', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+
+                $riph_admin = RiphAdmin::orderBy('updated_at', 'DESC')->get();
+
+                return view('admin.dashboard.indexadmin', compact('module_name', 'page_title', 'page_heading', 'heading_class', 'riph_admin')); 
             }
             if (Auth::user()->roles[0]->title == 'Verifikator'){
                 $module_name = 'Dashboard' ;
@@ -72,4 +76,6 @@ class DashboardController extends Controller
             
         } 
     }
+
+    
 }

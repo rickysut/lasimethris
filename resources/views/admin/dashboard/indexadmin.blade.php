@@ -33,7 +33,7 @@
                 <div class="">
                     <h3 class="display-5 d-block l-h-n m-0 fw-500" data-toggle="tooltip" title data-original-title="Jumlah Perusahaan yang telah masuk dalam sistem SIMETHRIS">
                         <!-- nilai ini diperoleh dari jumlah seluruh pengajuan yang belum diverifikasi. where status = 1 (user) -->
-                        117
+                        {{ number_format($riph_admin[0]->jumlah_importir, 0, ',', '.') }}
                         <small class="m-0 l-h-n">Perusahaan</small>
                     </h3>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="">
                     <h3 class="display-5 d-block l-h-n m-0 fw-500" data-toggle="tooltip" title data-original-title="Total volume RIPH yang telah masuk ke dalam sistem SIMETHRIS">
                         <!-- nilai ini diperoleh dari jumlah seluruh pengajuan yang SEDANG diverifikasi. where status = 2 (mulai/on progress) -->
-                        868.324
+                        {{ number_format($riph_admin[0]->v_pengajuan_import, 0, ',', '.') }}
                         <small class="m-0 l-h-n">Volume Import (ton)</small>
                     </h3>
                 </div>
@@ -60,7 +60,7 @@
                 <div class="">
                     <h3 class="display-5 d-block l-h-n m-0 fw-500" data-toggle="tooltip" title data-original-title="Jumlah luas tanam dalam satuan hektar yang harus dipenuhi oleh pelaku usaha yang telah masuk ke dalam sistem SIMETHRIS.">
                         <!-- nilai ini diperoleh dari jumlah seluruh pengajuan yang TELAH diverifikasi. where status = 3 & 4 (Verified OK & Verified Perbaikan) -->
-                        7.236
+                        {{ number_format($riph_admin[0]->v_beban_tanam, 0, ',', '.') }}
                         <small class="m-0 l-h-n">Kewajiban Tanam (ha)</small>
                     </h3>
                 </div>
@@ -72,7 +72,7 @@
                 <div class="">
                     <h4 class="display-5 d-block l-h-n m-0 fw-500" data-toggle="tooltip" title data-original-title="Jumlah volume tanam dalam satuan ton yang harus dipenuhi oleh pelaku usaha yang telah masuk ke dalam sistem SIMETHRIS.">
                         <!-- nilai ini diperoleh dari jumlah seluruh pengajuan yang TELAH LUNAS. where status = 5 (LUNAS) -->
-                        43.416
+                        {{ number_format($riph_admin[0]->v_beban_produksi, 0, ',', '.') }}
                         <small class="m-0 l-h-n">Kewajiban Produksi (ton)</small>
                     </h4>
                 </div>

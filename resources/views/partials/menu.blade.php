@@ -377,8 +377,8 @@
 
                 {{-- Master data RIPH --}}
                 @can('master_riph_access')
-                    <li class="c-sidebar-nav-item {{ request()->is("admin/masterriph") ? "active" : "" }}">
-                        <a href="" data-filter-tags="{{ strtolower(trans('cruds.masterriph.title_lang')) }}">
+                    <li class="c-sidebar-nav-item {{ request()->is("admin/riph") ? "active" : "" }}">
+                        <a href="{{ route('admin.riphAdmin.index') }}" data-filter-tags="{{ strtolower(trans('cruds.masterriph.title_lang')) }}">
                             <i class="fab fa-stack-overflow c-sidebar-nav-icon"></i>{{ trans('cruds.masterriph.title_lang') }}
                         </a>
                     </li>

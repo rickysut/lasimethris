@@ -79,7 +79,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     });
 
     
-    
+    Route::resource('riphAdmin', 'RiphAdminController');
+        
 
 });
 
