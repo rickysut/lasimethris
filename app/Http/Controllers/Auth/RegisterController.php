@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -68,6 +70,19 @@ class RegisterController extends Controller
         
         DB::beginTransaction();
         try {
+            $str = 'select  u.roleaccess
+            from data_users du 
+            INNER JOIN users u on 
+             du.npwp_company = "'.$data['npwp_company'].'" and u.id = du.user_id';
+            $roleaccess = DB::select($str);
+            
+            if ($roleaccess && ($roleaccess[0]->roleaccess == 3)){
+                DB::rollback();
+                return 'NPWP sudah didaftarkan';
+                //return null;
+            }
+            
+                
             $user = User::create([
                 'name'     => $data['name'],
                 'username' => $data['username'],
@@ -78,9 +93,7 @@ class RegisterController extends Controller
         } catch(ValidationException $e)
         {
             DB::rollback();
-            return Redirect::to('register')
-                ->withErrors( $e->getErrors() )
-                ->withInput();
+            return 'Gagal membuat user';
         } catch(\Exception $e)
         {
             DB::rollback();
@@ -110,33 +123,41 @@ class RegisterController extends Controller
                     'email_company' => $data['email_company']
                 ];
                 $avatar_path = '';
-                if  ($data['avatar']!=null){
-                    $file_name = $data['company_name'].'_'.'avatar.'.$data['avatar']->getClientOriginalExtension();
-                    $file_path = $data['avatar']->storeAs('uploads', $file_name, 'public');
-                    $avatar_path = $file_path;
-                    $regdata += array('avatar' => $avatar_path);
-                };
+                if (array_key_exists('avatar', $data)) {
+                    if  ($data['avatar']!=null){
+                        $file_name = $data['company_name'].'_'.'avatar.'.$data['avatar']->getClientOriginalExtension();
+                        $file_path = $data['avatar']->storeAs('uploads', $file_name, 'public');
+                        $avatar_path = $file_path;
+                        $regdata += array('avatar' => $avatar_path);
+                    };
+                }
                 $logo_path = '';
-                if  ($data['logo']!=null){
-                    $file_name = $data['company_name'].'_'.'logo.'.$data['logo']->getClientOriginalExtension();
-                    $file_path = $data['logo']->storeAs('uploads', $file_name, 'public');
-                    $logo_path = $file_path;
-                    $regdata += array('logo' => $logo_path);
-                };
+                if (array_key_exists('logo', $data)) {
+                    if  ($data['logo']!=null){
+                        $file_name = $data['company_name'].'_'.'logo.'.$data['logo']->getClientOriginalExtension();
+                        $file_path = $data['logo']->storeAs('uploads', $file_name, 'public');
+                        $logo_path = $file_path;
+                        $regdata += array('logo' => $logo_path);
+                    };
+                }
                 $ktp_path = '';
-                if  ($data['imagektp']!=null){
-                    $file_name = $data['company_name'].'_'.'ktp.'.$data['imagektp']->getClientOriginalExtension();
-                    $file_path = $data['imagektp']->storeAs('uploads', $file_name, 'public');
-                    $ktp_path = $file_path;
-                    $regdata += array('ktp_image' => $ktp_path);
-                };
+                if (array_key_exists('imagektp', $data)) {
+                    if  ($data['imagektp']!=null){
+                        $file_name = $data['company_name'].'_'.'ktp.'.$data['imagektp']->getClientOriginalExtension();
+                        $file_path = $data['imagektp']->storeAs('uploads', $file_name, 'public');
+                        $ktp_path = $file_path;
+                        $regdata += array('ktp_image' => $ktp_path);
+                    };
+                }
                 $assign_path = '';
-                if  ($data['assignment']!=null){
-                    $file_name = $data['company_name'].'_'.'assignment.'.$data['assignment']->getClientOriginalExtension();
-                    $file_path = $data['assignment']->storeAs('uploads', $file_name, 'public');
-                    $assign_path = $file_path;
-                    $regdata += array('assignment' => $assign_path);
-                };
+                if (array_key_exists('assignment', $data)) {
+                    if  ($data['assignment']!=null){
+                        $file_name = $data['company_name'].'_'.'assignment.'.$data['assignment']->getClientOriginalExtension();
+                        $file_path = $data['assignment']->storeAs('uploads', $file_name, 'public');
+                        $assign_path = $file_path;
+                        $regdata += array('assignment' => $assign_path);
+                    };
+                }
                 //dd($regdata);
                 $datauser = DataUser::create($regdata);
                 $user->data_user()->save($datauser);
@@ -145,9 +166,7 @@ class RegisterController extends Controller
         } catch(ValidationException $e)
         {
             DB::rollback();
-            return Redirect::to('register')
-                ->withErrors( $e->getErrors() )
-                ->withInput();
+            return 'Gagal update data-user';
         } catch(\Exception $e)
         {
             DB::rollback();

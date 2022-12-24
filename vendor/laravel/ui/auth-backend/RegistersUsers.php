@@ -3,6 +3,7 @@
 namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -113,16 +114,21 @@ trait RegistersUsers
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
+        if($user && $user instanceof Authenticatable) {
 
-        $this->guard()->login($user);
+        
+            $this->guard()->login($user);
 
-        if ($response = $this->registered($request, $user)) {
-            return $response;
+            if ($response = $this->registered($request, $user)) {
+                return $response;
+            }
+
+            return $request->wantsJson()
+                        ? new JsonResponse([], 201)
+                        : redirect($this->redirectPath());
+        } else {
+            return redirect('/register')->withErrors(['msg' => $user]);
         }
-
-        return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect($this->redirectPath());
     }
 
     /**

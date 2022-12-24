@@ -120,8 +120,16 @@
                                                     </p>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger mt-1">
+                                            @foreach($errors->all() as $error)
+                                                {{ $error }}
+                                            @endforeach
+                                        </div>
+                                    @endif
                                     <form id="regform" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" id="token" name="token" value="{{ $access_token }}">
@@ -155,7 +163,7 @@
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label class="form-label" for="ktp">No. KTP <span class="text-danger">*</span></label>
-                                                                    <input type="text" name="ktp" class="form-control" placeholder="No. KTP">
+                                                                    <input type="text" name="ktp" class="form-control ktp" placeholder="No. KTP">
                                                                     <div class="help-block">Diisi digit no KTP</div>
                                                                 </div>
                                                             </div>
@@ -233,11 +241,11 @@
                                                                     <div class="form-group row">
                                                                         <div class="col-md-6">
                                                                             <label class="form-label" for="npwp_company">Nomor Pokok Wajib Pajak (NPWP) <span class="text-danger">*</span></label>
-                                                                            <input type="text" name="npwp_company" class="form-control" placeholder="Nomor Pokok Wajib Pajak (NPWP) Perusahaan" required>
+                                                                            <input type="text" name="npwp_company" class="form-control npwp_company" placeholder="00.000.000.0-000.000" required>
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <label class="form-label" for="nib_company">Nomor Induk Berusaha (NIB) <span class="text-danger">*</span></label>
-                                                                            <input type="text" name="nib_company" class="form-control" placeholder="Nomor Induk Berusaha" required>
+                                                                            <input type="text" name="nib_company" class="form-control nib_company" placeholder="Nomor Induk Berusaha" required>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
@@ -299,11 +307,11 @@
                                                                     <div class="form-group row">
                                                                         <div class="col-md-6">
                                                                             <label class="form-label" for="kodepos">Kode Pos <span class="text-danger">*</span></label>
-                                                                            <input type="text" name="kodepos" class="form-control" placeholder="Kode Pos" required>
+                                                                            <input type="text" name="kodepos" class="form-control kodepos" placeholder="Kode Pos" required>
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <label class="form-label" for="email_company">Email Perusahaan <span class="text-danger">*</span></label>
-                                                                            <input type="text" name="email_company" class="form-control" placeholder="Email Perusahaan" required>
+                                                                            <input type="text" name="email_company" class="form-control email_company" placeholder="Email Perusahaan" required>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -428,16 +436,17 @@
     <script src="{{ asset('js/smartadmin/statistics/easypiechart/easypiechart.bundle.js') }}"></script>
     <script src="{{ asset('js/smartadmin/statistics/sparkline/sparkline.bundle.js') }}"></script>
     <script src="{{ asset('js/smartadmin/statistics/flot/flot.bundle.js') }}"></script>
-
+    <script src="{{ asset('js/jquery/jquery.mask.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js.map"></script>
-
-
     <script>
         $(document).ready(function() {
-
+            $('.npwp_company').mask('00.000.000.0-000.000');
+            $('.nib_company').mask('0000000000000');
+            $('.kodepos').mask('00000');
+            $('.ktp').mask('0000000000000000');
             var $validator = $("#regform").validate({
                 rules: {
                     name: {
@@ -465,7 +474,7 @@
                     },
                     npwp_company: {
                         required: true,
-                        minlength: 16
+                        minlength: 15
                     },
                     nib_company: {
                         required: true,

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\api\Api\HelperController;
+use App\Http\Controllers\Api\HelperController;
 
-Route::group(['namespace' => 'api'], function () {
+Route::group(['namespace' => 'Api'], function () {
 
     Route::post('getAPIAccessToken', 'HelperController@getAPIAccessToken');
     // Provinsi

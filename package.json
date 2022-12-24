@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "intro.js": "^6.0.0",
+        "jquery-mask-plugin": "^1.14.16",
         "jqvmap": "^1.5.1"
     }
 }
