@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //user task
     Route::group(['prefix' => 'task','as' => 'task.'], function () {
         Route::get('pull', 'PullRiphController@index')->name('pull');
+        Route::get('getriph', 'PullRiphController@pull')->name('getriph');
         Route::get('commitment', 'CommitmentController@index')->name('commitment');
         Route::resource('kelompoktani', 'KelompoktaniController');
         Route::resource('pengajuan', 'PengajuanController');

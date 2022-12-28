@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
 
 class PullRiphController extends Controller
 {
@@ -26,6 +27,40 @@ class PullRiphController extends Controller
         return view('admin.pullriph.index', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
     }
 
+
+    public function pull(Request $request)
+    {   
+        //dd($request->string('npwp'), $request->string('nomor'));
+        try {
+            $options = array(
+                'soap_version' => SOAP_1_1,
+                'exceptions' => true,
+                'trace' => 1,
+                'cache_wsdl' => WSDL_CACHE_MEMORY,
+                'connection_timeout' => 25,
+                'style' => SOAP_RPC,
+                'use' => SOAP_ENCODED,
+            );
+    
+            $client = new \SoapClient('http://riph.pertanian.go.id/api.php/simethris?wsdl', $options);
+            $parameter = array(
+                'user' => 'simethris',
+                'pass' => 'wsriphsimethris',
+                'npwp' => $request->string('npwp'),
+                'nomor' =>  $request->string('nomor')
+            );
+            $response = $client->__soapCall('get_riph', $parameter);
+        } catch (\Exception $e) {
+
+            Log::error('Soap Exception: ' . $e->getMessage());
+            throw new \Exception('Problem with SOAP call');
+        }
+        $res = json_decode(json_encode((array)simplexml_load_string($response)),true);
+       
+        //$res = simplexml_load_string($response);
+        //dd($res->riph);
+        return $res;
+    }
     /**
      * Show the form for creating a new resource.
      *

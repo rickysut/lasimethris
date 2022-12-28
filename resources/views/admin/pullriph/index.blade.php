@@ -21,7 +21,7 @@
 			<h2>Sinkronisasi Data</h2>
 			<div class="row justify-content-center">
 				<div class="col-md-8 order-md-2 mb-4">
-					<form class="row" action="#">
+					{{-- <form class="row" action="#"> --}}
 						<div class="form-group col-lg-6 text-left">
 							<label class="form-label">No. RIPH</label>
 							<div class="input-group">
@@ -29,7 +29,7 @@
 									<span class="input-group-text"><i class="fal fa-file-invoice text-align-center"></i></span>
 								</div>
 								<!-- Nomor RIPH ini diinput oleh user importir untuk dicocokkan dengan data RIPH -->
-								<input type="text" placeholder="0155/PP.240/D/03/2022" data-inputmask="'mask': '9999/PP.240/D/99/9999'" class="form-control" required>
+								<input id="nomor" type="text" placeholder="____/PP.240/D/__/____" data-inputmask="'mask': '9999/PP.240/D/99/9999'" class="form-control" required>
 							</div>
 							<footer class="blockquote-footer text-left">
 								<cite title="Source Title">e.g 0001/PP.240/D/04/2022</cite>
@@ -42,13 +42,13 @@
 									<span class="input-group-text"><i class="fal fa-credit-card-front text-align-center"></i></span>
 								</div>
 								<!-- NPWP ini diperoleh dari tabel user importir yang diisi pada saat registrasi -->
-								<input type="text" placeholder="999-99-999-9999-9 (by API)" data-inputmask="'mask': '99.999.999.6-999.999'" class="form-control" disabled>
+								<input id="npwp" type="text" placeholder="__.___.___._-___.___" data-inputmask="'mask': '99.999.999.9-999.999'" class="form-control" >
 							</div>
 							<footer class="blockquote-footer text-left">
 								<cite title="Source Title">ini adalah Nomor Pokok Wajib Pajak (NPWP) Anda.</cite>
 							</footer>
 						</div>
-					</form>
+					{{-- </form> --}}
 					<!--
 						-	Button ini memeriksa dan mencocokkan data yang diberikan dengan data yang ada pada API RIPH
 						-	alamat ujicoba: http://riph.pertanian.go.id/api.php/testing/simethris_get
@@ -62,20 +62,24 @@
 							
 						-	Data yang ditampilkan sementara hanya pada data pokok di bawa ini.
 					-->
-					<a class="btn btn-sm btn-primary btn-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-						<i class="fas fa-sync"></i> Kirim
+					<a class="btn btn-sm btn-primary btn-block text-white"  id="btnexec" >
+						<i class="fas fa-sync"></i> Sync
 					</a>
 				</div>
 			</div>
 		</div>
-		<div class="row justify-content-center collapse" id="collapseExample">
+
+		
+
+		
+		<div class="row justify-content-center collapse" id="collapseData">
 			<div class="col-md-8 order-md-2 mb-4">
 				<p class="lead">Berikut adalah data yang diperoleh dari aplikasi RIPH ONLINE berdasarkan informasi yang Anda berikan.</p>
 				<h5 class="d-flex justify-content-between align-items-center mb-3">
 					<span class="text-muted">RESULT</span>
 					<span>
 						<!-- status ini diperoleh dari WSDL field <keterangan></keterangan> RIPH-->
-						Sync Status: <span class="badge badge-success badge-pill">Success</span>
+						Sync Status: <span id="keterangan" class="badge badge-success badge-pill">wait..</span>
 					</span>
 				</h5>
 				<ul class="list-group mb-3 notification">
@@ -85,8 +89,8 @@
 								<span class="name">
 									<h6>Perusahaan/Lembaga </h6>
 									<!-- field ini diperoleh dari WSDL field <nama></nama> RIPH-->
-									<span class="fw-500 position-absolute pos-top pos-right mt-1" id="nama_perusahaan">
-										AGRA JAYA NUSANTARA
+									<span id="nama" class="fw-500 position-absolute pos-top pos-right mt-1" id="nama_perusahaan">
+										
 									</span>
 								</span>
 								<footer class="blockquote-footer text-left">
@@ -104,8 +108,8 @@
 								<span class="name">
 									<h6>NPWP </h6>
 									<!-- field ini diperoleh dari WSDL field <npwp></npwp> RIPH-->
-									<span class="fw-500 position-absolute pos-top pos-right mt-1">
-										83.134.623.4-112.000
+									<span id="npwpout" class="fw-500 position-absolute pos-top pos-right mt-1">
+										
 									</span>
 								</span>
 								<footer class="blockquote-footer text-left">
@@ -123,8 +127,8 @@
 								<span class="name">
 									<h6>Nomor RIPH </h6>
 									<!-- field ini diperoleh dari WSDL field <no_ijin></no_ijin> RIPH-->
-									<span class="fw-500 position-absolute pos-top pos-right mt-1">
-										0155/PP.240/D/03/2022
+									<span id="no_ijin" class="fw-500 position-absolute pos-top pos-right mt-1">
+										
 									</span>
 								</span>
 								<footer class="blockquote-footer text-left">
@@ -293,6 +297,32 @@
 	$(document).ready(function()
 	{
 		$(":input").inputmask();
+
+		$("#btnexec").on('click', function(){
+			
+			stnpwp = $("#npwp").val().replace(/[\.,-]+/g,'');
+			stnomor = $("#nomor").val();
+			//console.log(stnpwp);
+			//console.log(stnomor);
+			$.ajax ({
+				url: "{{ route('admin.task.getriph') }}",
+				type: 'get',
+				data: {npwp: stnpwp, nomor: stnomor},
+				
+				success: function(response){
+					$('#keterangan').html(response.keterangan);
+					if (response.keterangan == 'SUCCESS') {
+						$('#no_ijin').html(response.riph.persetujuan.no_ijin);
+						$('#nama').html(response.riph.persetujuan.nama);
+						$('#npwpout').html($("#npwp").val());
+					}
+					
+				},
+				complete: function(response){
+					$('#collapseData').collapse('toggle');
+				}
+			});
+		})
 	});
 
 </script>
