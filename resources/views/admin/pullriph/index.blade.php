@@ -21,7 +21,7 @@
 			<h2>Sinkronisasi Data</h2>
 			<div class="row justify-content-center">
 				<div class="col-md-8 order-md-2 mb-4">
-					{{-- <form class="row" action="#"> --}}
+					<div class="row">
 						<div class="form-group col-lg-6 text-left">
 							<label class="form-label">No. RIPH</label>
 							<div class="input-group">
@@ -42,13 +42,13 @@
 									<span class="input-group-text"><i class="fal fa-credit-card-front text-align-center"></i></span>
 								</div>
 								<!-- NPWP ini diperoleh dari tabel user importir yang diisi pada saat registrasi -->
-								<input id="npwp" type="text" placeholder="__.___.___._-___.___" data-inputmask="'mask': '99.999.999.9-999.999'" class="form-control" >
+								<input id="npwp" type="text" placeholder="__.___.___._-___.___" data-inputmask="'mask': '99.999.999.9-999.999'" class="form-control" value="{{ ($npwp_company ?? '') }}">
 							</div>
 							<footer class="blockquote-footer text-left">
 								<cite title="Source Title">ini adalah Nomor Pokok Wajib Pajak (NPWP) Anda.</cite>
 							</footer>
 						</div>
-					{{-- </form> --}}
+					</div>
 					<!--
 						-	Button ini memeriksa dan mencocokkan data yang diberikan dengan data yang ada pada API RIPH
 						-	alamat ujicoba: http://riph.pertanian.go.id/api.php/testing/simethris_get
@@ -143,8 +143,8 @@
 								<span class="name">
 									<h6>Periode/Tahun Anggaran </h6>
 									<!-- field ini diperoleh dari WSDL field <tgl_ijin></tgl_ijin> RIPH-->
-									<span class="fw-500 position-absolute pos-top pos-right mt-1">
-										2022
+									<span id="periodetahun" class="fw-500 position-absolute pos-top pos-right mt-1">
+										
 									</span>
 								</span>
 								<footer class="blockquote-footer text-left">
@@ -159,8 +159,8 @@
 								<span class="name">
 									<h6>Tanggal Terbit </h6>
 									<!-- field ini diperoleh dari WSDL field <tgl_ijin></tgl_ijin> RIPH-->
-									<span class="fw-500 position-absolute pos-top pos-right mt-1">
-										2022-03-24
+									<span id="tgl_ijin" class="fw-500 position-absolute pos-top pos-right mt-1">
+										
 									</span>
 								</span>
 								<footer class="blockquote-footer text-left">
@@ -175,8 +175,8 @@
 								<span class="name">
 									<h6>Tanggal berakhir </h6>
 									<!-- field ini diperoleh dari WSDL field <tgl_akhir></tgl_akhir> RIPH-->
-									<span class="fw-500 position-absolute pos-top pos-right mt-1">
-										2022-12-31
+									<span id="tgl_akhir" class="fw-500 position-absolute pos-top pos-right mt-1">
+										
 									</span>
 								</span>
 								<footer class="blockquote-footer text-left">
@@ -315,6 +315,9 @@
 						$('#no_ijin').html(response.riph.persetujuan.no_ijin);
 						$('#nama').html(response.riph.persetujuan.nama);
 						$('#npwpout').html($("#npwp").val());
+						$('#periodetahun').html(stnomor.substr(stnomor.length - 4));
+						$('#tgl_ijin').html(response.riph.persetujuan.tgl_ijin);
+						$('#tgl_akhir').html(response.riph.persetujuan.tgl_akhir);
 					}
 					
 				},

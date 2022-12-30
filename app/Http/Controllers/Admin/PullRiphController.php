@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class PullRiphController extends Controller
 {
@@ -24,7 +25,8 @@ class PullRiphController extends Controller
         $page_title = 'Pull Data RIPH';
         $page_heading = 'Pull/Sync Data RIPH' ;
         $heading_class = 'fa fa-sync-alt';
-        return view('admin.pullriph.index', compact('module_name', 'page_title', 'page_heading', 'heading_class')); 
+        $npwp_company = Auth::user()::find(Auth::user()->id)->data_user->npwp_company;
+        return view('admin.pullriph.index', compact('module_name', 'page_title', 'page_heading', 'heading_class', 'npwp_company')); 
     }
 
 
