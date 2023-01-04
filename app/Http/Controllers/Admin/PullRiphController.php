@@ -82,7 +82,7 @@ class PullRiphController extends Controller
     public function store(Request $request)
     {
         $riph = $request->string('no_ijin');
-        if (empty(PullRiph::where('no_ijin', '=' , $riph)->get())){
+        if (empty(PullRiph::where('no_ijin', '=' , $riph)->first())){
             PullRiph::create($request->all());
             return back()->with('message', 'Sukses menyimpan data RIPH');  
         } else {

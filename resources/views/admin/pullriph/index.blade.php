@@ -40,7 +40,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fal fa-file-invoice text-align-center"></i></span>
 									</div>
-									<input id="nomor" name="nomor" type="text" placeholder="____/PP.240/D/__/____" data-inputmask="'mask': '9999/PP.240/D/99/9999'" class="form-control" value="0106/PP.240/D/03/2022" required>
+									<input id="nomor" name="nomor" type="text" placeholder="____/PP.240/D/__/____" data-inputmask="'mask': '9999/PP.240/D/99/9999'" class="form-control"  required>
 								</div>
 								<footer class="blockquote-footer text-left">
 									<cite title="Source Title">e.g 0001/PP.240/D/04/2022</cite>
