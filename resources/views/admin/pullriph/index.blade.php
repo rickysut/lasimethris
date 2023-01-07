@@ -266,10 +266,14 @@
 								<label class="custom-control-label text-danger" for="responsible">Bertanggungjawab sepenuhnya atas informasi dan data yang kami sampaikan.</label>
 							</div>
 						</div>
+						
+						<a id="submitbtn" class="btn btn-sm btn-primary text-white" role="button" type="submit">
+							<i class="fal fa-upload text-align-center  mr-1"></i> Simpan untuk pelaporan
+						</a>
 						<hr class="mb-4">
 						<!-- field konfirmasi, pada db mysql, is_confirm bernilai true jika berisi "username" -->
-						<span class="text-bold text-secondary">Konfirmasi</span>
-						<div class="form-group">
+						{{-- <span class="text-bold text-secondary">Konfirmasi</span> --}}
+						{{-- <div class="form-group">
 							<div class="input-group">
 								<input name="username" type="text" class="form-control form-control-sm @error('username') is-invalid @enderror" placeholder="ketikan username untuk konfirmasi" required>
 								
@@ -286,7 +290,7 @@
 									</a>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 						
 					
 				</div>
