@@ -19,90 +19,25 @@
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
-                    <table id="riphList" class="table table-sm table-bordered table-hover table-striped w-100">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th id="status"></th>
-                                <th id="year" hidden>Tahun Terbit</th>
-                                <th id="no_riph">No. RIPH</th>
-                                <th id="date_start">Tanggal.Terbit</th>
-                                <th id="locus" width="10%">Lokasi.Tanam</th>
-                                <th id="vol_riph">V. RIPH (ton)</th>
-                                <th id="crops_target">Target Tanam (ha)</th>
-                                <th id="crops_progress">Realisasi Tanam (ha)</th>
-                                <th id="harvest_target">Target Produksi (ton)</th>
-                                <th id="harvest_progress">Realisasi Produksi (ton)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center"><i class="fas fa-exclamation-triangle text-warning" data-toggle="tooltip" title data-original-title="WARNING! No Data Available"></i></td>
-                                <td hidden>2022</td>
-                                <td><a href="/commitment/detail">0155/PP.240/D/03/2022</a></td>
-                                <td>2022-03-24</td>
-                                <td>3323 - 33</td>
-                                <td>5.640</td>
-                                <td>autocalculate</td>
-                                <td>total tanam</td>
-                                <td>autocalculate</td>
-                                <td>total produksi</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><i class="fas fa-seedling text-success" data-toggle="tooltip" title data-original-title="Data Tanam is Available"></i></td>
-                                <td hidden>2021</td>
-                                <td><a href="/commitment/detail">xxxx/PP.240/D/MM/YYYY</a></td>
-                                <td>dd mmmm yyyy</td>
-                                <td>Kabupaten - Provinsi</td>
-                                <td>xx.xxx</td>
-                                <td>autocalculate</td>
-                                <td>total tanam</td>
-                                <td>autocalculate</td>
-                                <td>total produksi</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><i class="fas fa-dolly text-warning" data-toggle="tooltip" title data-original-title="Data Produksi is Available"></i></td>
-                                <td hidden>2020</td>
-                                <td><a href="/commitment/detail">xxxx/PP.240/D/MM/YYYY</a></td>
-                                <td>dd mmmm yyyy</td>
-                                <td>Kabupaten - Provinsi</td>
-                                <td>xx.xxx</td>
-                                <td>autocalculate</td>
-                                <td>total tanam</td>
-                                <td>autocalculate</td>
-                                <td>total produksi</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <i class="fas fa-upload text-danger" data-toggle="tooltip" title data-original-title="Data diajukan verifikasi"></i>
-                                </td>
-                                <td hidden>2022</td>
-                                <td><a href="/commitment/detail">xxxx/PP.240/D/MM/YYYY</a></td>
-                                <td>dd mmmm yyyy</td>
-                                <td>Kabupaten - Provinsi</td>
-                                <td>xx.xxx</td>
-                                <td>autocalculate</td>
-                                <td>total tanam</td>
-                                <td>autocalculate</td>
-                                <td>total produksi</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <a href="/" class="fs-xl">
-                                        <i class="fas fa-award text-warning" data-toggle="tooltip" title data-original-title="LUNAS! Lihat Sertifikat Keterangan Lunas"></i>
-                                    </a>
-                                </td>
-                                <td hidden>2019</td>
-                                <td><a href="">xxxx/PP.240/D/MM/YYYY</a></td>
-                                <td>dd mmmm yyyy</td>
-                                <td>Kabupaten - Provinsi</td>
-                                <td>xx.xxx</td>
-                                <td>autocalculate</td>
-                                <td>total tanam</td>
-                                <td>autocalculate</td>
-                                <td>total produksi</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table dataTables_wrapper dt-bootstrap4">
+                        <table class="table table-sm table-bordered table-striped table-hover ajaxTable datatable datatable-Riph w-100">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th ></th>
+                                    {{-- <th hidden>ID</th> --}}
+                                    <th >Periode Tahun</th>
+                                    <th >No. RIPH</th>
+                                    <th >Tanggal.Terbit</th>
+                                    <th>V. RIPH (ton)</th>
+                                    <th>V. Produksi (ton)</th>
+                                    <th>L. Wajib Tanam (ha)</th>
+                                    <th style="width:15%">
+                                        {{ trans('global.actions') }}
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,27 +52,88 @@
 @parent
 <script>
 	
-	$(document).ready(function()
+	$(function () 
 	{
-		$('#dt-riph').dataTable(
-		{
-			responsive: true,
-			pageLength: 15,
-			order: [
-				[1, 'desc']
-			],
-			rowGroup:
-			{
-				dataSrc: 1
-			},
-			dom: 
-					"<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'l>>" +
-					"<'row'<'col-sm-12'tr>>" +
-					"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-			
-		});
-	});
+		let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+        @can('commitment_delete')
+            let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
+            let deleteButton = {
+                text: deleteButtonTrans,
+                url: "{{ route('admin.task.commitment.massDestroy') }}",
+                className: 'btn-danger  waves-effect waves-themed  btn-xs mr-1', 
+                action: function (e, dt, node, config) {
+                var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+                    return entry.id
+                });
 
+                if (ids.length === 0) {
+                    alert('{{ trans('global.datatables.zero_selected') }}')
+
+                    return
+                }
+
+                if (confirm('{{ trans('global.areYouSure') }}')) {
+                    $.ajax({
+                    headers: {'x-csrf-token': _token},
+                    method: 'POST',
+                    url: config.url,
+                    data: { ids: ids, _method: 'DELETE' }})
+                    .done(function () { location.reload() })
+                }
+                }
+            }
+            dtButtons.push(deleteButton)
+        @endcan
+        let dtOverrideGlobals = {
+            buttons: dtButtons,
+            processing: true,
+            serverSide: true,
+            retrieve: true,
+            aaSorting: [],
+            columnDefs: [{
+                                orderable: false,
+                                className: 'select-checkbox',
+                                targets: 0
+                            }, {
+                                orderable: false,
+                                searchable: false,
+                                targets: -1
+                            }],
+            select: {
+                        style:    'multi+shift',
+                        selector: 'td:first-child'
+            },
+            dom: 
+					"<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-8 d-flex'B><'col-sm-12 col-md-2 d-flex justify-content-end'f>>" +
+					"<'row'<'col-sm-12 col-md-12'tr>>" +
+					"<'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'p>>",
+            
+            ajax: "{{ route('admin.task.commitment.index') }}",
+            columns: [
+                { data: 'placeholder', name: 'placeholder' },
+                // { data: 'id', name: 'id',  },
+                { data: 'periodetahun', name: 'periodetahun' },
+                { data: 'no_ijin', name: 'no_ijin' },
+                { data: 'tgl_ijin', name: 'tgl_ijin' },
+                { data: 'volume_riph', name: 'volume_riph', class: 'text-right' },
+                { data: 'volume_produksi', name: 'volume_produksi', class: 'text-right' },
+                { data: 'luas_wajib_tanam', name: 'luas_wajib_tanam', class: 'text-right' },
+                { data: 'actions', name: '{{ trans('global.actions') }}', class: 'text-center' }
+            ],
+            orderCellsTop: true,
+            order: [[ 1, 'desc' ]],
+            pageLength: 10,
+        };
+        let table = $('.datatable-Riph').DataTable(dtOverrideGlobals);
+        $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
+            $($.fn.dataTable.tables(true)).DataTable()
+                .columns.adjust();
+        });
+        
+        
+        
+    });
+        
 </script>
 
 

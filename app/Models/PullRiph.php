@@ -11,6 +11,8 @@ class PullRiph extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public $table = 'pull_riphs';
+
     protected $fillable = [
         'npwp',
         'keterangan',

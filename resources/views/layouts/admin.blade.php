@@ -125,7 +125,7 @@
 		<!-- end quick menu -->
 		{{-- base app script --}}
 		<script src="{{ asset('js/app.js') }}"></script>
-		{{-- <script src="{{ asset('js/jquery/jquery.min.js') }}"></script> --}}
+		
 		<!-- Smartadmin core -->
 		
 		
@@ -160,7 +160,7 @@
 		<script src="{{ asset('js/intro.js/minified/intro.min.js.map') }}"></script> --}}
 
 		<!-- coreui -->
-		
+		<script src="{{ asset('js/main.js') }}"></script>
 		<script src="{{ asset('js/pdfmake/pdfmake.min.js') }}"></script>
 		<script src="{{ asset('js/pdfmake/vfs_fonts.js') }}"></script>
 		<script src="{{ asset('js/jszip/jszip.min.js') }}"></script> 

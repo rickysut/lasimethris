@@ -211,7 +211,7 @@
                     @endcan
                     @can('commitment_access')
                         <li class="c-sidebar-nav-item {{ request()->is("admin/task/commitment")  ? "active" : "" }}">
-                            <a href="{{ route("admin.task.commitment") }}" data-filter-tags="{{ strtolower(trans('cruds.commitment.title_lang')) }}">
+                            <a href="{{ route("admin.task.commitment.index") }}" data-filter-tags="{{ strtolower(trans('cruds.commitment.title_lang')) }}">
                                 <i class="fa-fw fal fa-ballot c-sidebar-nav-icon">
 
                                 </i>

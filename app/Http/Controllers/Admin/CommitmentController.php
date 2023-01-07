@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Commitment;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\PullRiph;
 use Gate;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class CommitmentController extends Controller
 {
@@ -15,9 +17,57 @@ class CommitmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('commitment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        if ($request->ajax()) {
+            $query = PullRiph::query()->orderBy('tgl_ijin', 'desc')->select(sprintf('%s.*', (new PullRiph())->table));
+            $table = Datatables::of($query);
+
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate = 'commitment_show';
+                $editGate = 'commitment_edit';
+                $deleteGate = 'commitment_delete';
+                $crudRoutePart = 'task.commitment';
+
+                return view('partials.datatablesActions', compact(
+                'viewGate',
+                'editGate',
+                'deleteGate',
+                'crudRoutePart',
+                'row'
+            ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('no_ijin', function ($row) {
+                return $row->no_ijin ? $row->no_ijin : '';
+            });
+            $table->editColumn('tgl_ijin', function ($row) {
+                return $row->tgl_ijin ? $row->tgl_ijin : '';
+            });
+            $table->editColumn('periodetahun', function ($row) {
+                return $row->periodetahun ? $row->periodetahun : '';
+            });
+            $table->editColumn('volume_riph', function ($row) {
+                return $row->volume_riph ? $row->volume_riph : '';
+            });
+            $table->editColumn('volume_produksi', function ($row) {
+                return $row->volume_produksi ? $row->volume_produksi : '';
+            });
+            $table->editColumn('luas_wajib_tanam', function ($row) {
+                return $row->luas_wajib_tanam ? $row->luas_wajib_tanam : '';
+            });
+            
+            $table->rawColumns(['actions', 'placeholder']);
+            return $table->make(true);
+        }
 
         $module_name = 'User task' ;
         $page_title = 'Commitment';
@@ -50,12 +100,16 @@ class CommitmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Commitment  $commitment
+     * @param  \App\Models\PullRiph  $commitment
      * @return \Illuminate\Http\Response
      */
-    public function show(Commitment $commitment)
+    public function show(PullRiph $riphdata)
     {
-        //
+        $module_name = 'User task' ;
+        $page_title = 'Commitment';
+        $page_heading = 'Rincian Komitmen Wajib Tanam-produksi' ;
+        $heading_class = 'fal fa-file-invoice';
+        return view('admin.commitment.show', compact('module_name', 'page_title', 'page_heading', 'heading_class', 'riphdata'));
     }
 
     /**
@@ -66,7 +120,7 @@ class CommitmentController extends Controller
      */
     public function edit(Commitment $commitment)
     {
-        //
+        
     }
 
     /**
@@ -89,6 +143,17 @@ class CommitmentController extends Controller
      */
     public function destroy(Commitment $commitment)
     {
-        //
+        abort_if(Gate::denies('commitment_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $commitment->delete();
+
+        return back();
+    }
+
+    public function massDestroy(MassDestroyPermissionRequest $request)
+    {
+        PullRiph::whereIn('id', request('ids'))->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

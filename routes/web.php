@@ -73,7 +73,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::post('storeriph', 'PullRiphController@store')->name('storeriph');
         
 
-        Route::get('commitment', 'CommitmentController@index')->name('commitment');
+        Route::resource('commitment', 'CommitmentController');
+        Route::delete('commitment/destroy', 'CommitmentController@massDestroy')->name('commitment.massDestroy');
+
         Route::resource('kelompoktani', 'KelompoktaniController');
         Route::resource('pengajuan', 'PengajuanController');
         Route::resource('skl', 'SklController');
