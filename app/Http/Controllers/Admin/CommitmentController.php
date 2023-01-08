@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Commitment;
 use App\Http\Controllers\Controller;
+use App\Models\DataUser;
 use App\Models\PullRiph;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CommitmentController extends Controller
 {
@@ -22,7 +25,13 @@ class CommitmentController extends Controller
         abort_if(Gate::denies('commitment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = PullRiph::query()->orderBy('tgl_ijin', 'desc')->select(sprintf('%s.*', (new PullRiph())->table));
+            $npwp = Auth::user()::find(Auth::user()->id)->data_user->npwp_company;
+            //$user_npwp = preg_replace('/[^0-9]/', '', $npwp->data_user->npwp_company);
+            //00.000.000.0-000.000
+            $mask = "%s%s.%s%s%s.%s%s%s.%s-%s%s%s.%s%s%s";
+            $formated = vsprintf($mask, str_split($npwp));
+            // dd($formated);
+            $query = PullRiph::where('npwp', $formated)->orderBy('tgl_ijin', 'desc')->select(sprintf('%s.*', (new PullRiph())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
