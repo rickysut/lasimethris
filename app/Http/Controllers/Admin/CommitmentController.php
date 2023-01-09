@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\MassDestroyPullriphRequest;
 
 class CommitmentController extends Controller
 {
@@ -29,6 +30,7 @@ class CommitmentController extends Controller
             //$user_npwp = preg_replace('/[^0-9]/', '', $npwp->data_user->npwp_company);
             //00.000.000.0-000.000
             $mask = "%s%s.%s%s%s.%s%s%s.%s-%s%s%s.%s%s%s";
+            if (!$npwp) return null; 
             $formated = vsprintf($mask, str_split($npwp));
             // dd($formated);
             $query = PullRiph::where('npwp', $formated)->orderBy('tgl_ijin', 'desc')->select(sprintf('%s.*', (new PullRiph())->table));
@@ -39,13 +41,11 @@ class CommitmentController extends Controller
 
             $table->editColumn('actions', function ($row) {
                 $viewGate = 'commitment_show';
-                $editGate = 'commitment_edit';
                 $deleteGate = 'commitment_delete';
                 $crudRoutePart = 'task.commitment';
 
-                return view('partials.datatablesActions', compact(
+                return view('partials.pullRiphActions', compact(
                 'viewGate',
-                'editGate',
                 'deleteGate',
                 'crudRoutePart',
                 'row'
@@ -112,13 +112,15 @@ class CommitmentController extends Controller
      * @param  \App\Models\PullRiph  $commitment
      * @return \Illuminate\Http\Response
      */
-    public function show(PullRiph $riphdata)
+    public function show($id)
     {
+        
+        $pullRiph = PullRiph::findOrFail($id);
         $module_name = 'User task' ;
         $page_title = 'Commitment';
         $page_heading = 'Rincian Komitmen Wajib Tanam-produksi' ;
         $heading_class = 'fal fa-file-invoice';
-        return view('admin.commitment.show', compact('module_name', 'page_title', 'page_heading', 'heading_class', 'riphdata'));
+        return view('admin.commitment.show', compact('module_name', 'page_title', 'page_heading', 'heading_class', 'pullRiph'));
     }
 
     /**
@@ -150,19 +152,22 @@ class CommitmentController extends Controller
      * @param  \App\Models\Commitment  $commitment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Commitment $commitment)
+    public function destroy($id)
     {
         abort_if(Gate::denies('commitment_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $commitment->delete();
+        $pullRiph = PullRiph::find($id);
+        $pullRiph->delete();
 
         return back();
     }
 
-    public function massDestroy(MassDestroyPermissionRequest $request)
+    public function massDestroy(MassDestroyPullriphRequest $request)
     {
         PullRiph::whereIn('id', request('ids'))->delete();
-
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }
+
+    
+

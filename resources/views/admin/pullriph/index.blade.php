@@ -25,7 +25,7 @@
 
 <div class="row">
 	<div class="col-12">
-		<form  id="dataForm" action="{{ route('admin.task.storeriph') }}" method="POST" enctype="multipart/form-data">
+		<form  id="dataForm" action="{{ route('admin.task.pull.store') }}" method="POST" enctype="multipart/form-data">
 		@csrf
 		
 			<div class="text-center">
@@ -359,7 +359,7 @@
 			//console.log(stnpwp);
 			//console.log(stnomor);
 			$.ajax ({
-				url: "{{ route('admin.task.getriph') }}",
+				url: "{{ route('admin.task.pull.getriph') }}",
 				type: 'get',
 				data: {npwp: stnpwp, nomor: stnomor},
 				

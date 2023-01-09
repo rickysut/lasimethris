@@ -65,7 +65,7 @@
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.permissions.massDestroy') }}",
-    className: 'btn-danger  waves-effect waves-themed  btn-xs mr-1', 
+    className: 'btn-danger  waves-effect waves-themed  mr-1', 
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
           return entry.id

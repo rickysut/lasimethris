@@ -3,7 +3,7 @@
 @include('partials.breadcrumb')
 @include('partials.subheader')
 @can('commitment_show')
-    @if (!empty($pagedata['alerttitle']))
+    @if (!empty($error))
         <div class="" data-title="System Alert" data-intro="Ini adalah Panel yang berisi informasi atau pemberitahuan penting untuk Anda." data-step="1">@include('partials.sysalert')</div>
     @endif
 
@@ -25,43 +25,43 @@
                             <li class="list-group-item d-flex justify-content-between">
                                 <div>
                                     <span class="text-muted">Perusahaan/Lembaga</span>
-                                    <h6 class="fw-500 my-0">Nama Perusahaan/Lembaga</h6>
+                                    <h6 class="fw-500 my-0">{{ $pullRiph->nama }}</h6>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <div>
                                     <span class="text-muted">Nomor RIPH</span>
-                                    <h6 class="fw-500 my-0">xxxx/PP.240/D/MM/YYYY</h6>
+                                    <h6 class="fw-500 my-0">{{ $pullRiph->no_ijin }}</h6>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <div>
                                     <span class="text-muted">Tanggal Terbit</span>
-                                    <h6 class="fw-500 my-0">dd mmmm yyyy</h6>
+                                    <h6 class="fw-500 my-0">{{ $pullRiph->tgl_ijin }}</h6>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <div>
                                     <span class="text-muted">Volume RIPH</span>
-                                    <h6 class="fw-500 my-0">xx.xxx <sup>ton</sup></h6>
+                                    <h6 class="fw-500 my-0">{{ $pullRiph->volume_riph }} ton</h6>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <div>
                                     <span class="text-muted">Vol. Wajib Produksi</span>
-                                    <h6 class="fw-500 my-0">xx.xxx <sup>ton</sup></h6>
+                                    <h6 class="fw-500 my-0">{{ $pullRiph->volume_produksi }} ton</h6>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <div>
-                                    <span class="text-muted">Vol. Wajib Tanam</span>
-                                    <h6 class="fw-500 my-0">xx.xxx <sup>ha</sup></h6>
+                                    <span class="text-muted">Luas. Wajib Tanam</span>
+                                    <h6 class="fw-500 my-0">{{ $pullRiph->luas_wajib_tanam }} ha</h6>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <div>
-                                    <span class="text-muted">Lokasi Tanam</span>
-                                    <h6 class="fw-500 my-0">Kabupaten - Provinsi</h6>
+                                    <span class="text-muted">Status dokumen</span>
+                                    <h6 class="fw-500 my-0">Belum diverifikasi</h6>
                                 </div>
                             </li>
                         </ul>

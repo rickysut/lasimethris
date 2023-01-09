@@ -98,7 +98,12 @@ class PullRiphController extends Controller
      */
     public function show(PullRiph $pullRiph)
     {
-        //
+        $module_name = 'User task' ;
+        $page_title = 'Commitment';
+        $page_heading = 'Rincian Komitmen Wajib Tanam-produksi' ;
+        $heading_class = 'fal fa-file-invoice';
+        return view('admin.commitment.show', compact('module_name', 'page_title', 'page_heading', 'heading_class', 'pullRiph'));
+
     }
 
     /**
@@ -132,6 +137,8 @@ class PullRiphController extends Controller
      */
     public function destroy(PullRiph $pullRiph)
     {
-        //
+        
     }
+
+    
 }
