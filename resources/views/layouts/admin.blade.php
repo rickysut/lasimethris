@@ -125,7 +125,7 @@
 		<!-- end quick menu -->
 		{{-- base app script --}}
 		<script src="{{ asset('js/app.js') }}"></script>
-		{{-- <script src="{{ asset('js/jquery/jquery.min.js') }}"></script> --}}
+		
 		<!-- Smartadmin core -->
 		
 		
@@ -135,7 +135,7 @@
 		<!-- Smartadmin plugin -->
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.bundle.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.export.js') }}"></script>
-		{{-- <script src="{{ asset('js/datatables/buttons.colVis.min.js') }}"></script> --}}
+		<script src="{{ asset('js/datatables/datetime.js') }}"></script>
 
 		<script src="{{ asset('js/moment/moment.min.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/formplugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
@@ -160,7 +160,7 @@
 		<script src="{{ asset('js/intro.js/minified/intro.min.js.map') }}"></script> --}}
 
 		<!-- coreui -->
-		
+		<script src="{{ asset('js/main.js') }}"></script>
 		<script src="{{ asset('js/pdfmake/pdfmake.min.js') }}"></script>
 		<script src="{{ asset('js/pdfmake/vfs_fonts.js') }}"></script>
 		<script src="{{ asset('js/jszip/jszip.min.js') }}"></script> 

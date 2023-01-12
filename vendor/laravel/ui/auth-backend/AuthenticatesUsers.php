@@ -84,7 +84,9 @@ trait AuthenticatesUsers
                     if ($user->wasRecentlyCreated) {
                         $user->roles()->attach(2); // user V3
                     } 
-                    
+                    $npwp = (string)$res->riph->company_profile->npwp;
+                    $mask = "%s%s.%s%s%s.%s%s%s.%s-%s%s%s.%s%s%s";
+                    $formatedNpwp = vsprintf($mask, str_split($npwp));
                     $datauser = DataUser::updateOrCreate(
                         ['user_id' => $user->id, 'company_name' =>  (string)$res->riph->company_profile->nama],
                         [
@@ -93,7 +95,7 @@ trait AuthenticatesUsers
                             'fix_phone' => (string)$res->riph->company_profile->telepon,
                             'pic_name' => (string)$res->riph->company_profile->penanggung_jawab,
                             'jabatan' => (string)$res->riph->company_profile->jabatan,
-                            'npwp_company' => (string)$res->riph->company_profile->npwp,
+                            'npwp_company' => $formatedNpwp,
                             'nib_company' => (string)$res->riph->company_profile->nib,
                             'address_company' => (string)$res->riph->company_profile->alamat,
                             'provinsi' => (string)$res->riph->company_profile->kdprop,

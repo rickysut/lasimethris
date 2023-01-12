@@ -68,12 +68,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     
     //user task
     Route::group(['prefix' => 'task','as' => 'task.'], function () {
-        Route::get('pull', 'PullRiphController@index')->name('pull');
-        Route::get('getriph', 'PullRiphController@pull')->name('getriph');
-        Route::post('storeriph', 'PullRiphController@store')->name('storeriph');
-        
 
+
+        Route::get('pull', 'PullRiphController@index')->name('pull');
+        Route::get('getriph', 'PullRiphController@pull')->name('pull.getriph');
+        Route::post('pull', 'PullRiphController@store')->name('pull.store');
+    
         Route::get('commitment', 'CommitmentController@index')->name('commitment');
+        Route::get('commitment/{pullriph}', 'CommitmentController@show')->name('commitment.show');
+        Route::delete('commitment/{pullriph}', 'CommitmentController@destroy')->name('commitment.destroy');
+        Route::post('commitment/unggah', 'CommitmentController@store')->name('commitment.store');
+        Route::delete('commitmentmd', 'CommitmentController@massDestroy')->name('commitment.massDestroy');
+
         Route::resource('kelompoktani', 'KelompoktaniController');
         Route::resource('pengajuan', 'PengajuanController');
         Route::resource('skl', 'SklController');

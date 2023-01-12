@@ -5,27 +5,10 @@
 
 @can('pull_access')
 
-@if ($errors)
-<div class="" data-title="System Alert" >
-	@foreach($errors->all() as $error)
-		<li>{{ $error }}</li>
-	@endforeach
-</div>
-
-@endif
-
-{{-- @if ($status)
-<div class="" data-title="System Alert" >
-	@foreach($errors->all() as $error)
-		<li>{{ $status }}</li>
-	@endforeach
-</div>
-@endif --}}
-
 
 <div class="row">
 	<div class="col-12">
-		<form  id="dataForm" action="{{ route('admin.task.storeriph') }}" method="POST" enctype="multipart/form-data">
+		<form  id="dataForm" action="{{ route('admin.task.pull.store') }}" method="POST" enctype="multipart/form-data">
 		@csrf
 		
 			<div class="text-center">
@@ -97,9 +80,6 @@
 							</li>
 							<li>
 								<a href="#" class="d-flex align-items-center">
-									{{-- <div class="icon-stack display-4 mr-1 flex-shrink-0">
-										<i class="fas fa-check icon-stack-1x opacity-100 color-success-500"></i>
-									</div> --}}
 									<span class="d-flex flex-column flex-1 ml-1">
 										<span class="name">
 											<h6>NPWP </h6>
@@ -115,9 +95,6 @@
 							</li>
 							<li>
 								<a href="#" class="d-flex align-items-center">
-									{{-- <div class="icon-stack display-4 mr-1 flex-shrink-0">
-										<i class="fas fa-check icon-stack-1x opacity-100 color-success-500"></i>
-									</div> --}}
 									<span class="d-flex flex-column flex-1 ml-1">
 										<span class="name">
 											<h6>Nomor RIPH </h6>
@@ -253,8 +230,6 @@
 							</li>
 						</ul>
 						<hr class="mb-4">
-						<!-- field pernyataan kebenaran-->
-						
 						<span class="text-bold text-secondary">Kami menyatakan:</span>
 						<div class="form-group ">
 							<div class="custom-control custom-checkbox">
@@ -271,27 +246,6 @@
 							<i class="fal fa-upload text-align-center  mr-1"></i> Simpan untuk pelaporan
 						</a>
 						<hr class="mb-4">
-						<!-- field konfirmasi, pada db mysql, is_confirm bernilai true jika berisi "username" -->
-						{{-- <span class="text-bold text-secondary">Konfirmasi</span> --}}
-						{{-- <div class="form-group">
-							<div class="input-group">
-								<input name="username" type="text" class="form-control form-control-sm @error('username') is-invalid @enderror" placeholder="ketikan username untuk konfirmasi" required>
-								
-								
-								<div class="input-group-append">
-									<a class="btn btn-sm btn-danger text-white" role="button">
-										<i class="fal fa-times text-align-center  mr-1"></i> Cancel
-									</a>
-								</div>
-								
-								<div class="input-group-append">
-									<a id="submitbtn" class="btn btn-sm btn-primary text-white" role="button" type="submit">
-										<i class="fal fa-upload text-align-center  mr-1"></i> Submit
-									</a>
-								</div>
-							</div>
-						</div> --}}
-						
 					
 				</div>
 			</div>
@@ -356,10 +310,8 @@
 			
 			stnpwp = $("#npwp").val().replace(/[\.,-]+/g,'');
 			stnomor = $("#nomor").val();
-			//console.log(stnpwp);
-			//console.log(stnomor);
 			$.ajax ({
-				url: "{{ route('admin.task.getriph') }}",
+				url: "{{ route('admin.task.pull.getriph') }}",
 				type: 'get',
 				data: {npwp: stnpwp, nomor: stnomor},
 				
