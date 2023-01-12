@@ -14,8 +14,8 @@
 
 <!-- Page Content -->
 <div class="row">
-	<div class="col-lg-7">
-		<div id="panel-1" class="panel">
+	<div class="col-lg-7" hidden>
+		<div id="panel-1" class="panel" >
 			
 			<div class="panel-hdr">
 				<h2>

@@ -32,7 +32,6 @@ class PullRiphController extends Controller
 
     public function pull(Request $request)
     {   
-        //dd($request->string('npwp'), $request->string('nomor'));
         try {
             $options = array(
                 'soap_version' => SOAP_1_1,
@@ -59,8 +58,6 @@ class PullRiphController extends Controller
         }
         $res = json_decode(json_encode((array)simplexml_load_string($response)),true);
        
-        //$res = simplexml_load_string($response);
-        //dd($res->riph);
         return $res;
     }
     /**

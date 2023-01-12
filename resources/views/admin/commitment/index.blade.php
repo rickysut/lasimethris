@@ -94,11 +94,12 @@
                                 orderable: false,
                                 className: 'select-checkbox',
                                 targets: 0
-                            }, {
+                            },  {
                                 orderable: false,
                                 searchable: false,
                                 targets: -1
-                            }],
+                            }
+                        ],
             select: {
                         style:    'multi+shift',
                         selector: 'td:first-child'
@@ -114,7 +115,7 @@
                 // { data: 'id', name: 'id',  },
                 { data: 'periodetahun', name: 'periodetahun' },
                 { data: 'no_ijin', name: 'no_ijin' },
-                { data: 'tgl_ijin', name: 'tgl_ijin' },
+                { data: 'tgl_ijin', name: 'tgl_ijin',class: 'text-center'  },
                 { data: 'volume_riph', name: 'volume_riph', class: 'text-right' },
                 { data: 'volume_produksi', name: 'volume_produksi', class: 'text-right' },
                 { data: 'luas_wajib_tanam', name: 'luas_wajib_tanam', class: 'text-right' },

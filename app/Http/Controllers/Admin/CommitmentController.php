@@ -4,15 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Commitment;
 use App\Http\Controllers\Controller;
-use App\Models\DataUser;
 use App\Models\PullRiph;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\User;
+use App\Models\DataUser;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\MassDestroyPullriphRequest;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class CommitmentController extends Controller
 {
@@ -27,13 +29,9 @@ class CommitmentController extends Controller
 
         if ($request->ajax()) {
             $npwp = Auth::user()::find(Auth::user()->id)->data_user->npwp_company;
-            //$user_npwp = preg_replace('/[^0-9]/', '', $npwp->data_user->npwp_company);
-            //00.000.000.0-000.000
-            $mask = "%s%s.%s%s%s.%s%s%s.%s-%s%s%s.%s%s%s";
             if (!$npwp) return null; 
-            $formated = vsprintf($mask, str_split($npwp));
-            // dd($formated);
-            $query = PullRiph::where('npwp', $formated)->orderBy('tgl_ijin', 'desc')->select(sprintf('%s.*', (new PullRiph())->table));
+            
+            $query = PullRiph::where('npwp', $npwp)->orderBy('tgl_ijin', 'desc')->select(sprintf('%s.*', (new PullRiph())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -59,19 +57,22 @@ class CommitmentController extends Controller
                 return $row->no_ijin ? $row->no_ijin : '';
             });
             $table->editColumn('tgl_ijin', function ($row) {
-                return $row->tgl_ijin ? $row->tgl_ijin : '';
+                return $row->tgl_ijin ? date('d/m/Y', strtotime($row->tgl_ijin)) : '';
             });
             $table->editColumn('periodetahun', function ($row) {
                 return $row->periodetahun ? $row->periodetahun : '';
             });
             $table->editColumn('volume_riph', function ($row) {
-                return $row->volume_riph ? $row->volume_riph : '';
+                return $row->volume_riph ? str_replace('.', ',', $row->volume_riph) : '';
             });
             $table->editColumn('volume_produksi', function ($row) {
-                return $row->volume_produksi ? $row->volume_produksi : '';
+                return $row->volume_produksi ? str_replace('.', ',', $row->volume_produksi) : '';
             });
             $table->editColumn('luas_wajib_tanam', function ($row) {
-                return $row->luas_wajib_tanam ? $row->luas_wajib_tanam : '';
+                return $row->luas_wajib_tanam ? str_replace('.', ',', $row->luas_wajib_tanam) : '';
+            });
+            $table->editColumn('status', function ($row) {
+                return $row->status ? $row->status : 0;
             });
             
             $table->rawColumns(['actions', 'placeholder']);
@@ -103,7 +104,121 @@ class CommitmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $realnpwp = Auth::user()::find(Auth::user()->id)->data_user->npwp_company;
+        $pullRiph = PullRiph::where('npwp', $realnpwp)->first();
+        DB::beginTransaction();
+        try {
+            if ($pullRiph){
+                $npwp = str_replace('.', '', $realnpwp);
+                $npwp = str_replace('-', '', $npwp);
+                $userFiles = [];
+                $userFiles += array('status' => 1);
+                if ($request->hasFile('formRiph')) {
+                    if  ($request->formRiph !=null){
+                        $file = $request->file('formRiph');
+                        $file_name = 'formRiph.'.$file->getClientOriginalExtension();
+                        $file_path = $file->storeAs('uploads/'.$npwp, $file_name, 'public');
+                        $userFiles += array('formRiph' => $file_path);
+                    };
+                }
+                if ($request->hasFile('formSptjm')) {
+                    if  ($request->formSptjm !=null){
+                        $file = $request->file('formSptjm');
+                        $file_name = 'formSptjm.'.$file->getClientOriginalExtension();
+                        $file_path = $file->storeAs('uploads/'.$npwp, $file_name, 'public');
+                        $userFiles += array('formSptjm' => $file_path);
+                    };
+                }
+                if ($request->hasFile('logBook')) {
+                    if  ($request->logBook !=null){
+                        $file = $request->file('logBook');
+                        $file_name = 'logBook.'.$file->getClientOriginalExtension();
+                        $file_path = $file->storeAs('uploads/'.$npwp, $file_name, 'public');
+                        $userFiles += array('logBook' => $file_path);
+                    };
+                }
+                if ($request->hasFile('formRt')) {
+                    if  ($request->formRt !=null){
+                        $file = $request->file('formRt');
+                        $file_name = 'formRt.'.$file->getClientOriginalExtension();
+                        $file_path = $file->storeAs('uploads/'.$npwp, $file_name, 'public');
+                        $userFiles += array('formRt' => $file_path);
+                    };
+                }
+                if ($request->hasFile('formRta')) {
+                    if  ($request->formRta !=null){
+                        $file = $request->file('formRta');
+                        $file_name = 'formRta.'.$file->getClientOriginalExtension();
+                        $file_path = $file->storeAs('uploads/'.$npwp, $file_name, 'public');
+                        $userFiles += array('formRta' => $file_path);
+                    };
+                }
+                if ($request->hasFile('formRpo')) {
+                    if  ($request->formRpo !=null){
+                        $file = $request->file('formRpo');
+                        $file_name = 'formRpo.'.$file->getClientOriginalExtension();
+                        $file_path = $file->storeAs('uploads/'.$npwp, $file_name, 'public');
+                        $userFiles += array('formRpo' => $file_path);
+                    };
+                }
+                if ($request->hasFile('formLa')) {
+                    if  ($request->formLa !=null){
+                        $file = $request->file('formLa');
+                        $file_name = 'formLa.'.$file->getClientOriginalExtension();
+                        $file_path = $file->storeAs('uploads/'.$npwp, $file_name, 'public');
+                        $userFiles += array('formLa' => $file_path);
+                    };
+                }
+                PullRiph::updateOrCreate(
+                    ['npwp' => $realnpwp],
+                    $userFiles
+                ); 
+            
+            }
+        } catch(ValidationException $e)
+        {
+            DB::rollback();
+            return back()->with(['error' => __('Terjadi kesalahan saat unggah file')]);
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            //throw $e;
+            return back()->with(['error' => __('Terjadi kesalahan saat unggah file')]);
+        }
+        
+        DB::commit();
+        return back()->with('message', 'Sukses mengunggah file..'); 
+    }
+
+    protected function pull($npwp, $nomor)
+    {   
+        try {
+            $options = array(
+                'soap_version' => SOAP_1_1,
+                'exceptions' => true,
+                'trace' => 1,
+                'cache_wsdl' => WSDL_CACHE_MEMORY,
+                'connection_timeout' => 25,
+                'style' => SOAP_RPC,
+                'use' => SOAP_ENCODED,
+            );
+    
+            $client = new \SoapClient('http://riph.pertanian.go.id/api.php/simethris?wsdl', $options);
+            $parameter = array(
+                'user' => 'simethris',
+                'pass' => 'wsriphsimethris',
+                'npwp' => $npwp,
+                'nomor' =>  $nomor
+            );
+            $response = $client->__soapCall('get_riph', $parameter);
+        } catch (\Exception $e) {
+
+            Log::error('Soap Exception: ' . $e->getMessage());
+            throw new \Exception('Problem with SOAP call');
+        }
+        $res = json_decode(json_encode((array)simplexml_load_string($response)),true);
+       
+        return $res;
     }
 
     /**
@@ -114,13 +229,17 @@ class CommitmentController extends Controller
      */
     public function show($id)
     {
-        
         $pullRiph = PullRiph::findOrFail($id);
+        $npwp = Auth::user()::find(Auth::user()->id)->data_user->npwp_company;
+        $npwp = str_replace('.', '', $npwp);
+        $npwp = str_replace('-', '', $npwp);
+        $pullData = $this->pull($npwp, $pullRiph->no_ijin);
+        
         $module_name = 'User task' ;
         $page_title = 'Commitment';
         $page_heading = 'Rincian Komitmen Wajib Tanam-produksi' ;
         $heading_class = 'fal fa-file-invoice';
-        return view('admin.commitment.show', compact('module_name', 'page_title', 'page_heading', 'heading_class', 'pullRiph'));
+        return view('admin.commitment.show', compact('module_name', 'page_title', 'page_heading', 'heading_class', 'pullRiph', 'pullData'));
     }
 
     /**

@@ -18,7 +18,6 @@ return new class extends Migration
         Schema::create('pull_riphs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('npwp')->unique();
-            $table->string('riph')->unique();
             $table->string('keterangan')->nullable();
             $table->string('nama')->nullable();
             $table->string('no_ijin')->nullable();
@@ -29,6 +28,14 @@ return new class extends Migration
             $table->float('volume_riph')->nullable();
             $table->float('volume_produksi')->nullable();
             $table->float('luas_wajib_tanam')->nullable();
+            $table->integer('status')->nullable();
+            $table->string('formRiph')->nullable();
+            $table->string('formSptjm')->nullable();
+            $table->string('logBook')->nullable();
+            $table->string('formRt')->nullable();
+            $table->string('formRta')->nullable();
+            $table->string('formRpo')->nullable();
+            $table->string('formLa')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

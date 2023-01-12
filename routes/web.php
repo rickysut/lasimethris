@@ -77,6 +77,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('commitment', 'CommitmentController@index')->name('commitment');
         Route::get('commitment/{pullriph}', 'CommitmentController@show')->name('commitment.show');
         Route::delete('commitment/{pullriph}', 'CommitmentController@destroy')->name('commitment.destroy');
+        Route::post('commitment/unggah', 'CommitmentController@store')->name('commitment.store');
         Route::delete('commitmentmd', 'CommitmentController@massDestroy')->name('commitment.massDestroy');
 
         Route::resource('kelompoktani', 'KelompoktaniController');

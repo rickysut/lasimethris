@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('data_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unique();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('name');
             $table->string('mobile_phone');
             $table->string('fix_phone')->nullable();
@@ -39,6 +39,11 @@ return new class extends Migration
             $table->string('email_company')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

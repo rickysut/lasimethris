@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,7 @@ class PullRiph extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Auditable;
 
     public $table = 'pull_riphs';
 
@@ -24,7 +26,15 @@ class PullRiph extends Model
         'no_hs',
         'volume_riph',
         'volume_produksi',
-        'luas_wajib_tanam'
+        'luas_wajib_tanam',
+        'status',
+        'formRiph',
+        'formSptjm',
+        'logBook',
+        'formRt',
+        'formRta',
+        'formRpo',
+        'formLa',
     ];
 
     protected $dates = [

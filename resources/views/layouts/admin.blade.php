@@ -135,7 +135,7 @@
 		<!-- Smartadmin plugin -->
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.bundle.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/datagrid/datatables/datatables.export.js') }}"></script>
-		{{-- <script src="{{ asset('js/datatables/buttons.colVis.min.js') }}"></script> --}}
+		<script src="{{ asset('js/datatables/datetime.js') }}"></script>
 
 		<script src="{{ asset('js/moment/moment.min.js') }}"></script>
 		<script src="{{ asset('js/smartadmin/formplugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
